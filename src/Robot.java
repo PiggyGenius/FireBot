@@ -7,7 +7,7 @@ public abstract class Robot {
 	/** constructeur de la classe abstraite Robot
 	 * @param position
 	 * 	La position initiale du robot */
-	public Robot(Case position) {
+	public Robot(Coordonnee position) {
 		setPosition(position);
 	}
 
@@ -20,7 +20,7 @@ public abstract class Robot {
 
 	/** @param position
 	 * 	La nouvelle position du Robot */
-	public void setPosition(Case position) {
+	public void setPosition(Coordonnee position) {
 		this.position = new Case(position, this.position.getNature());
 	}
 

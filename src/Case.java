@@ -3,7 +3,7 @@
 public class Case {
 
 	private Coordonnee coord;
-	private EnumNatureTerrain nature;
+	private NatureTerrain nature;
 
 
 	/** constructeur de Case
@@ -11,7 +11,7 @@ public class Case {
 	 * 	coordonnees de la case
 	 * @param terrain
 	 * 	nature du terrain de la case */
-	public Case (Coordonnee coord, EnumNatureTerrain terrain) {
+	public Case (Coordonnee coord, NatureTerrain terrain) {
 		this.coord = new Coordonnee(coord);
 		this.nature = terrain;
 	}
@@ -30,7 +30,7 @@ public class Case {
 
 
 	/** @return Nature du terrain */
-	public EnumNatureTerrain getNature() {
+	public NatureTerrain getNature() {
 		return this.nature;
 	}
 
