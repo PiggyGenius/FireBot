@@ -63,7 +63,7 @@ public class Carte {
 	public Case getVoisin(Case src, Direction dir){
 		if(voisinExiste(src,dir)){
 			Coordonnee voisin = getCoordonnee(src,dir);
-			return grille_case[voisin.getLigne()][voisin.getColonne];
+			return grille_case[voisin.getLigne()][voisin.getColonne()];
 		}
 		else {
 			System.out.println("Cette case n'a pas de voisin dans cette direction.");

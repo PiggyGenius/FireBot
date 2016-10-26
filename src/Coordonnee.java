@@ -15,13 +15,13 @@ public class Coordonnee {
 		return this.y;
 	}
 
-	public int setLigne(int x){
+	public void setLigne(int x){
 		if(x < 0)
 			throw new IllegalArgumentException();
 		this.x = x;
 	}
 
-	public int setColonne(int y){
+	public void setColonne(int y){
 		if(y < 0)
 			throw new IllegalArgumentException();
 		this.y = y;
