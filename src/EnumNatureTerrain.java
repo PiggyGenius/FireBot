@@ -1,6 +1,6 @@
 
 /** enumeration des natures de terrains */
-public enum NatureTerrain {
+public enum EnumNatureTerrain {
 	EAU,
 	FORET,
 	ROCHE,

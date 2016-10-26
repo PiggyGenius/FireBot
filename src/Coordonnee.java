@@ -7,6 +7,11 @@ public class Coordonnee {
 		this.y = y;
 	}
 
+	public Coordonnee(Coordonnee c){
+		this.setLigne(c.getLigne());
+		this.setColonne(c.getColonne());
+	}
+
 	public int getLigne(){
 		return this.x;
 	}

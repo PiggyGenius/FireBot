@@ -26,7 +26,7 @@ public class Carte {
 		return this.grille_case[lig][col];
 	}
 
-	private Coordonne getCoordonnee(Case src, Direction dir){
+	private Coordonnee getCoordonnee(Case src, EnumDirection dir){
 		Coordonnee voisin = new Coordonnee(src.getLigne(),src.getColonne());
 		int x = voisin.getLigne();
 		int y = voisin.getColonne();
@@ -44,14 +44,13 @@ public class Carte {
 				voisin.setColonne(y-1);
 				break;
 			default :
-				System.out.println("dir n'est pas une Direction");
+				System.out.println("dir n'est pas une EnumDirection");
 				throw new IllegalArgumentException();
-				break;
 		}
 		return voisin;
 	}
 
-	public boolean voisinExiste(Case src, Direction dir){
+	public boolean voisinExiste(Case src, EnumDirection dir){
 		Coordonnee voisin = getCoordonnee(src,dir);
 		int x = voisin.getLigne();
 		int y = voisin.getColonne();
@@ -60,7 +59,7 @@ public class Carte {
 		return true;
 	}
 
-	public Case getVoisin(Case src, Direction dir){
+	public Case getVoisin(Case src, EnumDirection dir){
 		if(voisinExiste(src,dir)){
 			Coordonnee voisin = getCoordonnee(src,dir);
 			return grille_case[voisin.getLigne()][voisin.getColonne()];

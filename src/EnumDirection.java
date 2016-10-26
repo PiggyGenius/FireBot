@@ -1,6 +1,6 @@
 
 /** enumeration des directions possibles */
-public enum Direction {
+public enum EnumDirection {
 	NORD,
 	SUD,
 	EST,
