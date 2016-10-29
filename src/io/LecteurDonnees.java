@@ -30,7 +30,7 @@ import enumerations.*;
  */
 public class LecteurDonnees {
 	/* On ajoute un attribut DonnesSimulation qui sera éditer par les méthodes */
-	private DonneesSimulation simulation;
+	private static DonneesSimulation simulation;
 
     /**
      * Lit et affiche le contenu d'un fichier de donnees (cases,
@@ -39,7 +39,8 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static void lire(String fichierDonnees) throws FileNotFoundException, DataFormatException {
+    public static DonneesSimulation lire(String fichierDonnees) throws FileNotFoundException, DataFormatException {
+		simulation = new DonneesSimulation();
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         lecteur.lireCarte();
@@ -47,6 +48,7 @@ public class LecteurDonnees {
         lecteur.lireRobots();
         scanner.close();
         System.out.println("\n == Lecture terminee");
+		return simulation;
     }
 
 
@@ -78,7 +80,7 @@ public class LecteurDonnees {
             int tailleCases = scanner.nextInt();	// en m
 
 			/* On créé la grille */
-			this.simulation = new DonneesSimulation();
+			//this.simulation = new DonneesSimulation();
 			simulation.setCarte(nbLignes,nbColonnes,tailleCases);
 
             System.out.println("Carte " + nbLignes + "x" + nbColonnes
