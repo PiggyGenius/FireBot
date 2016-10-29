@@ -54,6 +54,32 @@ public abstract class Robot {
 	}
 
 
+	public int getCapaciteReservoir {
+		return this.capaciteReservoir;
+	}
+
+
+	public int getTempsRemplissage {
+		return this.tempsRemplissage;
+	}
+
+
+	public int getLitresUnitaire {
+		return this.litresUnitaire;
+	}
+
+
+	public int getTempsUnitaire {
+		return this.tempsUnitaire;
+	}
+
+
+	public int getDistanceRemplissage {
+		return this.distanceRemplissage;
+	}
+
+
+
 	/** 
 	 * @param terrain
 	 * 	La nature du terrain à traverser
