@@ -10,11 +10,16 @@ public class RobotPattes extends Robot {
 
 		super(position);
 
+		double v = vitesse;
+		if (vitesse <= 0.0) {
+			v = 30.0;
+		}
+
 		this.vitesse.put(NatureTerrain.EAU, new Double(0.0));
-		this.vitesse.put(NatureTerrain.FORET, new Double(vitesse));
+		this.vitesse.put(NatureTerrain.FORET, new Double(v));
 		this.vitesse.put(NatureTerrain.ROCHE, new Double(10.0));
-		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(vitesse));
-		this.vitesse.put(NatureTerrain.HABITAT, new Double(vitesse));
+		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(v));
+		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 0;
 		this.tempsRemplissage = 0;
