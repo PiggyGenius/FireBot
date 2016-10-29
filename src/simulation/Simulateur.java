@@ -32,7 +32,7 @@ public class Simulateur implements Simulable {
 	private void draw(){
 		this.gui.reset();
 		Color test_color = Color.decode("#f2ff28");
-		/* EAU,FORET,ROCHE,TERRAIN_LIBRE,HABITAT */
+		/* EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT */
 		String[] terrain_s = {"#40a4df","#0A290A","#45463D","#66CD00","#663300"};
 		Color[] terrain = new Color[5];
 		for(int i = 0; i < 5; i++)
