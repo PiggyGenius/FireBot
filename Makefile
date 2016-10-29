@@ -21,13 +21,13 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testInvader testLecture testCarte testRobots testSimulateur
+all: testInvader testLecture testCarte testRobots testCarteGUI
 
 testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
 
 testLecture:
-	javac -d bin sourcepath src src/TestLecteurDonnees.java
+	javac -d bin -sourcepath src src/TestLecteurDonnees.java
 
 testCarte:
 	javac -d bin -sourcepath src src/TestCarte.java
