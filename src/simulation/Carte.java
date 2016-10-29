@@ -62,8 +62,7 @@ public class Carte {
 				voisin.setColonne(y-1);
 				break;
 			default :
-				System.out.println("dir n'est pas une Direction");
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("dir n'est pas une Direction");
 		}
 		return voisin;
 	}

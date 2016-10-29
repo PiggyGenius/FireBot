@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import robot.*;
 import enumerations.*;
+import robot.*;
 
 public class DonneesSimulation {
 	private Carte carteTerrain;
@@ -35,6 +36,48 @@ public class DonneesSimulation {
 		this.nbRobots = nbRobots;
 	}
 
-	public void addRobot(String position){
+	public void addRobot(Coordonnee c,TypeRobot type){
+		Robot robot_pompier;
+		Case case_robot = this.carteTerrain.getCase(c);
+		switch(type){
+			case CHENILLES:
+				robot_pompier = new RobotChenilles(case_robot);
+				break;
+			case DRONE:
+				robot_pompier = new RobotDrone(case_robot);
+				break;
+			case ROUES:
+				robot_pompier = new RobotRoues(case_robot);
+				break;
+			case PATTES:
+				robot_pompier = new RobotPattes(case_robot);
+				break;
+			default :
+				throw new IllegalArgumentException("Ce type de robot n'existe pas.");
+		}
+		this.listeRobot.add(robot_pompier);
+	}
+
+	public void addRobot(Coordonnee c,TypeRobot type,int vitesse){
+		Robot robot_pompier;
+		Case case_robot = this.carteTerrain.getCase(c);
+		double vitesse_d = (double) vitesse;
+		switch(type){
+			case CHENILLES:
+				robot_pompier = new RobotChenilles(case_robot,vitesse_d);
+				break;
+			case DRONE:
+				robot_pompier = new RobotDrone(case_robot,vitesse_d);
+				break;
+			case ROUES:
+				robot_pompier = new RobotRoues(case_robot,vitesse_d);
+				break;
+			case PATTES:
+				robot_pompier = new RobotPattes(case_robot,vitesse_d);
+				break;
+			default :
+				throw new IllegalArgumentException("Ce type de robot n'existe pas.");
+		}
+		this.listeRobot.add(robot_pompier);
 	}
 }
