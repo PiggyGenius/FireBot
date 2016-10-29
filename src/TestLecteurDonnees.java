@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
 
 public class TestLecteurDonnees {
-
     public static void main(String[] args) {
         if (args.length < 1) {
             System.out.println("Syntaxe: java TestLecteurDonnees <nomDeFichier>");
@@ -21,6 +20,5 @@ public class TestLecteurDonnees {
             System.out.println("\n\t**format du fichier " + args[0] + " invalide: " + e.getMessage());
         }
     }
-
 }
 

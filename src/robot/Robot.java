@@ -54,27 +54,27 @@ public abstract class Robot {
 	}
 
 
-	public int getCapaciteReservoir {
+	public int getCapaciteReservoir() {
 		return this.capaciteReservoir;
 	}
 
 
-	public int getTempsRemplissage {
+	public int getTempsRemplissage() {
 		return this.tempsRemplissage;
 	}
 
 
-	public int getLitresUnitaire {
+	public int getLitresUnitaire() {
 		return this.litresUnitaire;
 	}
 
 
-	public int getTempsUnitaire {
+	public int getTempsUnitaire() {
 		return this.tempsUnitaire;
 	}
 
 
-	public int getDistanceRemplissage {
+	public int getDistanceRemplissage() {
 		return this.distanceRemplissage;
 	}
 
