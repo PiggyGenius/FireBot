@@ -35,9 +35,6 @@ testCarte:
 testRobots:
 	javac -d bin -sourcepath src src/TestRobots.java
 
-testSimulateur:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
-
 testCarteGUI:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarteGUI.java
 
@@ -58,11 +55,9 @@ exeCarte: testCarte
 exeRobots: testRobots
 	java -classpath bin TestRobots
 
-exeSimulateur: testSimulateur
-	java -classpath bin:bin/gui.jar TestSimulateur
-
 exeCarteGUI: testCarteGUI
 	java -classpath bin:bin/gui.jar TestCarteGUI cartes/carteSujet.map
+
 
 clean:
 	rm -rf bin/*.class
