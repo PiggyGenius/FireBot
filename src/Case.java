@@ -28,7 +28,7 @@ public class Case {
 	}
 
 	public Coordonnee getCoordonnee(){
-		return new Coordonnee(this.coordonnee());
+		return new Coordonnee(this.coord);
 	}
 
 	/** @return Nature du terrain */
