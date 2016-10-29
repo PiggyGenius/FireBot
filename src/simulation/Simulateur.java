@@ -1,3 +1,5 @@
+package simulation;
+
 import java.awt.Color;
 import gui.GUISimulator;
 import gui.Rectangle;
