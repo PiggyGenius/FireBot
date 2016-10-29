@@ -1,8 +1,9 @@
 public class Carte {
-	private int tailleCases;
+	private int taille_case;
 	private Case[][] grille_case;
 
-	public Carte(){
+	public Carte(int taille_case){
+		this.taille_case = taille_case;
 	}
 
 	public void evenement(long date){
@@ -17,7 +18,7 @@ public class Carte {
 	}
 
 	public int getTailleCases(){
-		return this.tailleCases;
+		return this.taille_case;
 	}
 
 	public Case getCase(int lig, int col){

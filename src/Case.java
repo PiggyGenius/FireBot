@@ -1,7 +1,6 @@
 
 /** classe Case */
 public class Case {
-
 	private Coordonnee coord;
 	private NatureTerrain nature;
 
@@ -28,6 +27,9 @@ public class Case {
 		return this.coord.getColonne();
 	}
 
+	public Coordonnee getCoordonnee(){
+		return new Coordonnee(this.coordonnee());
+	}
 
 	/** @return Nature du terrain */
 	public NatureTerrain getNature() {
