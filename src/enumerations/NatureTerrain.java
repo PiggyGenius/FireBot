@@ -1,5 +1,6 @@
+package enumerations;
 
-/** enumeration des natures de terrains */
+/** enumeration des directions possibles */
 public enum NatureTerrain {
 	EAU,
 	FORET,

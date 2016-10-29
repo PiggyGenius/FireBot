@@ -1,3 +1,6 @@
+package simulation;
+
+import enumerations.*;
 
 /** classe Case */
 public class Case {
@@ -39,7 +42,7 @@ public class Case {
 
 	@Override
 	public String toString() {
-		return new String();
+		return new String(this.coord.toString());
 	}
 
 }

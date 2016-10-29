@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+package simulation;
 
 public class DonneesSimulation {
 	private Carte carte_terrain;

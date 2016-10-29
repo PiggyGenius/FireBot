@@ -1,14 +1,29 @@
+package robot;
+
+import java.lang.Double;
+import java.util.EnumMap;
+import java.util.Iterator;
+
+import enumerations.*;
+import simulation.*;
 
 /** classe abstraite Robot */
 public abstract class Robot {
 
-	private Case position;
+	protected Case position;
+	/* contient les vitesses du robot pour chaque élément (-1 si inaccessible) */
+	protected EnumMap<NatureTerrain, Double> vitesse;
+	protected int capaciteReservoir;
+	protected int tempsRemplissage;
+	protected int litresUnitaire;
+	protected int tempsUnitaire;
 
 	/** constructeur de la classe abstraite Robot
 	 * @param position
 	 * 	La position initiale du robot */
 	public Robot(Coordonnee position) {
-		setPosition(position);
+		this.setPosition(position);
+		vitesse = new EnumMap<NatureTerrain, Double>(NatureTerrain.class);
 	}
 
 
@@ -21,7 +36,7 @@ public abstract class Robot {
 	/** @param position
 	 * 	La nouvelle position du Robot */
 	public void setPosition(Coordonnee position) {
-		this.position = new Case(position, this.position.getNature());
+		this.position = new Case(position, NatureTerrain.FORET); // TODO Recuperer la nature initiale du terrain
 	}
 
 
