@@ -22,4 +22,9 @@ public class RobotChenilles extends Robot {
 		this.tempsUnitaire = 8;
 		this.distanceRemplissage = 1;
 	}
+
+
+	public RobotChenilles(Case position) {
+		this(position, 60.0);
+	}
 }

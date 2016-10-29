@@ -22,4 +22,9 @@ public class RobotPattes extends Robot {
 		this.tempsUnitaire = 1;
 		this.distanceRemplissage = 0;
 	}
+
+
+	public RobotPattes(Case position) {
+		this(position, 30.0);
+	}
 }
