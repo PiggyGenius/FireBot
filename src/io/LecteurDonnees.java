@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
 import simulation.*;
+import enumerations.*;
 
 
 
@@ -38,8 +39,7 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static void lire(String fichierDonnees)
-        throws FileNotFoundException, DataFormatException {
+    public static void lire(String fichierDonnees) throws FileNotFoundException, DataFormatException {
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         lecteur.lireCarte();
@@ -104,28 +104,25 @@ public class LecteurDonnees {
      * Lit et affiche les donnees d'une case.
      */
     private void lireCase(int lig, int col) throws DataFormatException {
-        ignorerCommentaires();
-        System.out.print("Case (" + lig + "," + col + "): ");
-        String chaineNature = new String();
-        //		NatureTerrain nature;
+		ignorerCommentaires();
+		System.out.print("Case (" + lig + "," + col + "): ");
+		String chaineNature = new String();
 
-        try {
-            chaineNature = scanner.next();
-            // si NatureTerrain est un Enum, vous pouvez recuperer la valeur
-            // de l'enum a partir d'une String avec:
-            //			NatureTerrain nature = NatureTerrain.valueOf(chaineNature);
+		try {
+			chaineNature = scanner.next();
+			System.out.println(chaineNature);	
+			simulation.setCase(new Coordonnee(lig,col),NatureTerrain.valueOf(chaineNature));
+			verifieLigneTerminee();
 
-            verifieLigneTerminee();
+			System.out.print("nature = " + chaineNature);
 
-            System.out.print("nature = " + chaineNature);
+		} catch (NoSuchElementException e) {
+			throw new DataFormatException("format de case invalide. "
+					+ "Attendu: nature altitude [valeur_specifique]");
+		}
 
-        } catch (NoSuchElementException e) {
-            throw new DataFormatException("format de case invalide. "
-                    + "Attendu: nature altitude [valeur_specifique]");
-        }
-
-        System.out.println();
-    }
+		System.out.println();
+	}
 
 
     /**
@@ -135,6 +132,7 @@ public class LecteurDonnees {
         ignorerCommentaires();
         try {
             int nbIncendies = scanner.nextInt();
+			this.simulation.setNbIncendies(nbIncendies);
             System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
                 lireIncendie(i);
@@ -159,6 +157,7 @@ public class LecteurDonnees {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
             int intensite = scanner.nextInt();
+			this.simulation.addIncendie(new Coordonnee(lig,col),intensite);
             if (intensite <= 0) {
                 throw new DataFormatException("incendie " + i
                         + "nb litres pour eteindre doit etre > 0");
@@ -182,6 +181,7 @@ public class LecteurDonnees {
         ignorerCommentaires();
         try {
             int nbRobots = scanner.nextInt();
+			this.simulation.setNbRobots(nbRobots);
             System.out.println("Nb de robots = " + nbRobots);
             for (int i = 0; i < nbRobots; i++) {
                 lireRobot(i);
@@ -216,11 +216,14 @@ public class LecteurDonnees {
             String s = scanner.findInLine("(\\d+)");	// 1 or more digit(s) ?
             // pour lire un flottant:    ("(\\d+(\\.\\d+)?)");
 
+			Coordonnee c = new Coordonnee(lig,col);
             if (s == null) {
                 System.out.print("valeur par defaut");
+				//this.simulation.addRobot(c,type);
             } else {
                 int vitesse = Integer.parseInt(s);
                 System.out.print(vitesse);
+				//this.simulation.addRobot(c,type,vitesse);
             }
             verifieLigneTerminee();
 

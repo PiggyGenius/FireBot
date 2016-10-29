@@ -32,6 +32,18 @@ public class Carte {
 		return this.grilleCase[lig][col];
 	}
 
+	public Case getCase(Coordonnee c){
+		int lig = c.getLigne();
+		int col = c.getColonne();
+		if(lig < 0 || lig > this.getNbLignes() || col < 0 || col > this.getNbColonnes())
+			throw new IllegalArgumentException();
+		return this.grilleCase[lig][col];
+	}
+
+	public void setCase(Coordonnee c, NatureTerrain terrain){
+		grilleCase[c.getLigne()][c.getColonne()] = new Case(c,terrain);
+	}
+
 	private Coordonnee getCoordonnee(Case src, Direction dir){
 		Coordonnee voisin = new Coordonnee(src.getLigne(),src.getColonne());
 		int x = voisin.getLigne();
