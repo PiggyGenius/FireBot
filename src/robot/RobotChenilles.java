@@ -7,14 +7,21 @@ import java.lang.Double;
 public class RobotChenilles extends Robot {
 
 	public RobotChenilles(Case position, double vitesse) {
-
+		
 		super(position);
 
-		this.vitesse.put(NatureTerrain.EAU, new Double(vitesse));
-		this.vitesse.put(NatureTerrain.FORET, new Double(0.5*vitesse));
-		this.vitesse.put(NatureTerrain.ROCHE, new Double(vitesse));
-		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(vitesse));
-		this.vitesse.put(NatureTerrain.HABITAT, new Double(vitesse));
+		double v = vitesse;
+		if (vitesse <= 0.0) {
+			v = 60.0;
+		} else if (vitesse > 80.0) {
+			v = 80.0;
+		}
+
+		this.vitesse.put(NatureTerrain.EAU, new Double(v));
+		this.vitesse.put(NatureTerrain.FORET, new Double(0.5*v));
+		this.vitesse.put(NatureTerrain.ROCHE, new Double(v));
+		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(v));
+		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 2000;
 		this.tempsRemplissage = 300;
