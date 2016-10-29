@@ -219,11 +219,11 @@ public class LecteurDonnees {
 			Coordonnee c = new Coordonnee(lig,col);
             if (s == null) {
                 System.out.print("valeur par defaut");
-				this.simulation.addRobot(c,type);
+				this.simulation.addRobot(c,TypeRobot.valueOf(type));
             } else {
                 int vitesse = Integer.parseInt(s);
                 System.out.print(vitesse);
-				this.simulation.addRobot(c,type,vitesse);
+				this.simulation.addRobot(c,TypeRobot.valueOf(type),vitesse);
             }
             verifieLigneTerminee();
 
