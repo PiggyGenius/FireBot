@@ -122,25 +122,11 @@ class Invader implements Simulable {
      */
     private void draw() {
         gui.reset();	// clear the window
-
-        gui.addGraphicalElement(new Rectangle(x + 30, y     , invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 40, y     , invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 50, y     , invaderColor, invaderColor, 10));
-
-        gui.addGraphicalElement(new Rectangle(x + 20, y + 10, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 30, y + 10, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 40, y + 10, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 50, y + 10, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 60, y + 10, invaderColor, invaderColor, 10));
-
-        gui.addGraphicalElement(new Rectangle(x + 10, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 20, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 30, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 40, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 50, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 60, y + 20, invaderColor, invaderColor, 10));
-        gui.addGraphicalElement(new Rectangle(x + 70, y + 20, invaderColor, invaderColor, 10));
-
+		int y_inc,x_inc;
+		for(y_inc = 0; y_inc <= 20; y_inc += 10){
+			for(x_inc = 30-y_inc; x_inc <= 50+y_inc; x_inc += 10)
+    	    	gui.addGraphicalElement(new Rectangle(x + x_inc,y + y_inc,invaderColor,invaderColor, 10));
+		}
         gui.addGraphicalElement(new Rectangle(x     , y + 30, invaderColor, invaderColor, 10));
         gui.addGraphicalElement(new Rectangle(x + 10, y + 30, invaderColor, invaderColor, 10));
         gui.addGraphicalElement(new Rectangle(x + 40, y + 30, invaderColor, invaderColor, 10));
