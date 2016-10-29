@@ -1,6 +1,8 @@
+package simulation;
+
 import java.util.List;
 import java.util.ArrayList;
-package simulation;
+import robot.*;
 
 public class DonneesSimulation {
 	private Carte carte_terrain;
