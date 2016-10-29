@@ -1,3 +1,4 @@
+package enumerations;
 
 /** enumeration des directions possibles */
 public enum Direction {

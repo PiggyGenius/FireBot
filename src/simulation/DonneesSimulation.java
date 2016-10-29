@@ -1,3 +1,5 @@
+package simulation;
+
 public class DonneesSimulation {
 	private Carte carte_terrain;
 	private List<Incendie> liste_incendie = newArrayList<Incendie>();

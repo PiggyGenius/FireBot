@@ -1,3 +1,7 @@
+package simulation;
+
+import enumerations.*;
+
 public class Carte {
 	private int taille_case;
 	private Case[][] grille_case;
