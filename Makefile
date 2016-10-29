@@ -27,7 +27,7 @@ testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
 
 testLecture:
-	javac -d bin -sourcepath src src/TestLecteurDonnees.java
+	javac -d bin sourcepath src src/TestLecteurDonnees.java
 
 testCarte:
 	javac -d bin -sourcepath src src/TestCarte.java
@@ -38,6 +38,8 @@ testRobots:
 testSimulateur:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 
+testCarteGUI:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarteGUI.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -58,6 +60,9 @@ exeRobots: testRobots
 
 exeSimulateur: testSimulateur
 	java -classpath bin:bin/gui.jar TestSimulateur
+
+exeCarteGUI: testCarteGUI
+	java -classpath bin:bin/gui.jar TestCarteGUI cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*.class
