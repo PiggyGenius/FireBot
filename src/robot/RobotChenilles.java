@@ -6,28 +6,20 @@ import java.lang.Double;
 
 public class RobotChenilles extends Robot {
 
-	public RobotChenilles(Coordonnee position) {
+	public RobotChenilles(Case position, double vitesse) {
+
 		super(position);
-		System.out.println("OK");
-		this.vitesse.put(NatureTerrain.EAU, new Double(60.0));
-		this.vitesse.put(NatureTerrain.FORET, new Double(30.0));
-		this.vitesse.put(NatureTerrain.ROCHE, new Double(60.0));
-		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(60.0));
-		this.vitesse.put(NatureTerrain.HABITAT, new Double(60.0));
-	}
 
-	@Override
-	public double getVitesse(NatureTerrain terrain) {
-		return this.vitesse.get(terrain);
-	}
+		this.vitesse.put(NatureTerrain.EAU, new Double(vitesse));
+		this.vitesse.put(NatureTerrain.FORET, new Double(0.5*vitesse));
+		this.vitesse.put(NatureTerrain.ROCHE, new Double(vitesse));
+		this.vitesse.put(NatureTerrain.TERRAIN_LIBRE, new Double(vitesse));
+		this.vitesse.put(NatureTerrain.HABITAT, new Double(vitesse));
 
-	@Override
-	public void deverserEau(int volume) {
-		return;
-	}
-
-	@Override
-	public void remplirReservoir() {
-		return;
+		this.capaciteReservoir = 2000;
+		this.tempsRemplissage = 300;
+		this.litresUnitaire = 100;
+		this.tempsUnitaire = 8;
+		this.distanceRemplissage = 1;
 	}
 }
