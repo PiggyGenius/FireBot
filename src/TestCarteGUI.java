@@ -15,11 +15,12 @@ public class TestCarteGUI {
             System.out.println("Syntaxe: java TestLecteurDonnees <nomDeFichier>");
             System.exit(1);
         }
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-        Simulateur simule_terrain = new Simulateur(gui);
 		
         try {
 			DonneesSimulation simulation = LecteurDonnees.lire(args[0]);
+
+	        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+	        Simulateur simule_terrain = new Simulateur(gui,simulation);
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
