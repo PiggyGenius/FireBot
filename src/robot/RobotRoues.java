@@ -22,4 +22,9 @@ public class RobotRoues extends Robot {
 		this.tempsUnitaire = 5;
 		this.distanceRemplissage = 1;
 	}
+
+
+	public RobotRoues(Case position) {
+		this(position, 80.0);
+	}
 }

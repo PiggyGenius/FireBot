@@ -22,4 +22,9 @@ public class RobotDrone extends Robot {
 		this.tempsUnitaire = 30;
 		this.distanceRemplissage = 0;
 	}
+
+
+	public RobotDrone(Case position) {
+		this(position, 100.0);
+	}
 }
