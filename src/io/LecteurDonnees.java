@@ -1,6 +1,5 @@
 package io;
 
-
 import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
@@ -28,7 +27,8 @@ import java.util.zip.DataFormatException;
  * DonneesSimulation.
  */
 public class LecteurDonnees {
-
+	/* On ajoute un attribut DonnesSimulation qui sera éditer par les méthodes */
+	private DonneesSimulation simulation;
 
     /**
      * Lit et affiche le contenu d'un fichier de donnees (cases,
@@ -75,6 +75,11 @@ public class LecteurDonnees {
             int nbLignes = scanner.nextInt();
             int nbColonnes = scanner.nextInt();
             int tailleCases = scanner.nextInt();	// en m
+
+			/* On créé la grille */
+			this.simulation = new DonneesSimulation();
+			simulation.setCarte(nbLignes,nbColonnes,tailleCases);
+
             System.out.println("Carte " + nbLignes + "x" + nbColonnes
                     + "; taille des cases = " + tailleCases);
 

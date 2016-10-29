@@ -1,30 +1,31 @@
 public class Carte {
-	private int taille_case;
-	private Case[][] grille_case;
+	private int tailleCases;
+	private Case[][] grilleCase;
 
-	public Carte(int taille_case){
-		this.taille_case = taille_case;
+	public Carte(int nbLignes,int nbColonnes,int tailleCases){
+		this.grilleCase = new Case[nbLignes][nbColonnes];
+		this.tailleCases = tailleCases;
 	}
 
 	public void evenement(long date){
 	}
 
 	public int getNbLignes(){
-		return grille_case[0].length;
+		return grilleCase[0].length;
 	}
 
 	public int getNbColonnes(){
-		return grille_case.length;
+		return grilleCase.length;
 	}
 
 	public int getTailleCases(){
-		return this.taille_case;
+		return this.tailleCases;
 	}
 
 	public Case getCase(int lig, int col){
 		if(lig < 0 || lig > this.getNbLignes() || col < 0 || col > this.getNbColonnes())
 			throw new IllegalArgumentException();
-		return this.grille_case[lig][col];
+		return this.grilleCase[lig][col];
 	}
 
 	private Coordonnee getCoordonnee(Case src, Direction dir){
@@ -63,7 +64,7 @@ public class Carte {
 	public Case getVoisin(Case src, Direction dir){
 		if(voisinExiste(src,dir)){
 			Coordonnee voisin = getCoordonnee(src,dir);
-			return grille_case[voisin.getLigne()][voisin.getColonne()];
+			return grilleCase[voisin.getLigne()][voisin.getColonne()];
 		}
 		else {
 			System.out.println("Cette case n'a pas de voisin dans cette direction.");
