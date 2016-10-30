@@ -2,6 +2,7 @@ package simulation;
 
 import java.awt.Color;
 import java.util.EnumMap;
+import java.util.PriorityQueue;
 import gui.GUISimulator;
 import gui.Rectangle;
 import simulation.*;
@@ -16,6 +17,8 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation simulation;
 
 	private long dateSimulation;
+
+	private PriorityQueue<Evenement> listeEvenements = new PriorityQueue<Evenement> ();
 
 	public Simulateur(GUISimulator gui,DonneesSimulation simulation){
 		this.gui = gui;
@@ -77,14 +80,26 @@ public class Simulateur implements Simulable {
 
 
 	public void ajouteEvenement(Evenement e) {
-		return;
+		listeEvenements.add(e);
 	}
 
-	private void incrementeDate() {
+	public void incrementeDate() {
 		this.dateSimulation ++;
+		System.out.println(this.dateSimulation); // DEBUG
+		Evenement e;
+		// TODO : on recherche 2 fois de suite le meilleur, c'est dommage
+		while (! this.simulationTerminee() && listeEvenements.peek().getDate() <= this.dateSimulation) {
+			e = listeEvenements.poll();
+			e.execute();
+		}
 	}
 
-	private boolean simulationTerminee() {
-		return false;
+	public boolean simulationTerminee() {
+		return listeEvenements.isEmpty();
+	}
+
+
+	public long getDateSimulation() {
+		return this.dateSimulation;
 	}
 }

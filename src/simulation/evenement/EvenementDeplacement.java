@@ -1,18 +1,21 @@
 package simulation.evenement;
 
-public class EvenementDeplacement {
+import robot.*;
+import simulation.*;
+
+public class EvenementDeplacement extends Evenement {
 
 	private Robot robot;
 
 	private Case dest;
 
-	public EvenementDeplacement(Robot r, Case dest) {
-		this.robot = Robot;
+	public EvenementDeplacement(long date, Robot r, Case dest) {
+		super(date);
+		this.robot = r;
 		this.dest = dest;
 	}
 
 	public void execute() {
-		System.out.println("Robot : " + this.robot.toString()
-			+ "Destination : " + this.dest.toString() + "\n");
+		System.out.println("Destination : " + this.dest.toString());
 	}
 }

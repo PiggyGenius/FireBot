@@ -1,6 +1,6 @@
 package simulation.evenement;
 
-public abstract class Evenement {
+public abstract class Evenement implements Comparable<Evenement> {
 
 	protected long date;
 
@@ -13,6 +13,14 @@ public abstract class Evenement {
 	}
 
 	public abstract void execute();
+
+	@Override
+	public int compareTo(Evenement e) {
+		if (e == null)
+			throw new NullPointerException();
+
+		return (int)(this.date - e.date);
+	}
 }
 
 
