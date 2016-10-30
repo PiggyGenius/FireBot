@@ -134,7 +134,6 @@ public class LecteurDonnees {
         ignorerCommentaires();
         try {
             int nbIncendies = scanner.nextInt();
-			this.simulation.setNbIncendies(nbIncendies);
             System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
                 lireIncendie(i);
@@ -183,7 +182,6 @@ public class LecteurDonnees {
         ignorerCommentaires();
         try {
             int nbRobots = scanner.nextInt();
-			this.simulation.setNbRobots(nbRobots);
             System.out.println("Nb de robots = " + nbRobots);
             for (int i = 0; i < nbRobots; i++) {
                 lireRobot(i);

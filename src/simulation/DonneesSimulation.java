@@ -10,8 +10,6 @@ public class DonneesSimulation {
 	private Carte carteTerrain;
 	private List<Incendie> listeIncendie = new ArrayList<Incendie>();
 	private List<Robot> listeRobot = new ArrayList<Robot>();
-	private int nbIncendies;
-	private int nbRobots;
 
 	public DonneesSimulation(){
 	}
@@ -24,16 +22,8 @@ public class DonneesSimulation {
 		this.carteTerrain.setCase(c,terrain);
 	}
 
-	public void setNbIncendies(int nbIncendies){
-		this.nbIncendies = nbIncendies;
-	}
-
 	public void addIncendie(Coordonnee c,int intensite){
 		this.listeIncendie.add(new Incendie(this.carteTerrain.getCase(c),intensite));
-	}
-
-	public void setNbRobots(int nbRobots){
-		this.nbRobots = nbRobots;
 	}
 
 	public void addRobot(Coordonnee c,TypeRobot type){
@@ -91,5 +81,21 @@ public class DonneesSimulation {
 
 	public NatureTerrain getNatureTerrain(int lig,int col){
 		return this.carteTerrain.getNatureTerrain(lig,col);
+	}
+
+	public int getNbIncendies(){
+		return this.listeIncendie.size();
+	}
+
+	public int getNbRobots(){
+		return this.listeRobot.size();
+	}
+
+	public Coordonnee getCoordonneeIncendie(int index){
+		return this.listeIncendie.get(index).getCoordonnee();
+	}
+
+	public Coordonnee getCoordonneeRobot(int index){
+		return this.listeRobot.get(index).getCoordonnee();
 	}
 }

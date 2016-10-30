@@ -42,6 +42,7 @@ public class Simulateur implements Simulable {
 		for(int i = 0; i < 5; i++)
 			couleur_terrain.put(NatureTerrain.values()[i],Color.decode(terrain_s[i]));
 
+		/* On affiche le terrain de la carte */
 		int nbLignes = this.simulation.getNbLignes();
 		int nbColonnes = this.simulation.getNbColonnes();	
 		int x_step = (int) Math.floor(this.gui.getPanelHeight() / nbLignes);
@@ -52,5 +53,21 @@ public class Simulateur implements Simulable {
 				gui.addGraphicalElement(new Rectangle(x_step*i,y_step*j,couleur_case,couleur_case,y_step));
 			}
 		}
+
+		/* On ajoute le feu !!! */
+		couleur_case = Color.decode("#cc0000");
+		Coordonnee c;
+		for(int i = 0; i < this.simulation.getNbIncendies(); i++){
+			c = this.simulation.getCoordonneeIncendie(i);
+			gui.addGraphicalElement(new Rectangle(x_step*c.getLigne(),y_step*c.getColonne(),couleur_case,couleur_case,y_step));
+		}
+
+		/* Et enfin les robots */
+		couleur_case = Color.decode("#c0c0c0");
+		for(int i = 0; i < this.simulation.getNbRobots(); i++){
+			c = this.simulation.getCoordonneeRobot(i);
+			gui.addGraphicalElement(new Rectangle(x_step*c.getLigne(),y_step*c.getColonne(),couleur_case,couleur_case,y_step));
+		}
+
 	}
 }

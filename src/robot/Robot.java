@@ -46,6 +46,10 @@ public abstract class Robot {
 		return this.position;
 	}
 
+	public Coordonnee getCoordonnee(){
+		return this.position.getCoordonnee();
+	}
+
 
 	/** @param position
 	 * 	La nouvelle position du Robot */

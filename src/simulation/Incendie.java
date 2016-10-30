@@ -8,4 +8,8 @@ public class Incendie {
 		position = case_terrain;
 		this.intensite = intensite;
 	}
+
+	public Coordonnee getCoordonnee(){
+		return this.position.getCoordonnee();
+	}
 }
