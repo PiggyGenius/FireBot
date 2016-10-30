@@ -86,4 +86,10 @@ public class Carte {
 			throw new IllegalArgumentException();
 		}
 	}
+
+	public NatureTerrain getNatureTerrain(int lig,int col){
+		if(lig < 0 || lig > getNbLignes() || col < 0 || col > getNbColonnes())
+			throw new IllegalArgumentException("Cette case n'existe pas");
+		return grilleCase[lig][col].getNatureTerrain();
+	}
 }

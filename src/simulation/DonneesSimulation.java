@@ -80,4 +80,16 @@ public class DonneesSimulation {
 		}
 		this.listeRobot.add(robot_pompier);
 	}
+
+	public int getNbLignes(){
+		return this.carteTerrain.getNbLignes();
+	}
+	
+	public int getNbColonnes(){
+		return this.carteTerrain.getNbColonnes();
+	}
+
+	public NatureTerrain getNatureTerrain(int lig,int col){
+		return this.carteTerrain.getNatureTerrain(lig,col);
+	}
 }

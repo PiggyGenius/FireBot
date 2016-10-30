@@ -35,7 +35,7 @@ public class Case {
 	}
 
 	/** @return Nature du terrain */
-	public NatureTerrain getNature() {
+	public NatureTerrain getNatureTerrain() {
 		return this.nature;
 	}
 

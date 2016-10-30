@@ -1,19 +1,22 @@
 package simulation;
 
 import java.awt.Color;
+import java.util.EnumMap;
 import gui.GUISimulator;
 import gui.Rectangle;
 import simulation.*;
 import gui.Simulable;
 import gui.Text;
+import enumerations.*;
+
 
 public class Simulateur implements Simulable {
 	private GUISimulator gui;
-	private Simulateur simule_terrain;
+	private DonneesSimulation simulation;
 
 	public Simulateur(GUISimulator gui,DonneesSimulation simulation){
 		this.gui = gui;
-		this.simule_terrain = simule_terrain;
+		this.simulation = simulation;
 		gui.setSimulable(this);
 	}
 	
@@ -31,12 +34,23 @@ public class Simulateur implements Simulable {
 
 	private void draw(){
 		this.gui.reset();
-		Color test_color = Color.decode("#f2ff28");
+		Color couleur_case;
+		NatureTerrain nature_terrain;
 		/* EAU, FORET, ROCHE, TERRAIN_LIBRE, HABITAT */
 		String[] terrain_s = {"#40a4df","#0A290A","#45463D","#66CD00","#663300"};
-		Color[] terrain = new Color[5];
+		EnumMap<NatureTerrain, Color> couleur_terrain = new EnumMap<NatureTerrain, Color>(NatureTerrain.class);
 		for(int i = 0; i < 5; i++)
-			terrain[i] = Color.decode(terrain_s[i]);
-		gui.addGraphicalElement(new Rectangle(20,20,test_color,test_color,20));
+			couleur_terrain.put(NatureTerrain.values()[i],Color.decode(terrain_s[i]));
+
+		int nbLignes = this.simulation.getNbLignes();
+		int nbColonnes = this.simulation.getNbColonnes();	
+		int x_step = (int) Math.floor(this.gui.getPanelHeight() / nbLignes);
+		int y_step = (int) Math.floor(this.gui.getPanelWidth() / nbColonnes);
+		for(int i = 0; i < nbLignes; i++){
+			for(int j = 0; j < nbColonnes; j++){
+				couleur_case = couleur_terrain.get(this.simulation.getNatureTerrain(i,j));
+				gui.addGraphicalElement(new Rectangle(x_step*i,y_step*j,couleur_case,couleur_case,y_step));
+			}
+		}
 	}
 }
