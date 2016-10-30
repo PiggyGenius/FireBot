@@ -24,9 +24,13 @@ public abstract class Evenement implements Comparable<Evenement> {
 }
 
 
-/* Evenements possibles :
+/* Types d'evenements (absolument pas sur de ça) :
  * - deplacement
+ * - deplacement fini
  * - deverser eau
+ * - deverser eau fini
  * - remplir reservoir
- * - ...
+ * - remplir reservoir fini
+ * - disponible
+ * - decision de la prochaine destination
  */
