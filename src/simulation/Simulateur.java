@@ -76,7 +76,7 @@ public class Simulateur implements Simulable {
 	}
 
 
-	public ajouteEvenement(Evenement e) {
+	public void ajouteEvenement(Evenement e) {
 		return;
 	}
 
