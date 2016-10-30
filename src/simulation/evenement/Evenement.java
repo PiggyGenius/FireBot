@@ -31,6 +31,5 @@ public abstract class Evenement implements Comparable<Evenement> {
  * - deverser eau fini
  * - remplir reservoir
  * - remplir reservoir fini
- * - disponible
- * - decision de la prochaine destination
+ * - lancer processus decisionnel
  */

@@ -29,13 +29,15 @@ public class Simulateur implements Simulable {
 	
 	@Override
 	public void next(){
-		System.out.println("Clicked on next");
+		System.out.println("Clicked on next"); // DEBUG
+		this.incrementeDate();
 		this.draw();
 	}
 
 	@Override
 	public void restart(){
-		System.out.println("Clicked on restart");
+		System.out.println("Clicked on restart"); // DEBUG
+		// TODO : reinitialiser proprement la date et la liste d'evenements
 		this.draw();
 	}
 

@@ -71,6 +71,16 @@ public class DonneesSimulation {
 		this.listeRobot.add(robot_pompier);
 	}
 
+	// Added by Maxime
+	public Carte getCarte(){
+		return this.carteTerrain;
+	}
+
+	// Added by Maxime
+	public Robot getRobot(int index){
+		return this.listeRobot.get(index);
+	}
+
 	public int getNbLignes(){
 		return this.carteTerrain.getNbLignes();
 	}

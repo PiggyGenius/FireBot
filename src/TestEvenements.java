@@ -20,37 +20,15 @@ public class TestEvenements {
 			DonneesSimulation simulation = LecteurDonnees.lire(args[0]);
 			GUISimulator gui = new GUISimulator(600, 600, Color.BLACK);
 			Simulateur s = new Simulateur(gui, simulation);
-
-			Coordonnee c_src = new Coordonnee(12, 4);
-			Coordonnee c_dst1 = new Coordonnee(1, 7);
-			Coordonnee c_dst2 = new Coordonnee(2, 11);
-			Coordonnee c_dst3 = new Coordonnee(3, 5);
-			Coordonnee c_dst4 = new Coordonnee(4, 9);
-
-			Case src = new Case(c_src, NatureTerrain.EAU);
-			Case dst1 = new Case(c_dst1, NatureTerrain.FORET);
-			Case dst2 = new Case(c_dst2, NatureTerrain.EAU);
-			Case dst3 = new Case(c_dst3, NatureTerrain.ROCHE);
-			Case dst4 = new Case(c_dst4, NatureTerrain.HABITAT);
-
-			Robot r = new RobotChenilles(src);
-			Evenement e1 = new EvenementDeplacement(8, r, dst3);
-			Evenement e2 = new EvenementDeplacement(2, r, dst1);
-			Evenement e3 = new EvenementDeplacement(5, r, dst2);
-			Evenement e4 = new EvenementDeplacement(8, r, dst4);
-
-			assert s.simulationTerminee() == true;
-			s.ajouteEvenement(e1);
-			assert s.simulationTerminee() == false;
-			s.ajouteEvenement(e2);
-			s.ajouteEvenement(e3);
-			s.ajouteEvenement(e4);
-			assert s.simulationTerminee() == false;
+			
+			Robot robert = simulation.getRobot(0);
 
 			for (int i = 0; i < 10; i++) {
-				s.incrementeDate();
+				Coordonnee c_src = simulation.getCoordonneeRobot(0);
+				Case dst = simulation.getCarte().getCase(c_src.getLigne()+i, c_src.getColonne());
+				System.out.println(dst);
+				s.ajouteEvenement(new EvenementDeplacement(i, robert, dst));
 			}
-
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();

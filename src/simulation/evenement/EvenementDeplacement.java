@@ -16,6 +16,7 @@ public class EvenementDeplacement extends Evenement {
 	}
 
 	public void execute() {
-		System.out.println("Destination : " + this.dest.toString());
+		System.out.println("Destination : " + this.dest.toString()); // DEBUG
+		this.robot.setPosition(this.dest);
 	}
 }
