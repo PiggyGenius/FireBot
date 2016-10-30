@@ -56,7 +56,7 @@ exeRobots: testRobots
 	java -classpath bin TestRobots
 
 exeCarteGUI: testCarteGUI
-	java -classpath bin:bin/gui.jar TestCarteGUI cartes/carteSujet.map
+	java -classpath bin:bin/gui.jar TestCarteGUI cartes/spiralOfMadness-50x50.map
 
 
 clean:
