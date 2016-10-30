@@ -8,15 +8,19 @@ import simulation.*;
 import gui.Simulable;
 import gui.Text;
 import enumerations.*;
+import evenement.*;
 
 
 public class Simulateur implements Simulable {
 	private GUISimulator gui;
 	private DonneesSimulation simulation;
 
+	private long dateSimulation;
+
 	public Simulateur(GUISimulator gui,DonneesSimulation simulation){
 		this.gui = gui;
 		this.simulation = simulation;
+		this.dateSimulation = 0;
 		gui.setSimulable(this);
 	}
 	
@@ -69,5 +73,18 @@ public class Simulateur implements Simulable {
 			gui.addGraphicalElement(new Rectangle(x_step*c.getLigne(),y_step*c.getColonne(),couleur_case,couleur_case,y_step));
 		}
 
+	}
+
+
+	public ajouteEvenement(Evenement e) {
+		return;
+	}
+
+	private void incrementeDate() {
+		this.dateSimulation ++;
+	}
+
+	private boolean simulationTerminee() {
+		return false;
 	}
 }
