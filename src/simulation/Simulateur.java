@@ -8,7 +8,6 @@ import simulation.*;
 import gui.Simulable;
 import gui.Text;
 import enumerations.*;
-import evenement.*;
 
 
 public class Simulateur implements Simulable {
