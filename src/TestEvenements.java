@@ -21,14 +21,30 @@ public class TestEvenements {
 			GUISimulator gui = new GUISimulator(600, 600, Color.BLACK);
 			Simulateur s = new Simulateur(gui, simulation);
 			
-			Robot robert = simulation.getRobot(0);
+			Robot robert = simulation.getRobot(1);
+			int temps = 3;
 
-			for (int i = 0; i < 10; i++) {
-				Coordonnee c_src = simulation.getCoordonneeRobot(0);
-				Case dst = simulation.getCarte().getCase(c_src.getLigne()+i, c_src.getColonne());
-				System.out.println(dst);
-				s.ajouteEvenement(new EvenementDeplacement(i, robert, dst));
-			}
+			/* Tu t'es planté dans les coordonnées : quand je diminue le 2nd
+			 * paramètre (les colonnes donc), le robot remonte d'une ligne.
+			 * En allant en (5, 4) puis en (5, 3), je vais au nord, alors que
+			 * ça devrait être l'ouest => à corriger */
+
+			// deplacement ouest
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,5))); temps ++;
+			// extinction
+			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
+			// deplacement nord x2
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,4))); temps ++;
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,3))); temps ++;
+			// remplissage (ça prend suuuuuuuper longtemps, 600 unités de temps)
+			s.ajouteEvenement(new EvenementRemplissage(temps, robert)); temps += robert.getTempsRemplissage();
+			// deplacement sud x2
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,4))); temps ++;
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,5))); temps ++;
+			// extinction
+			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
+			// retour à la case initiale
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(6,5))); temps ++;
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();

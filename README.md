@@ -16,3 +16,14 @@ Ensimag 2A POO - TP 2016/17
 - Makefile: quelques explications sur la compilation en ligne, notamment la notion de classpath et l'utilisation de gui.jar
 
 
+
+Problèmes
+=========
+
+Inversion des coordonnées X et Y
+--------------------------------
+cf. fichier TestEvenements.java
+
+Extinction d'un incendie
+------------------------
+Je vois pas comment ma méthode de Robot qui va déverser de l'eau peut accéder à la case incendie correspondante et diminuer son intensité

@@ -19,6 +19,9 @@ public abstract class Robot {
 	/* capacité du réservoir (0 si infini) */
 	protected int capaciteReservoir;
 
+	/* contenance courante du reservoir */
+	protected int qteReservoir;
+
 	/* temps de remplissage du réservoir en secondes (0 si reservoir infini) */
 	protected int tempsRemplissage;
 
@@ -97,13 +100,15 @@ public abstract class Robot {
 	 * @param volume
 	 * 	le volume d'eau a deverser */
 	public void deverserEau(int volume) {
-		return; // TODO
+		if (volume > qteReservoir)
+			throw new IllegalArgumentException("Volume superieur à la quantite d'eau");
+		this.qteReservoir -= volume;
 	}
 
 
 	/** Action de remplir le reservoir */
 	public void remplirReservoir() {
-		return; // TODO
+		this.qteReservoir = this.capaciteReservoir;
 	}
 
 

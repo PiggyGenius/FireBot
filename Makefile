@@ -62,7 +62,7 @@ exeCarteGUI: testCarteGUI
 	java -classpath bin:bin/gui.jar TestCarteGUI cartes/spiralOfMadness-50x50.map
 
 exeEvenements: testEvenements
-	java -classpath bin:bin/gui.jar TestEvenements cartes/spiralOfMadness-50x50.map -enableassertions
+	java -classpath bin:bin/gui.jar TestEvenements cartes/carteSujet.map -enableassertions
 
 clean:
 	rm -rf bin/*.class
