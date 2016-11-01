@@ -24,11 +24,6 @@ public class TestEvenements {
 			Robot robert = simulation.getRobot(1);
 			int temps = 3;
 
-			/* Tu t'es planté dans les coordonnées : quand je diminue le 2nd
-			 * paramètre (les colonnes donc), le robot remonte d'une ligne.
-			 * En allant en (5, 4) puis en (5, 3), je vais au nord, alors que
-			 * ça devrait être l'ouest => à corriger */
-
 			// deplacement Nord
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getVoisin(robert.getPosition(),Direction.NORD))); temps ++;
 			// extinction
@@ -44,7 +39,6 @@ public class TestEvenements {
 			// extinction
 			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
 			// retour à la case initiale
-			//s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(6,5))); temps ++;
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getVoisin(robert.getPosition(),Direction.SUD))); temps ++;
 
 
