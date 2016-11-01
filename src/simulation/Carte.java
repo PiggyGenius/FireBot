@@ -33,11 +33,7 @@ public class Carte {
 	}
 
 	public Case getCase(Coordonnee c){
-		int lig = c.getLigne();
-		int col = c.getColonne();
-		if(lig < 0 || lig > this.getNbLignes() || col < 0 || col > this.getNbColonnes())
-			throw new IllegalArgumentException();
-		return this.grilleCase[lig][col];
+		this.getCase(c.getLigne(), c.getColonne());
 	}
 
 	public void setCase(Coordonnee c, NatureTerrain terrain){
