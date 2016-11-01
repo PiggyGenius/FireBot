@@ -46,20 +46,18 @@ public class Carte {
 
 	private Coordonnee getCoordonnee(Case src, Direction dir){
 		Coordonnee voisin = new Coordonnee(src.getLigne(),src.getColonne());
-		int x = voisin.getLigne();
-		int y = voisin.getColonne();
 		switch(dir){
 			case NORD:
-				voisin.setLigne(x+1);
+				voisin.setLigne(voisin.getLigne()-1);
 				break;
 			case SUD:
-				voisin.setLigne(x-1);
+				voisin.setLigne(voisin.getLigne()+1);
 				break;
 			case EST:
-				voisin.setColonne(y+1);
+				voisin.setColonne(voisin.getColonne()+1);
 				break;
 			case OUEST:
-				voisin.setColonne(y-1);
+				voisin.setColonne(voisin.getColonne()-1);
 				break;
 			default :
 				throw new IllegalArgumentException("dir n'est pas une Direction");
