@@ -29,22 +29,24 @@ public class TestEvenements {
 			 * En allant en (5, 4) puis en (5, 3), je vais au nord, alors que
 			 * ça devrait être l'ouest => à corriger */
 
-			// deplacement ouest
-			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,5))); temps ++;
+			// deplacement Nord
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getVoisin(robert.getPosition(),Direction.NORD))); temps ++;
 			// extinction
 			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
-			// deplacement nord x2
+			// deplacement ouest x2
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,4))); temps ++;
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,3))); temps ++;
 			// remplissage (ça prend suuuuuuuper longtemps, 600 unités de temps)
 			s.ajouteEvenement(new EvenementRemplissage(temps, robert)); temps += robert.getTempsRemplissage();
-			// deplacement sud x2
+			// deplacement est x2
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,4))); temps ++;
 			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,5))); temps ++;
 			// extinction
 			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
 			// retour à la case initiale
-			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(6,5))); temps ++;
+			//s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(6,5))); temps ++;
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getVoisin(robert.getPosition(),Direction.SUD))); temps ++;
+
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();
