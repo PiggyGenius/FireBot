@@ -34,8 +34,8 @@ public class TestEvenements {
 			// extinction
 			s.ajouteEvenement(new EvenementDeversement(temps, robert, robert.getLitresUnitaire())); temps += robert.getTempsUnitaire();
 			// deplacement nord x2
-			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,4))); temps ++;
-			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(5,3))); temps ++;
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(4,5))); temps ++;
+			s.ajouteEvenement(new EvenementDeplacement(temps, robert, simulation.getCarte().getCase(3,5))); temps ++;
 			// remplissage (ça prend suuuuuuuper longtemps, 600 unités de temps)
 			s.ajouteEvenement(new EvenementRemplissage(temps, robert)); temps += robert.getTempsRemplissage();
 			// deplacement sud x2
