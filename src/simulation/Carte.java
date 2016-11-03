@@ -33,7 +33,7 @@ public class Carte {
 	}
 
 	public Case getCase(Coordonnee c){
-		this.getCase(c.getLigne(), c.getColonne());
+		return this.getCase(c.getLigne(), c.getColonne());
 	}
 
 	public void setCase(Coordonnee c, NatureTerrain terrain){
