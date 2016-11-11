@@ -11,6 +11,8 @@ import chemin.*;
 /** classe abstraite Robot */
 public abstract class Robot {
 
+	/* ######################### Attributs ######################### */
+
 	/* position courante du robot */
 	protected Case position;
 
@@ -35,6 +37,11 @@ public abstract class Robot {
 	/* distance a laquelle le robot doit se trouver d'un pt d'eau (0 ou 1) */
 	protected int distanceRemplissage;
 
+	/* indique si le robot est disponible ou non */
+	protected boolean dispo;
+
+
+	/* ######################### Constructeur ######################### */
 
 	/** constructeur de la classe abstraite Robot
 	 * @param position La position initiale du robot 
@@ -44,6 +51,7 @@ public abstract class Robot {
 		vitesse = new EnumMap<NatureTerrain, Double>(NatureTerrain.class);
 	}
 
+	/* ######################### Getters / Setters ######################### */
 	/** @return Position courante */
 	public Case getPosition() {
 		return this.position;
@@ -58,32 +66,29 @@ public abstract class Robot {
 		this.position = position;
 	}
 
-
 	public int getCapaciteReservoir() {
 		return this.capaciteReservoir;
 	}
-
 
 	public int getTempsRemplissage() {
 		return this.tempsRemplissage;
 	}
 
-
 	public int getLitresUnitaire() {
 		return this.litresUnitaire;
 	}
-
 
 	public int getTempsUnitaire() {
 		return this.tempsUnitaire;
 	}
 
-
 	public int getDistanceRemplissage() {
 		return this.distanceRemplissage;
 	}
 
-
+	public boolean getDispo() {
+		return this.dispo;
+	}
 
 	/** 
 	 * @param terrain
@@ -94,10 +99,20 @@ public abstract class Robot {
 	}
 
 
+	/* ######################### Evenements  ######################### */
+
+	/** Action de se deplacer */
+	public void planifierDeplacement(Chemin chemin) {
+		// TODO	: ajouter la liste d'evénements elémentaires nécessaires au déplacement
+		return; 
+	}
+
+
 	/** Action de deverser de l'eau sur la case courante 
 	 * @param volume
 	 * 	le volume d'eau a deverser */
-	public void deverserEau(int volume) {
+	public void planifierDeversement(int volume) {
+		// TODO : ajouter evenement de deversement
 		if (volume > qteReservoir)
 			throw new IllegalArgumentException("Volume superieur à la quantite d'eau");
 		this.qteReservoir -= volume;
@@ -105,10 +120,13 @@ public abstract class Robot {
 
 
 	/** Action de remplir le reservoir */
-	public void remplirReservoir() {
+	public void planifierRemplissage() {
+		// TODO : ajouter evenement de remplissage
 		this.qteReservoir = this.capaciteReservoir;
 	}
 
+
+	/* ######################### Affichage des robots ######################### */
 
 	public static String repeat(int count, String with) {
 		return new String(new char[count]).replace("\0", with);
