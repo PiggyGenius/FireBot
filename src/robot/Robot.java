@@ -52,6 +52,7 @@ public abstract class Robot {
 	}
 
 	/* ######################### Getters / Setters ######################### */
+
 	/** @return Position courante */
 	public Case getPosition() {
 		return this.position;
@@ -105,28 +106,31 @@ public abstract class Robot {
 
 	/* ######################### Evenements  ######################### */
 
+	public void planifierAction(Chemin chemin) {
+		planifierDeplacement();
+		planifierDeversement();
+		planifierRemplissage();
+	}
+
+
 	/** Action de se deplacer */
-	public void planifierDeplacement(Chemin chemin) {
+	public static void planifierDeplacement() {
 		// TODO	: ajouter la liste d'evénements elémentaires nécessaires au déplacement
 		return; 
 	}
 
 
-	/** Action de deverser de l'eau sur la case courante 
-	 * @param volume
-	 * 	le volume d'eau a deverser */
-	public void planifierDeversement(int volume) {
+	/** Action de deverser de l'eau */
+	public static void planifierDeversement() {
 		// TODO : ajouter evenement de deversement
-		if (volume > qteReservoir)
-			throw new IllegalArgumentException("Volume superieur à la quantite d'eau");
-		this.qteReservoir -= volume;
+		return;
 	}
 
 
 	/** Action de remplir le reservoir */
-	public void planifierRemplissage() {
+	public static void planifierRemplissage() {
 		// TODO : ajouter evenement de remplissage
-		this.qteReservoir = this.capaciteReservoir;
+		return;
 	}
 
 
