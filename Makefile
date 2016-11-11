@@ -68,4 +68,4 @@ doc:
 	javadoc -d doc/src/*.java
 
 clean:
-	rm -rf bin/*.class
+	rm -rf bin/*.class doc/*
