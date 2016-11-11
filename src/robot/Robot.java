@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import enumerations.*;
 import simulation.*;
+import chemin.*;
 
 /** classe abstraite Robot */
 public abstract class Robot {
@@ -36,13 +37,12 @@ public abstract class Robot {
 
 
 	/** constructeur de la classe abstraite Robot
-	 * @param position
-	 * 	La position initiale du robot */
+	 * @param position La position initiale du robot 
+	 **/
 	public Robot(Case position) {
 		this.setPosition(position);
 		vitesse = new EnumMap<NatureTerrain, Double>(NatureTerrain.class);
 	}
-
 
 	/** @return Position courante */
 	public Case getPosition() {
@@ -53,9 +53,7 @@ public abstract class Robot {
 		return this.position.getCoordonnee();
 	}
 
-
-	/** @param position
-	 * 	La nouvelle position du Robot */
+	/** @param position	La nouvelle position du Robot */
 	public void setPosition(Case position) {
 		this.position = position;
 	}
