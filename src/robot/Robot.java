@@ -52,6 +52,7 @@ public abstract class Robot {
 	}
 
 	/* ######################### Getters / Setters ######################### */
+
 	/** @return Position courante */
 	public Case getPosition() {
 		return this.position;

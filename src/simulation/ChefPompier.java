@@ -11,6 +11,7 @@ public class ChefPompier {
 	public Robot ChoisirRobot(Incendie incendie) {
 		// calculer plus court chemin pour tous les robots
 		// choisir le robot le plus proche de l'incendie
+		// appeler planifierAction sur ce robot
 	}
 
 }
