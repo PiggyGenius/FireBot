@@ -18,6 +18,10 @@ public class Case {
 		this.nature = terrain;
 	}
 
+	public Case (int ligne,int colonne, NatureTerrain terrain) {
+		this.coord = new Coordonnee(ligne,colonne);
+		this.nature = terrain;
+	}
 
 	/** @return Ligne */
 	public int getLigne() {

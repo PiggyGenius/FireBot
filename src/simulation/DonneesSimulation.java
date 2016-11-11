@@ -2,20 +2,30 @@ package simulation;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import robot.*;
+import chemin.*;
 import enumerations.*;
-import robot.*;
 
 public class DonneesSimulation {
 	private Carte carteTerrain;
 	private List<Incendie> listeIncendie = new ArrayList<Incendie>();
 	private List<Robot> listeRobot = new ArrayList<Robot>();
+	private PlusCourtChemin plusCourtChemin;
 
 	public DonneesSimulation(){
 	}
 
+	public Chemin getChemin(Case src,Case dst,EnumMap<NatureTerrain, Double> vitesse){
+		return this.plusCourtChemin.getChemin(src,dst,vitesse);
+	}
+
 	public void setCarte(int nbLignes,int nbColonnes,int tailleCases){
 		this.carteTerrain = new Carte(nbLignes,nbColonnes,tailleCases);
+	}
+
+	public void setPlusCourtChemin(){
+		this.plusCourtChemin = new Dijkstra(this.carteTerrain);
 	}
 
 	public void setCase(Coordonnee c, NatureTerrain terrain){

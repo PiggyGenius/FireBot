@@ -7,6 +7,7 @@ import gui.Rectangle;
 import gui.Simulable;
 import io.LecteurDonnees;
 import simulation.*;
+import enumerations.NatureTerrain;
 
 
 public class TestCarteGUI {
@@ -18,9 +19,12 @@ public class TestCarteGUI {
 		
         try {
 			DonneesSimulation simulation = LecteurDonnees.lire(args[0]);
-
 	        GUISimulator gui = new GUISimulator(600, 600, Color.BLACK);
 	        Simulateur simule_terrain = new Simulateur(gui,simulation);
+			simulation.setPlusCourtChemin();
+
+			ChefPompier chef = new ChefPompier(simulation);
+			chef.getChemin(new Case(48,47,NatureTerrain.ROCHE),chef.ChoisirRobot(new Incendie(new Case(5,5,NatureTerrain.ROCHE),45)));
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {

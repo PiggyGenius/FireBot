@@ -98,6 +98,10 @@ public abstract class Robot {
 		return this.vitesse.get(terrain);
 	}
 
+	public EnumMap<NatureTerrain,Double> getVitesseMap(){
+		return this.vitesse;
+	}
+
 
 	/* ######################### Evenements  ######################### */
 
