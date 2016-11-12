@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.EnumMap;
 import java.util.PriorityQueue;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
 import gui.GUISimulator;
 import gui.Rectangle;
 import simulation.*;
@@ -11,13 +13,14 @@ import gui.Simulable;
 import gui.Text;
 import enumerations.*;
 import simulation.evenement.*;
+import chemin.*;
 
 
 public class Simulateur implements Simulable {
 	private GUISimulator gui;
 	private DonneesSimulation simulation;
 	// TEMPORARY JUST TO TEST STUFF
-	private List<Case> chemin;
+	private HashSet<Destination> chemin;
 
 	private long dateSimulation;
 
@@ -46,7 +49,7 @@ public class Simulateur implements Simulable {
 	}
 
 	//TEMPORARY JUST TO TEST STUFF
-	public void setPath(List<Case> chemin){
+	public void setPath(HashSet<Destination> chemin){
 		this.chemin = chemin;
 	}
 
@@ -54,8 +57,11 @@ public class Simulateur implements Simulable {
 		Color couleur_case = Color.decode("#3607ea");
 		int x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
 		int y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
-		for(Case noeud: this.chemin){
+		Iterator<Destination> dest_iterator = this.chemin.iterator();
+		while(dest_iterator.hasNext()){
+			Case noeud = dest_iterator.next().getPosition();
 			gui.addGraphicalElement(new Rectangle(y_step*noeud.getColonne(),x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
+			this.chemin.remove(noeud);
 		}
 	}
 
