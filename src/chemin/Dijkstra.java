@@ -3,6 +3,7 @@ package chemin;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.EnumMap;
 import simulation.*;
 import enumerations.NatureTerrain;
@@ -10,32 +11,30 @@ import enumerations.NatureTerrain;
 /** On réalise une classe statique avec un constructeur privé et des méthodes statiques. */
 public class Dijkstra extends PlusCourtChemin {
 	private Carte carte;
-	private Case[][] ensembleCase;
 	private HashSet<Case> ensembleNoeud;
 	private Case[][] predecesseur;
 	private double[][] distance;
-	private List<Case> voisins;
 
 	/** @param carte carte du terrain de la simulation */
 	public Dijkstra(Carte carte){
 		this.carte = carte;
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
-		this.voisins = new ArrayList<Case>();
 		this.distance = new double[nb_lignes][nb_colonnes];
 		this.predecesseur = new Case[nb_lignes][nb_colonnes];
-		this.ensembleCase = new Case[nb_lignes][nb_colonnes];
 	}
 
-	/** Remplit le tableau de Case avec les références de la carte */
-	private void setEnsembleCase(){
+	/** Remplit le HashSet de Case avec les références de la carte */
+	private void setEnsembleNoeud(EnumMap<NatureTerrain,Double> vitesse){
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
 		this.ensembleNoeud = new HashSet<Case>(nb_lignes*nb_colonnes);
+		Case noeud = null;
 		for(int i=0;i<nb_lignes;i++){
 			for(int j=0;j<nb_colonnes;j++){
-				this.ensembleNoeud.add(this.carte.getCase(i,j));
-				this.ensembleCase[i][j] = this.carte.getCase(i,j);
+				noeud = this.carte.getCase(i,j);
+				if(vitesse.get(noeud.getNatureTerrain()) != 0.0)
+					this.ensembleNoeud.add(this.carte.getCase(i,j));
 			}
 		}
 	}
@@ -48,38 +47,47 @@ public class Dijkstra extends PlusCourtChemin {
 	 **/
 	@Override
 	public Chemin getChemin(Case src,Case dst,EnumMap<NatureTerrain,Double> vitesse){
-		int nb_lignes = this.carte.getNbLignes();
-		int nb_colonnes = this.carte.getNbColonnes();
-		int count = nb_lignes*nb_colonnes;
+		List<Case> voisins = new ArrayList<Case>();
 
-		this.setEnsembleCase();
-		this.init(src);
-		for(int c=0;c<count;c++){
-			Case noeud = this.getMin();
-			if(noeud == null || this.distance[noeud.getLigne()][noeud.getColonne()] == Double.MAX_VALUE)
+		this.setEnsembleNoeud(vitesse);
+		this.initDistance(src);
+		Iterator<Case> noeud = this.ensembleNoeud.iterator();
+		while(noeud.hasNext()){
+			Case min = this.getMin();
+			if(min == null || this.distance[min.getLigne()][min.getColonne()] == Double.MAX_VALUE)
 				return new Chemin(this.predecesseur,this.distance,src,dst);
-			int i = noeud.getLigne();
-			int j = noeud.getColonne();
-			ensembleCase[i][j] = null;
-			if(i-1>=0 && vitesse.get(this.carte.getCase(i-1,j).getNatureTerrain()) != -1)
-				voisins.add(this.carte.getCase(i-1,j));
-			if(i+1<nb_lignes && vitesse.get(this.carte.getCase(i+1,j).getNatureTerrain()) != -1)
-				voisins.add(this.carte.getCase(i+1,j));
-			if(j-1>=0 && vitesse.get(this.carte.getCase(i,j-1).getNatureTerrain()) != -1)
-				voisins.add(this.carte.getCase(i,j-1));
-			if(j+1<nb_colonnes && vitesse.get(this.carte.getCase(i,j+1).getNatureTerrain()) != -1)
-				voisins.add(this.carte.getCase(i,j+1));
+			this.ensembleNoeud.remove(min);
+			this.ajouteVoisins(min,voisins);
 			for(Case noeud_voisin: voisins){
-				setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
+				setDistance(min,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
 			}
 		}
 		return new Chemin(this.predecesseur,this.distance,src,dst);
 	}
 
+	/** Ajoute les voisins à la liste
+	 *  @param noeud Case de départ pour déterminer les voisins
+	 *  @param voisins Liste de voisins
+	 **/
+	private void ajouteVoisins(Case noeud,List<Case> voisins){
+		int nb_lignes = this.carte.getNbLignes();
+		int nb_colonnes = this.carte.getNbColonnes();
+		int i = noeud.getLigne();
+		int j = noeud.getColonne();
+		if(i-1>=0)
+			voisins.add(this.carte.getCase(i-1,j));
+		if(i+1<nb_lignes)
+			voisins.add(this.carte.getCase(i+1,j));
+		if(j-1>=0)
+			voisins.add(this.carte.getCase(i,j-1));
+		if(j+1<nb_colonnes)
+			voisins.add(this.carte.getCase(i,j+1));
+	}
+
 	/** Initialise le tableau de distance à +inf 
 	 *  @param src Case source
 	 **/
-	private void init(Case src){
+	private void initDistance(Case src){
 		int nb_lignes = this.distance.length;
 		int nb_colonnes = this.distance[0].length;
 		for(int i=0;i<nb_lignes;i++){
@@ -95,15 +103,14 @@ public class Dijkstra extends PlusCourtChemin {
 	 **/
 	private Case getMin(){
 		double distance_min = Double.MAX_VALUE;
+		Iterator<Case> noeud_set = this.ensembleNoeud.iterator();
 		Case case_min = null;
-		for(int i=0;i<this.ensembleCase.length;i++){
-			for(int j=0;j<this.ensembleCase[0].length;j++){
-				if(ensembleCase[i][j] != null){
-					if(distance[i][j] < distance_min){
-						distance_min = distance[i][j];
-						case_min = this.ensembleCase[i][j];
-					}
-				}
+		Case noeud = null;
+		while(noeud_set.hasNext()){
+			noeud = noeud_set.next();
+			if(distance[noeud.getLigne()][noeud.getColonne()] < distance_min){
+				distance_min = distance[noeud.getLigne()][noeud.getColonne()];
+				case_min = noeud;
 			}
 		}
 		return case_min;
