@@ -16,7 +16,6 @@ public class Chemin {
 		// Pourquoi ? Je ne sais pas
 		while(noeud.getLigne() != src.getLigne() || noeud.getColonne() != src.getColonne()){
 			this.chemin.add(noeud);
-			System.out.println(noeud);
 			this.temps += distance[noeud.getLigne()][noeud.getColonne()];
 			noeud = predecesseur[noeud.getLigne()][noeud.getColonne()];
 		}

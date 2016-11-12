@@ -26,7 +26,7 @@ public class Dijkstra extends PlusCourtChemin {
 		this.setEnsembleCase();
 	}
 
-	/** Remplit le tableau de Case */
+	/** Remplit le tableau de Case avec les références de la carte */
 	private void setEnsembleCase(){
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
@@ -40,6 +40,7 @@ public class Dijkstra extends PlusCourtChemin {
 	/** Calcule le plus court chemin par Dijkstra
 	 *  @param src Case de départ
 	 *  @param dst Case de destination
+	 *  @param vitesse Mapping des vitesses associées au terrain
 	 *  @return chemin Liste de case à suivre pour se rendre à l'objectif + temps
 	 **/
 	@Override
@@ -71,7 +72,9 @@ public class Dijkstra extends PlusCourtChemin {
 		return new Chemin(this.predecesseur,this.distance,src,dst);
 	}
 
-	/** Initialise le tableau de distance à +inf */
+	/** Initialise le tableau de distance à +inf 
+	 *  @param src Case source
+	 **/
 	private void init(Case src){
 		int nb_lignes = this.distance.length;
 		int nb_colonnes = this.distance[0].length;
@@ -102,6 +105,11 @@ public class Dijkstra extends PlusCourtChemin {
 		return case_min;
 	}
 
+	/** Mise a jour du tableau de distance des noeuds 
+	 *  @param src Case source
+	 *  @param dst Case destination
+	 *  @param vitesse Vitesse du robot sur la Case destination
+	 **/
 	private void setDistance(Case src,Case dst,double vitesse){
 		int src_i = src.getLigne();
 		int src_j = src.getColonne();
@@ -114,7 +122,13 @@ public class Dijkstra extends PlusCourtChemin {
 		}
 	}
 
+	/** Calcul le poids d'un arc
+	 *  @param src Case source
+	 *  @param dst Case destination
+	 *  @param vitesse Vitesse du robot sur la Case destination
+	 *  @return distance(src,dst)/vitesse
+	 */
 	private double getPoids(Case src,Case dst,double vitesse){
-		return (Math.abs(src.getLigne()-dst.getLigne())+Math.abs(src.getColonne()+dst.getColonne()))/vitesse;
+		return (Math.abs(src.getLigne()-dst.getLigne())+Math.abs(src.getColonne()-dst.getColonne()))/vitesse;
 	}
 }
