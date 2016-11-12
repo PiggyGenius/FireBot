@@ -8,7 +8,7 @@ import java.util.EnumMap;
 import simulation.*;
 import enumerations.NatureTerrain;
 
-/** On réalise une classe statique avec un constructeur privé et des méthodes statiques. */
+/** Algorithme Dijkstra de calcule du plus court chemin */
 public class Dijkstra extends PlusCourtChemin {
 	private Carte carte;
 	private HashSet<Case> ensembleNoeud;
@@ -24,7 +24,9 @@ public class Dijkstra extends PlusCourtChemin {
 		this.predecesseur = new Case[nb_lignes][nb_colonnes];
 	}
 
-	/** Remplit le HashSet de Case avec les références de la carte */
+	/** Remplit le HashSet de Case avec les références de la carte 
+	 *  @param vitesse Mapping des vitesses associées aux terrains
+	 **/
 	private void setEnsembleNoeud(EnumMap<NatureTerrain,Double> vitesse){
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();

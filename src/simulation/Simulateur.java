@@ -19,6 +19,8 @@ import chemin.*;
 public class Simulateur implements Simulable {
 	private GUISimulator gui;
 	private DonneesSimulation simulation;
+	private int x_step;
+	private int y_step;
 	// TEMPORARY JUST TO TEST STUFF
 	private HashSet<Destination> chemin;
 
@@ -30,6 +32,8 @@ public class Simulateur implements Simulable {
 		this.gui = gui;
 		this.simulation = simulation;
 		this.dateSimulation = 0;
+		this.x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
+		this.y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
 		gui.setSimulable(this);
 	}
 	
@@ -55,12 +59,12 @@ public class Simulateur implements Simulable {
 
 	public void drawPath(){
 		Color couleur_case = Color.decode("#3607ea");
-		int x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
-		int y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
 		Iterator<Destination> dest_iterator = this.chemin.iterator();
 		while(dest_iterator.hasNext()){
-			Case noeud = dest_iterator.next().getPosition();
-			gui.addGraphicalElement(new Rectangle(y_step*noeud.getColonne(),x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
+			Destination dest = dest_iterator.next();
+			Case noeud = dest.getPosition();
+			//System.out.println(dest.getTemps());
+			gui.addGraphicalElement(new Rectangle(this.y_step*noeud.getColonne(),this.x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
 			this.chemin.remove(noeud);
 		}
 	}
@@ -78,12 +82,10 @@ public class Simulateur implements Simulable {
 		/* On affiche le terrain de la carte */
 		int nbLignes = this.simulation.getNbLignes();
 		int nbColonnes = this.simulation.getNbColonnes();	
-		int x_step = (int) Math.floor(this.gui.getPanelHeight() / nbLignes);
-		int y_step = (int) Math.floor(this.gui.getPanelWidth() / nbColonnes);
 		for(int i = 0; i < nbLignes; i++){
 			for(int j = 0; j < nbColonnes; j++){
 				couleur_case = couleur_terrain.get(this.simulation.getNatureTerrain(i,j));
-				gui.addGraphicalElement(new Rectangle(y_step*j,x_step*i,couleur_case,couleur_case,y_step));
+				gui.addGraphicalElement(new Rectangle(this.y_step*j,this.x_step*i,couleur_case,couleur_case,y_step));
 			}
 		}
 
