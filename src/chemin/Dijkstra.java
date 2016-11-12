@@ -40,6 +40,7 @@ public class Dijkstra extends PlusCourtChemin {
 	/** Calcule le plus court chemin par Dijkstra
 	 *  @param src Case de départ
 	 *  @param dst Case de destination
+	 *  @return chemin Liste de case à suivre pour se rendre à l'objectif + temps
 	 **/
 	@Override
 	public Chemin getChemin(Case src,Case dst,EnumMap<NatureTerrain,Double> vitesse){
@@ -49,7 +50,7 @@ public class Dijkstra extends PlusCourtChemin {
 		this.init(src);
 		for(int c=0;c<count;c++){
 			Case noeud = this.getMin();
-			if(this.distance[noeud.getLigne()][noeud.getColonne()] == Double.MAX_VALUE)
+			if(noeud == null || this.distance[noeud.getLigne()][noeud.getColonne()] == Double.MAX_VALUE)
 				return new Chemin(this.predecesseur,this.distance,src,dst);
 			int i = noeud.getLigne();
 			int j = noeud.getColonne();

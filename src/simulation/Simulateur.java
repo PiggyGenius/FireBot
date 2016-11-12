@@ -3,6 +3,7 @@ package simulation;
 import java.awt.Color;
 import java.util.EnumMap;
 import java.util.PriorityQueue;
+import java.util.List;
 import gui.GUISimulator;
 import gui.Rectangle;
 import simulation.*;
@@ -15,6 +16,8 @@ import simulation.evenement.*;
 public class Simulateur implements Simulable {
 	private GUISimulator gui;
 	private DonneesSimulation simulation;
+	// TEMPORARY JUST TO TEST STUFF
+	private List<Case> chemin;
 
 	private long dateSimulation;
 
@@ -32,6 +35,7 @@ public class Simulateur implements Simulable {
 		System.out.println("Clicked on next"); // DEBUG
 		this.incrementeDate();
 		this.draw();
+		this.drawPath();
 	}
 
 	@Override
@@ -39,6 +43,20 @@ public class Simulateur implements Simulable {
 		System.out.println("Clicked on restart"); // DEBUG
 		// TODO : reinitialiser proprement la date et la liste d'evenements
 		this.draw();
+	}
+
+	//TEMPORARY JUST TO TEST STUFF
+	public void setPath(List<Case> chemin){
+		this.chemin = chemin;
+	}
+
+	public void drawPath(){
+		Color couleur_case = Color.decode("#3607ea");
+		int x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
+		int y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
+		for(Case noeud: this.chemin){
+			gui.addGraphicalElement(new Rectangle(y_step*noeud.getColonne(),x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
+		}
 	}
 
 	private void draw(){

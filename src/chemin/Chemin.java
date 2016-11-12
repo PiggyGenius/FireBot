@@ -21,4 +21,8 @@ public class Chemin {
 			noeud = predecesseur[noeud.getLigne()][noeud.getColonne()];
 		}
 	}
+
+	public List<Case> getChemin(){
+		return this.chemin;
+	}
 }

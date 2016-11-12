@@ -24,6 +24,6 @@ public class ChefPompier {
 	 * @return Liste de Case pour se rendre à destination avec le temps du trajet
 	 **/
 	public Chemin getChemin(Case destination,Robot pompier){
-		return this.donnees.getChemin(new Case(0,0,NatureTerrain.ROCHE),destination,pompier.getVitesseMap());
+		return this.donnees.getChemin(new Case(0,15,NatureTerrain.ROCHE),destination,pompier.getVitesseMap());
 	}
 }
