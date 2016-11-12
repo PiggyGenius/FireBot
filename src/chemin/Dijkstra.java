@@ -2,6 +2,7 @@ package chemin;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.EnumMap;
 import simulation.*;
 import enumerations.NatureTerrain;
@@ -10,11 +11,12 @@ import enumerations.NatureTerrain;
 public class Dijkstra extends PlusCourtChemin {
 	private Carte carte;
 	private Case[][] ensembleCase;
+	private HashSet<Case> ensembleNoeud;
 	private Case[][] predecesseur;
 	private double[][] distance;
 	private List<Case> voisins;
 
-	/** @param Carte carte du terrain de la simulation */
+	/** @param carte carte du terrain de la simulation */
 	public Dijkstra(Carte carte){
 		this.carte = carte;
 		int nb_lignes = this.carte.getNbLignes();
@@ -23,15 +25,16 @@ public class Dijkstra extends PlusCourtChemin {
 		this.distance = new double[nb_lignes][nb_colonnes];
 		this.predecesseur = new Case[nb_lignes][nb_colonnes];
 		this.ensembleCase = new Case[nb_lignes][nb_colonnes];
-		this.setEnsembleCase();
 	}
 
 	/** Remplit le tableau de Case avec les références de la carte */
 	private void setEnsembleCase(){
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
+		this.ensembleNoeud = new HashSet<Case>(nb_lignes*nb_colonnes);
 		for(int i=0;i<nb_lignes;i++){
 			for(int j=0;j<nb_colonnes;j++){
+				this.ensembleNoeud.add(this.carte.getCase(i,j));
 				this.ensembleCase[i][j] = this.carte.getCase(i,j);
 			}
 		}
@@ -40,7 +43,7 @@ public class Dijkstra extends PlusCourtChemin {
 	/** Calcule le plus court chemin par Dijkstra
 	 *  @param src Case de départ
 	 *  @param dst Case de destination
-	 *  @param vitesse Mapping des vitesses associées au terrain
+	 *  @param vitesse Mapping des vitesses associées aux terrains
 	 *  @return chemin Liste de case à suivre pour se rendre à l'objectif + temps
 	 **/
 	@Override
@@ -48,6 +51,8 @@ public class Dijkstra extends PlusCourtChemin {
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
 		int count = nb_lignes*nb_colonnes;
+
+		this.setEnsembleCase();
 		this.init(src);
 		for(int c=0;c<count;c++){
 			Case noeud = this.getMin();
@@ -68,7 +73,6 @@ public class Dijkstra extends PlusCourtChemin {
 				setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
 			}
 		}
-		this.setEnsembleCase();
 		return new Chemin(this.predecesseur,this.distance,src,dst);
 	}
 

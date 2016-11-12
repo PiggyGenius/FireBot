@@ -32,13 +32,12 @@ public class LecteurDonnees {
 	/* On ajoute un attribut DonnesSimulation qui sera éditer par les méthodes */
 	private static DonneesSimulation simulation;
 
-    /**
-     * Lit et affiche le contenu d'un fichier de donnees (cases,
-     * robots et incendies).
-     * Ceci est méthode de classe; utilisation:
-     * LecteurDonnees.lire(fichierDonnees)
-     * @param fichierDonnees nom du fichier à lire
-     */
+    /** Lit et affiche le contenu d'un fichier de donnees (cases, robots et incendies)
+     *  @param fichierDonnees nom du fichier à lire
+	 *  @throws FileNotFoundException le fichier n'existe pas ou ne peut etre ouvert
+	 *  @throws DataFormatException format des données du fichier incorrect
+	 *  @return donnees de simulation associées au fichier
+     **/
     public static DonneesSimulation lire(String fichierDonnees) throws FileNotFoundException, DataFormatException {
 		simulation = new DonneesSimulation();
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
@@ -54,24 +53,21 @@ public class LecteurDonnees {
 
 
 
-    // Tout le reste de la classe est prive!
-
     private static Scanner scanner;
 
-    /**
-     * Constructeur prive; impossible d'instancier la classe depuis l'exterieur
-     * @param fichierDonnees nom du fichier a lire
-     */
+    /** Constructeur prive; impossible d'instancier la classe depuis l'exterieur
+     *  @param fichierDonnees nom du fichier a lire
+	 *  @throws FileNotFoundException le fichier n'existe pas ou ne peut etre ouvert
+     **/
     private LecteurDonnees(String fichierDonnees)
         throws FileNotFoundException {
         scanner = new Scanner(new File(fichierDonnees));
         scanner.useLocale(Locale.US);
     }
 
-    /**
-     * Lit et affiche les donnees de la carte.
-     * @throws ExceptionFormatDonnees
-     */
+    /** Lit et affiche les donnees de la carte.
+	 *  @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireCarte() throws DataFormatException {
         ignorerCommentaires();
         try {
@@ -102,9 +98,11 @@ public class LecteurDonnees {
 
 
 
-    /**
-     * Lit et affiche les donnees d'une case.
-     */
+    /** Lit et affiche les donnees d'une case
+	 *  @param lig indice de ligne
+	 *  @param col indice de colonne
+	 *  @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireCase(int lig, int col) throws DataFormatException {
 		ignorerCommentaires();
 		System.out.print("Case (" + lig + "," + col + "): ");
@@ -127,9 +125,9 @@ public class LecteurDonnees {
 	}
 
 
-    /**
-     * Lit et affiche les donnees des incendies.
-     */
+    /** Lit et affiche les donnees des incendies
+	 * @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireIncendies() throws DataFormatException {
         ignorerCommentaires();
         try {
@@ -146,10 +144,10 @@ public class LecteurDonnees {
     }
 
 
-    /**
-     * Lit et affiche les donnees du i-eme incendie.
-     * @param i
-     */
+    /** Lit et affiche les donnees du i-eme incendie
+     * @param i indice de l'incendie
+	 * @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireIncendie(int i) throws DataFormatException {
         ignorerCommentaires();
         System.out.print("Incendie " + i + ": ");
@@ -175,9 +173,9 @@ public class LecteurDonnees {
     }
 
 
-    /**
-     * Lit et affiche les donnees des robots.
-     */
+    /** Lit et affiche les donnees des robots
+	 *  @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireRobots() throws DataFormatException {
         ignorerCommentaires();
         try {
@@ -194,10 +192,10 @@ public class LecteurDonnees {
     }
 
 
-    /**
-     * Lit et affiche les donnees du i-eme robot.
-     * @param i
-     */
+    /** Lit et affiche les donnees du i-eme robot
+     * @param i indice du robot
+	 * @throws DataFormatException format des données du fichier incorrect
+     **/
     private void lireRobot(int i) throws DataFormatException {
         ignorerCommentaires();
         System.out.print("Robot " + i + ": ");
@@ -245,10 +243,9 @@ public class LecteurDonnees {
         }
     }
 
-    /**
-     * Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
-     * @throws ExceptionFormatDonnees
-     */
+    /** Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
+     *  @throws DataFormatException format des données du fichier incorrect
+     **/
     private void verifieLigneTerminee() throws DataFormatException {
         if (scanner.findInLine("(\\d+)") != null) {
             throw new DataFormatException("format invalide, donnees en trop.");

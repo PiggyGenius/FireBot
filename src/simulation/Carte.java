@@ -2,6 +2,7 @@ package simulation;
 
 import enumerations.*;
 
+/** Représente une carte comme une matrice de cases */
 public class Carte {
 	private int tailleCases;
 	private Case[][] grilleCase;
