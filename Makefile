@@ -41,6 +41,7 @@ testCarteGUI:
 testEvenements:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEvenements.java
 
+# Ajouter une regle
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
