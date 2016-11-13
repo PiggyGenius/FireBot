@@ -2,13 +2,13 @@ package simulation.evenement;
 
 public abstract class Evenement implements Comparable<Evenement> {
 
-	protected long date;
+	protected double date;
 
 	public Evenement(long date) {
 		this.date = date;
 	}
 
-	public long getDate() {
+	public double getDate() {
 		return this.date;
 	}
 
@@ -18,8 +18,12 @@ public abstract class Evenement implements Comparable<Evenement> {
 	public int compareTo(Evenement e) {
 		if (e == null)
 			throw new NullPointerException();
-
-		return (int)(this.date - e.date);
+		if(this.date < e.date)
+			return -1;
+		else if(this.date == e.date)
+			return 0;
+		else
+			return 1;
 	}
 }
 
