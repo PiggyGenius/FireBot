@@ -25,8 +25,8 @@ public class TestCarteGUI {
 			simulation.setPlusCourtChemin();
 
 			ChefPompier chef = new ChefPompier(simulation);
-			Chemin chemin = chef.getChemin(new Case(40,15,NatureTerrain.ROCHE),chef.ChoisirRobot(new Incendie(new Case(5,5,NatureTerrain.ROCHE),45)));
-			simule_terrain.setPath(chemin.getChemin());
+			chef.choisirRobot(simulation.getIncendie(0));
+
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
