@@ -131,4 +131,8 @@ public class Simulateur implements Simulable {
 	public long getDateSimulation() {
 		return this.dateSimulation;
 	}
+
+	public DonneesSimulation getSimulation() {
+		return this.simulation;
+	}
 }

@@ -9,7 +9,7 @@ public class EvenementDeversement extends Evenement {
 
 	private int volume;
 
-	public EvenementDeversement(long date, Robot r, int volume) {
+	public EvenementDeversement(double date, Robot r, int volume) {
 		super(date);
 		this.robot = r;
 	}

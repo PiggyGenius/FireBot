@@ -7,10 +7,10 @@ import enumerations.NatureTerrain;
 
 public class ChefPompier {
 
-	private DonneesSimulation donnees;
+	private Simulateur sim;
 
-	public ChefPompier(DonneesSimulation donnees) {
-		this.donnees = donnees;
+	public ChefPompier(Simulateur sim) {
+		this.sim = sim;
 	}
 
 	/** Teste tous les robots disponibles
@@ -21,8 +21,8 @@ public class ChefPompier {
 		Chemin best_c = new Chemin();
 		best_c.setTemps(Double.MAX_VALUE);
 
-		for (int i = 0; i < donnees.getNbRobots(); i++) {
-			Robot r = this.donnees.getRobot(i);
+		for (int i = 0; i < this.sim.getSimulation().getNbRobots(); i++) {
+			Robot r = this.sim.getSimulation().getRobot(i);
 			Chemin c = this.getChemin(incendie.getCase(), r);
 			if (c != null && c.getTemps() < best_c.getTemps()) {
 				best_r = r;
@@ -31,7 +31,7 @@ public class ChefPompier {
 		}
 		
 		if (best_r != null) {
-			best_r.planifierAction(best_c);
+			best_r.planifierAction(best_c, this.sim);
 		} else {
 			System.out.println("We can't go there, let it burn");
 		}
@@ -44,6 +44,6 @@ public class ChefPompier {
 	 * @return Chemin pour se rendre à destination avec le temps du trajet
 	 **/
 	public Chemin getChemin(Case dest, Robot pompier) {
-		return this.donnees.getChemin(pompier.getPosition(), dest, pompier.getVitesseMap());
+		return this.sim.getSimulation().getChemin(pompier.getPosition(), dest, pompier.getVitesseMap());
 	}
 }

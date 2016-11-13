@@ -9,7 +9,7 @@ public class EvenementDeplacement extends Evenement {
 
 	private Case dest;
 
-	public EvenementDeplacement(long date, Robot r, Case dest) {
+	public EvenementDeplacement(double date, Robot r, Case dest) {
 		super(date);
 		this.robot = r;
 		this.dest = dest;
