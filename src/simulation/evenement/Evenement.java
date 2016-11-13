@@ -4,7 +4,7 @@ public abstract class Evenement implements Comparable<Evenement> {
 
 	protected double date;
 
-	public Evenement(long date) {
+	public Evenement(double date) {
 		this.date = date;
 	}
 

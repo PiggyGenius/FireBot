@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import enumerations.*;
 import simulation.*;
+import simulation.evenement.*;
 import chemin.*;
 
 /** classe abstraite Robot */
@@ -106,31 +107,36 @@ public abstract class Robot {
 
 	/* ######################### Evenements  ######################### */
 
-	public void planifierAction(Chemin chemin) {
+	public void planifierAction(Chemin chemin, Simulateur sim) {
 		System.out.println("ALL GOOD");
-		// planifierDeplacement();
-		// planifierDeversement();
-		// planifierRemplissage();
+		planifierDeplacement(chemin, sim);
+		planifierDeversement();
+		planifierRemplissage();
 	}
 
 
-	/** Action de se deplacer */
-	public static void planifierDeplacement() {
-		// TODO	: ajouter la liste d'evénements elémentaires nécessaires au déplacement
-		return; 
+	/** Planifie l'action de se deplacer
+	 * Ajoute la liste des eveneemnts elementaires necessaires au deplacement */
+	private void planifierDeplacement(Chemin c, Simulateur sim) {
+		double tailleCase = (double)sim.getSimulation().getCarte().getTailleCases() / 10.0;
+		for (Destination dest : c.getChemin()) {
+			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase, this, dest.getPosition()));
+		}
 	}
 
 
 	/** Action de deverser de l'eau */
-	public static void planifierDeversement() {
+	private void planifierDeversement() {
 		// TODO : ajouter evenement de deversement
+		System.out.println("Deversement");
 		return;
 	}
 
 
 	/** Action de remplir le reservoir */
-	public static void planifierRemplissage() {
+	private void planifierRemplissage() {
 		// TODO : ajouter evenement de remplissage
+		System.out.println("Remplissage");
 		return;
 	}
 

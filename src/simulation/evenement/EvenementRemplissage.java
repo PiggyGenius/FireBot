@@ -7,7 +7,7 @@ public class EvenementRemplissage extends Evenement {
 
 	private Robot robot;
 
-	public EvenementRemplissage(long date, Robot r) {
+	public EvenementRemplissage(double date, Robot r) {
 		super(date);
 		this.robot = r;
 	}

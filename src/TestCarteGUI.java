@@ -24,8 +24,7 @@ public class TestCarteGUI {
 	        Simulateur simule_terrain = new Simulateur(gui,simulation);
 			simulation.setPlusCourtChemin();
 
-			ChefPompier chef = new ChefPompier(simulation);
-
+			ChefPompier chef = new ChefPompier(simule_terrain);
 			chef.choisirRobot(simulation.getIncendie(0));
 
         } catch (FileNotFoundException e) {
