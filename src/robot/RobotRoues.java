@@ -15,6 +15,8 @@ public class RobotRoues extends Robot {
 			v = 80.0;
 		}
 
+		v = this.convertVitesse(v);
+
 		this.vitesse.put(NatureTerrain.EAU, new Double(0.0));
 		this.vitesse.put(NatureTerrain.FORET, new Double(0.0));
 		this.vitesse.put(NatureTerrain.ROCHE, new Double(0.0));

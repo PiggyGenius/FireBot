@@ -17,6 +17,8 @@ public class RobotDrone extends Robot {
 			v = 150.0;
 		}
 
+		v = this.convertVitesse(v);
+
 		this.vitesse.put(NatureTerrain.EAU, new Double(v));
 		this.vitesse.put(NatureTerrain.FORET, new Double(v));
 		this.vitesse.put(NatureTerrain.ROCHE, new Double(v));

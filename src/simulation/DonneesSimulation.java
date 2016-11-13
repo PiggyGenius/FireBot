@@ -132,6 +132,13 @@ public class DonneesSimulation {
 		return this.listeRobot.get(index);
 	}
 
+	/** @return Un incendie de la liste 
+	 *  @param index Indice de l'incendie dans la liste
+	 **/
+	public Incendie getIncendie(int index) {
+		return this.listeIncendie.get(index);
+	}
+
 	/** @return Nombre de lignes de la carte */
 	public int getNbLignes(){
 		return this.carteTerrain.getNbLignes();

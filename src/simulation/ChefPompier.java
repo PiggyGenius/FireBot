@@ -6,7 +6,8 @@ import robot.*;
 import enumerations.NatureTerrain;
 
 public class ChefPompier {
-	DonneesSimulation donnees;
+
+	private DonneesSimulation donnees;
 
 	public ChefPompier(DonneesSimulation donnees) {
 		this.donnees = donnees;
@@ -14,20 +15,30 @@ public class ChefPompier {
 
 	/** Teste tous les robots disponibles
 	 *  @param incendie Incendie destination
-	 *  @return Robot le plus proche de l'incendie
 	 **/
-	public Robot ChoisirRobot(Incendie incendie) {
-		// calculer plus court chemin pour tous les robots
-		// choisir le robot le plus proche de l'incendie
-		return new RobotChenilles(new Case(0,0,NatureTerrain.TERRAIN_LIBRE),45.0);
+	public void choisirRobot(Incendie incendie) {
+		Robot best_r = this.donnees.getRobot(0);
+		Chemin best_c = this.getChemin(incendie.getCase(), best_r);
+
+		for (int i = 1; i < donnees.getNbRobots(); i++) {
+			Robot r = this.donnees.getRobot(i);
+			Chemin c = this.getChemin(incendie.getCase(), r);
+			if (c != null && c.getTemps() < best_c.getTemps()) {
+				best_r = r;
+				best_c = c;
+			}
+		}
+
+		best_r.planifierAction(best_c);
 	}
+
 
 	/**
 	 * @param destination Case de destination
 	 * @param pompier Robot qui fera le déplacement
-	 * @return Liste de Case pour se rendre à destination avec le temps du trajet
+	 * @return Chemin pour se rendre à destination avec le temps du trajet
 	 **/
-	public Chemin getChemin(Case destination,Robot pompier){
-		return this.donnees.getChemin(new Case(20,45,NatureTerrain.TERRAIN_LIBRE),destination,pompier.getVitesseMap());
+	public Chemin getChemin(Case dest, Robot pompier) {
+		return this.donnees.getChemin(pompier.getPosition(), dest, pompier.getVitesseMap());
 	}
 }
