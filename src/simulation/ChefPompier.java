@@ -51,7 +51,7 @@ public class ChefPompier {
 			}
 
 			if (best_r != null) {
-				best_r.planifierAction(best_c, this);
+				best_r.planifierDeplacement(best_c, this);
 				it.remove();
 			}
 		}
