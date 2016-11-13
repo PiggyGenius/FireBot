@@ -39,7 +39,7 @@ public class ChefPompier {
 
 
 	/**
-	 * @param destination Case de destination
+	 * @param dest Case de destination
 	 * @param pompier Robot qui fera le déplacement
 	 * @return Chemin pour se rendre à destination avec le temps du trajet
 	 **/

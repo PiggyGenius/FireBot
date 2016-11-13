@@ -115,11 +115,12 @@ public abstract class Robot {
 	}
 
 
-	/** Action de se deplacer
+	/** Planifie l'action de se deplacer
 	 * Ajoute la liste des eveneemnts elementaires necessaires au deplacement */
 	private void planifierDeplacement(Chemin c, Simulateur sim) {
+		double tailleCase = (double)sim.getSimulation().getCarte().getTailleCases() / 10.0;
 		for (Destination dest : c.getChemin()) {
-			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps(), this, dest.getPosition()));
+			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase, this, dest.getPosition()));
 		}
 	}
 

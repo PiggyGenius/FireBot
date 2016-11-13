@@ -37,7 +37,6 @@ public class Simulateur implements Simulable {
 	
 	@Override
 	public void next(){
-		System.out.println("Clicked on next"); // DEBUG
 		this.incrementeDate();
 		this.draw();
 		// this.drawPath();
