@@ -1,0 +1,111 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1cm,bottom=1cm,right=1cm,left=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   Page de garde   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% variable à redéfinir (placées sur la page de garde et sur l'entête)
+\def\typedeprojet{Type de projet}
+\def\nomduprojet{Nom du projet}
+\def\dateduprojet{Date du projet}
+
+% définition des entêtes et pieds de page
+\pagestyle{fancy}
+
+% définition des marges pour les entêtes et pieds de page
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+% entête de page
+\lhead{\includegraphics[height=1.2cm]{logo_ensimag.jpg}}
+\chead{\bf \typedeprojet}
+\rhead{\nomduprojet}
+
+% pied de page
+\lfoot{\LaTeX}
+\cfoot{}
+\rfoot{\thepage}
+
+% compte à partir de 0 => la 2e page est donc à 1
+\setcounter{page}{0}
+
+% re-définition des tailles d'entête et de texte
+\setlength{\headheight}{60pt}
+\setlength{\textheight}{710pt}
+
+% titre de la page de garde
+\title{
+	% illustrations
+	\begin{flushleft}
+		\includegraphics[width=5cm]{logo_ensimag.jpg} \hfill
+		\includegraphics[width=7cm]{logo_latex.jpg} \\[40pt]
+	\end{flushleft} 
+	% séparateur 1
+	{\rule{15cm}{1mm}}\vspace{7mm}
+	% titres
+	\begin{tabular}{p{4cm} r}
+		& {\Huge {\bf \typedeprojet}} \\[20pt]
+		& {\huge \nomduprojet}
+	\end{tabular}\\
+	% séparateur 2
+	\vspace{7mm}{\rule{15cm}{1mm}}\vspace{2mm} \\
+	% date
+	\hfill \large \dateduprojet \hspace{2cm}
+	% table des matières
+	\renewcommand{\contentsname}{\LARGE \it Sommaire \hfill} % renommage de la table
+	\setcounter{tocdepth}{2} % numérotation (1 pour les sections, 2 pour les sous-sections, ...)
+	\tableofcontents
+	\vfill
+}
+
+% auteur(s)
+\author{
+	\begin{tabular}{p{15cm}}
+		\Large Maxime Deloche \& Thomas Loïodice
+	\end{tabular} \\
+	\hline
+}
+
+% pas de date, elle est dans le titre
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty} % pas de numérotation de la page de garde
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -------------------------------------- SECTION 1 --------------------------------------
+
+\section{}
+
+\subsection{}
+
+\subsection{}
+
+
+% -------------------------------------- SECTION 2 --------------------------------------
+
+\section{}
+
+\subsection{}
+
+\subsection{}
+
+
+% -------------------------------------- SECTION 3 --------------------------------------
+
+\section{}
+
+\subsection{}
+
+\subsection{}
+
+
+\end{document}
