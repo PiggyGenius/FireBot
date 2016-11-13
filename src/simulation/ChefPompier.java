@@ -33,7 +33,7 @@ public class ChefPompier {
 		if (best_r != null) {
 			best_r.planifierAction(best_c, this.sim);
 		} else {
-			System.out.println("We can't go there, let it burn");
+			throw new IllegalArgumentException("We can't go there, let it burn");
 		}
 	}
 
