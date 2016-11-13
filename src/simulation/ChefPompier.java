@@ -23,7 +23,7 @@ public class ChefPompier {
 		for (int i = 1; i < donnees.getNbRobots(); i++) {
 			Robot r = this.donnees.getRobot(i);
 			Chemin c = this.getChemin(incendie.getCase(), r);
-			if (c.getTemps() < best_c.getTemps()) {
+			if (c != null && c.getTemps() < best_c.getTemps()) {
 				best_r = r;
 				best_c = c;
 			}
@@ -36,7 +36,7 @@ public class ChefPompier {
 	/**
 	 * @param destination Case de destination
 	 * @param pompier Robot qui fera le déplacement
-	 * @return Liste de Case pour se rendre à destination avec le temps du trajet
+	 * @return Chemin pour se rendre à destination avec le temps du trajet
 	 **/
 	public Chemin getChemin(Case dest, Robot pompier) {
 		return this.donnees.getChemin(pompier.getPosition(), dest, pompier.getVitesseMap());
