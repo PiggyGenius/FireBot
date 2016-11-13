@@ -1,11 +1,16 @@
 package simulation.evenement;
 
+import simulation.*;
+
 public abstract class Evenement implements Comparable<Evenement> {
 
 	protected double date;
 
-	public Evenement(double date) {
+	protected ChefPompier chef;
+
+	public Evenement(double date, ChefPompier chef) {
 		this.date = date;
+		this.chef = chef;
 	}
 
 	public double getDate() {

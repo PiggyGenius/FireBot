@@ -11,8 +11,8 @@ public class EvenementDeversement extends Evenement {
 
 	private Incendie incendie;
 	
-	public EvenementDeversement(double date, Robot r, int volume, Incendie incendie) {
-		super(date);
+	public EvenementDeversement(double date, ChefPompier chef, Robot r, int volume, Incendie incendie) {
+		super(date, chef);
 		this.robot = r;
 		this.volume = volume;
 		this.incendie = incendie;

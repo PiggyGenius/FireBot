@@ -11,8 +11,8 @@ public class EvenementDeplacementFin extends Evenement {
 	 * ou pour un remplissage (False) */
 	boolean extinction;
 
-	public EvenementFinDeplacement(double date, Robot r, boolean extinction) {
-		super(date);
+	public EvenementFinDeplacement(double date, ChefPompier chef, Robot r, boolean extinction) {
+		super(date, chef);
 		this.robot = r;
 		this.extinction = extinction;
 	}

@@ -7,8 +7,8 @@ public class EvenementDeversementFin extends Evenement {
 
 	private Robot robot;
 
-	public EvenementFinDeversement(double date, Robot r) {
-		super(date);
+	public EvenementFinDeversement(double date, ChefPompier chef, Robot r) {
+		super(date, chef);
 		this.robot = r;
 	}
 

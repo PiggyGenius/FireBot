@@ -21,6 +21,10 @@ public class ChefPompier {
 		}
 	}
 
+	public Simulateur getSimulateur() {
+		return this.sim;
+	}
+
 	/** Teste tous les robots disponibles
 	 *  @param incendie Incendie destination
 	 **/
@@ -47,7 +51,7 @@ public class ChefPompier {
 			}
 
 			if (best_r != null) {
-				best_r.planifierAction(best_c, this.sim);
+				best_r.planifierAction(best_c, this);
 				it.remove();
 			}
 		}

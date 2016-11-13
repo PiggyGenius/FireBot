@@ -119,27 +119,26 @@ public abstract class Robot {
 
 	/* ######################### Evenements  ######################### */
 
-	public void planifierAction(Chemin chemin, Simulateur sim) {
+	public void planifierAction(Chemin chemin, ChefPompier chef) {
 		this.dispo = false;
-		planifierDeplacement(chemin, sim);
-		planifierDeversement(sim);
-		planifierRemplissage(sim);
+		planifierDeplacement(chemin, chef);
+		planifierDeversement(chef);
+		planifierRemplissage(chef);
 	}
 
 
 	/** Planifie l'action de se deplacer
 	 * Ajoute la liste des eveneemnts elementaires necessaires au deplacement */
-	private void planifierDeplacement(Chemin c, Simulateur sim) {
-		double tailleCase = (double)sim.getSimulation().getCarte().getTailleCases() / 10.0;
+	private void planifierDeplacement(Chemin c, ChefPompier chef) {
+		double tailleCase = (double)chef.getSimulateur().getSimulation().getCarte().getTailleCases() / 10.0;
 		for (Destination dest : c.getChemin()) {
-			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase 
-								+ sim.getDateSimulation(), this, dest.getPosition()));
+			chef.getSimulateur().ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase + chef.getSimulateur().getDateSimulation(), chef, this, dest.getPosition()));
 		}
 	}
 
 
 	/** Planifie l'action de deverser de l'eau sur la case courante */
-	private void planifierDeversement(Simulateur sim) {
+	private void planifierDeversement(ChefPompier chef) {
 		// TODO : ajouter evenement de deversement
 		// recuperer date
 		//
@@ -151,7 +150,7 @@ public abstract class Robot {
 
 
 	/** Action de remplir le reservoir */
-	private void planifierRemplissage(Simulateur sim) {
+	private void planifierRemplissage(ChefPompier chef) {
 		// TODO : ajouter evenement de remplissage
 		return;
 	}
