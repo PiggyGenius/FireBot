@@ -49,14 +49,20 @@ public class Dijkstra extends PlusCourtChemin {
 	 **/
 	@Override
 	public Chemin getChemin(Case src,Case dst,EnumMap<NatureTerrain,Double> vitesse){
-		List<Case> voisins = new ArrayList<Case>();
+		if(src == dst)
+			return new Chemin();
+		if(vitesse.get(dst.getNatureTerrain()) == 0.0)
+			return null;
 
+		List<Case> voisins = new ArrayList<Case>();
 		this.setEnsembleNoeud(vitesse);
 		this.initDistance(src);
 		Iterator<Case> noeud = this.ensembleNoeud.iterator();
 		while(noeud.hasNext()){
 			Case min = this.getMin();
-			if(min == null || this.distance[min.getLigne()][min.getColonne()] == Double.MAX_VALUE)
+			// You might need that in the test below but i don't think so
+			/* || this.distance[min.getLigne()][min.getColonne()] == Double.MAX_VALUE) */
+			if(min == null)
 				return new Chemin(this.predecesseur,this.distance,src,dst);
 			this.ensembleNoeud.remove(min);
 			this.ajouteVoisins(min,voisins);

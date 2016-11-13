@@ -58,6 +58,8 @@ public class Simulateur implements Simulable {
 	//TEMPORARY JUST TO TEST STUFF
 	public void drawPath(){
 		Color couleur_case = Color.decode("#3607ea");
+		if(this.chemin == null)
+			return;
 		Iterator<Destination> dest_iterator = this.chemin.iterator();
 		while(dest_iterator.hasNext()){
 			Destination dest = dest_iterator.next();

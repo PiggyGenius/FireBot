@@ -28,6 +28,11 @@ public class Chemin {
 		}
 	}
 
+	public Chemin(){
+		this.chemin = new HashSet<Destination>();
+		this.temps = 0;
+	}
+
 	/** @return Liste de case associée au chemin */
 	public HashSet<Destination> getChemin(){
 		return this.chemin;
