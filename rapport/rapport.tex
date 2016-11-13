@@ -10,9 +10,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   Page de garde   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % variable à redéfinir (placées sur la page de garde et sur l'entête)
-\def\typedeprojet{Type de projet}
-\def\nomduprojet{Nom du projet}
-\def\dateduprojet{Date du projet}
+\def\typedeprojet{Projet de POO}
+\def\nomduprojet{Simulation de robots pompiers}
+\def\dateduprojet{15 novembre 2016}
 
 % définition des entêtes et pieds de page
 \pagestyle{fancy}
@@ -22,7 +22,7 @@
 \renewcommand{\footrulewidth}{0.1pt}
 
 % entête de page
-\lhead{\includegraphics[height=1.2cm]{logo_ensimag.jpg}}
+\lhead{\includegraphics[height=1.2cm]{rapport/logo_ensimag.jpg}}
 \chead{\bf \typedeprojet}
 \rhead{\nomduprojet}
 
@@ -42,8 +42,8 @@
 \title{
 	% illustrations
 	\begin{flushleft}
-		\includegraphics[width=5cm]{logo_ensimag.jpg} \hfill
-		\includegraphics[width=7cm]{firebot.jpg} \\[40pt]
+		\includegraphics[width=5cm]{rapport/logo_ensimag.jpg} \hfill
+		\includegraphics[width=7cm]{rapport/firebot.jpg} \\[40pt]
 	\end{flushleft} 
 	% séparateur 1
 	{\rule{15cm}{1mm}}\vspace{7mm}
@@ -66,7 +66,7 @@
 % auteur(s)
 \author{
 	\begin{tabular}{p{15cm}}
-		\Large Maxime Deloche \& Thomas Loïodice
+		\Large Maxime Deloche \& Ludovic Carré \& Cyril Carlin
 	\end{tabular} \\
 	\hline
 }
@@ -83,12 +83,40 @@
 
 % -------------------------------------- SECTION 1 --------------------------------------
 
-\section{}
+\section{Description des packages intéressants}
 
-\subsection{}
+\subsection{Chemin}
 
-\subsection{}
+Le package chemin a pour rôle de définir les différentes classes nécessaires à la partie 3 du projet. On a choisi de créer une classe abstraite PlusCourtChemin qui permet une abstraction sur les stratégies de calculs de plus court chemin employées. Nous avons pour l'instant implémenté un seul algorithme, Dijkstra, mais il serait facile de rajouter une classe pour un autre algorithme comme A* sans avoir à modifier le reste du code.\\
 
+Nous avons hésité entre Dijkstra et A* et finalement choisi Dijkstra car A* ne semblait pas vraiment nécessaire au problème traité. Les cartes sont relativement petites ce qui implique un nombre de noeud assez restreint, 2500 pour la plus grande carte. De plus, il serait difficile de définir une bonne heuristique puisqu'il n'y a pas d'information sur la structure "normale" d'une carte.
+
+\subsubsection{Dijkstra avec un hash set}
+
+On notera $N = n*m$, où n et m sont les dimensions de la carte, le nombre de noeuds et les complexités sont calculées en pire cas (aucun noeud inaccessible dans le graphe).
+\begin{itemize}
+	\item setEnsembleNoeud: Initialise le HashSet avec les noeuds sur lesquels itérer. Coût: $\theta(N)$.
+	\item initDistance: Initialise le tableau de distance à $+\infty$. Coût: $\theta(N)$.
+	\item getMin: Retourne le noeud non exploré le plus proche de la source. Coût: $\sum\limits_{i=0}^{N}{N-i} = \frac{N(N-1)}{2} = \theta(N^2)$.
+	\item setDistanceVoisins: Met à jour les distances du tableau avec les distances des voisins. Coût: $4N-4 = \theta(N)$.\\
+\end{itemize}
+Complexité générale de l'algorithme: $\theta(N^2)$.
+
+\subsubsection{Dijkstra avec une priority queue}
+Il est possible d'améliorer l'algorithme en utilisant une priority queue comme structure de données, le coût de deux méthodes change.
+\begin{itemize}
+	\item setEnsembleNoeud: L'ajout d'un élément est en $log_2(N)$ on a donc un coût en $\theta(Nlog_2(N))$.
+	\item getMin: On a ici une amélioration conséquente grâce à la recherche en $log_2(n)$ (pour conserver l'ordre) ce qui nous donne un coût en $\theta(Nlog_2(N))$.\\
+\end{itemize}
+Complexité générale de l'algorithme: $\theta(Nlog_2(N))$.\\
+TODO du coup faut que je me motive pour modifier notre algo.
+
+\subsubsection{Reconstruction du chemin avec le tableau de prédecesseur}
+
+On définit un chemin comme un hash set de Destination, à chaque objet est associé une position et un temps de trajet pour s'y rendre en partant de la source, et un temps qui est la somme des temps des sous-trajets.\\
+Puisqu'il s'agit d'un hash set, il n'y a pas de notion d'ordre dans un chemin ce qui peut sembler particulier mais puisque les événements sont ajoutés avec un temps d'exécution, l'ordre n'est pas nécessaire.\\\\
+\textbf{Algorithme de reconstruction de Dijkstra:} L'algorithme consiste simplement à reconstruire le chemin à partir du tableau de prédécesseurs créé lors des mises à jours de distance.\\
+Coût: $\theta(M)$ où $M$ est la longueur du chemin en nombre de case donc $\theta(N-1)$ en pire cas.
 
 % -------------------------------------- SECTION 2 --------------------------------------
 

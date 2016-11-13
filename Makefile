@@ -68,7 +68,12 @@ exeEvenements: testEvenements
 doc:
 	javadoc -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath gui.jar -subpackages chemin simulation io robot enumerations
 
-clean:
-	rm -rf bin/*.class doc/*
+LATEX_TRASH=rapport.toc rapport.log rapport.aux
 
-.PHONY: doc clean
+rapport:
+	pdflatex -output-directory rapport/ rapport/rapport.tex && pdflatex -output-directory rapport/ rapport/rapport.tex
+
+clean:
+	rm -rf bin/*.class doc/* $(LATEX_TRASH)
+
+.PHONY: doc clean rapport

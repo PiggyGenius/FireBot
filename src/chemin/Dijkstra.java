@@ -54,7 +54,6 @@ public class Dijkstra extends PlusCourtChemin {
 		if(vitesse.get(dst.getNatureTerrain()) == 0.0)
 			return null;
 
-		List<Case> voisins = new ArrayList<Case>();
 		this.setEnsembleNoeud(vitesse);
 		this.initDistance(src);
 		Iterator<Case> noeud = this.ensembleNoeud.iterator();
@@ -65,31 +64,36 @@ public class Dijkstra extends PlusCourtChemin {
 			if(min == null)
 				return new Chemin(this.predecesseur,this.distance,src,dst);
 			this.ensembleNoeud.remove(min);
-			this.ajouteVoisins(min,voisins);
-			for(Case noeud_voisin: voisins){
-				setDistance(min,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
-			}
+			this.setDistanceVoisins(min,vitesse);
 		}
 		return new Chemin(this.predecesseur,this.distance,src,dst);
 	}
 
-	/** Ajoute les voisins à la liste
+	/** Met à jour la distance des voisins
 	 *  @param noeud Case de départ pour déterminer les voisins
-	 *  @param voisins Liste de voisins
 	 **/
-	private void ajouteVoisins(Case noeud,List<Case> voisins){
+	private void setDistanceVoisins(Case noeud,EnumMap<NatureTerrain,Double> vitesse){
 		int nb_lignes = this.carte.getNbLignes();
 		int nb_colonnes = this.carte.getNbColonnes();
 		int i = noeud.getLigne();
 		int j = noeud.getColonne();
-		if(i-1>=0)
-			voisins.add(this.carte.getCase(i-1,j));
-		if(i+1<nb_lignes)
-			voisins.add(this.carte.getCase(i+1,j));
-		if(j-1>=0)
-			voisins.add(this.carte.getCase(i,j-1));
-		if(j+1<nb_colonnes)
-			voisins.add(this.carte.getCase(i,j+1));
+		Case noeud_voisin;
+		if(i-1>=0){
+			noeud_voisin = this.carte.getCase(i-1,j);
+			setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
+		}
+		if(i+1<nb_lignes){
+			noeud_voisin = this.carte.getCase(i+1,j);
+			setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
+		}
+		if(j-1>=0){
+			noeud_voisin = this.carte.getCase(i,j-1);
+			setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
+		}
+		if(j+1<nb_colonnes){
+			noeud_voisin = this.carte.getCase(i,j+1);
+			setDistance(noeud,noeud_voisin,vitesse.get(noeud_voisin.getNatureTerrain()));
+		}
 	}
 
 	/** Initialise le tableau de distance à +inf 
