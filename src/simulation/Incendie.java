@@ -25,4 +25,19 @@ public class Incendie {
 	public Coordonnee getCoordonnee(){
 		return this.position.getCoordonnee();
 	}
+
+
+	/** @return Intensite de l'incendie */
+	public int getIntensite() {
+		return this.intensite;
+	}
+
+
+	/** @param volume Quantite d'eau deversee */
+	public void diminuerIntensite(int volume) {
+		this.intensite -= volume;
+		if (this.intensite < 0) {
+			this.intensite = 0;
+		}
+	}
 }

@@ -9,13 +9,18 @@ public class EvenementDeversement extends Evenement {
 
 	private int volume;
 
-	public EvenementDeversement(double date, Robot r, int volume) {
+	private Incendie incendie;
+	
+	public EvenementDeversement(double date, Robot r, int volume, Incendie incendie) {
 		super(date);
 		this.robot = r;
+		this.volume = volume;
+		this.incendie = incendie;
 	}
 
 	public void execute() {
 		System.out.println("Deversement"); // DEBUG
-		this.robot.deverserEau(this.volume);
+		this.incendie.diminuerIntensite(this.volume);
+		this.robot.diminuerQteReservoir(this.volume);
 	}
 }

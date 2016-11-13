@@ -72,6 +72,17 @@ public abstract class Robot {
 		return this.capaciteReservoir;
 	}
 
+	public int getQteReservoir() {
+		return this.qteReservoir;
+	}
+
+	public void diminuerQteReservoir(int volume) {
+		if (this.qteReservoir < volume) {
+			throw new IllegalArgumentException("Quantité d'eau à déverser invalide.");
+		}
+		this.qteReservoir -= volume;
+	}
+
 	public int getTempsRemplissage() {
 		return this.tempsRemplissage;
 	}
@@ -110,8 +121,8 @@ public abstract class Robot {
 	public void planifierAction(Chemin chemin, Simulateur sim) {
 		System.out.println("ALL GOOD");
 		planifierDeplacement(chemin, sim);
-		planifierDeversement();
-		planifierRemplissage();
+		planifierDeversement(sim);
+		planifierRemplissage(sim);
 	}
 
 
@@ -120,23 +131,26 @@ public abstract class Robot {
 	private void planifierDeplacement(Chemin c, Simulateur sim) {
 		double tailleCase = (double)sim.getSimulation().getCarte().getTailleCases() / 10.0;
 		for (Destination dest : c.getChemin()) {
-			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase, this, dest.getPosition()));
+			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase + sim.getDateSimulation(), this, dest.getPosition()));
 		}
 	}
 
 
-	/** Action de deverser de l'eau */
-	private void planifierDeversement() {
+	/** Planifie l'action de deverser de l'eau sur la case courante */
+	private void planifierDeversement(Simulateur sim) {
 		// TODO : ajouter evenement de deversement
-		System.out.println("Deversement");
+		// recuperer date
+		//
+		// tant que (incendie pas éteint et encore de l'eau)
+		//     planifier deversement unitaire
+		//     incrementer date
 		return;
 	}
 
 
 	/** Action de remplir le reservoir */
-	private void planifierRemplissage() {
+	private void planifierRemplissage(Simulateur sim) {
 		// TODO : ajouter evenement de remplissage
-		System.out.println("Remplissage");
 		return;
 	}
 
