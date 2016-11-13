@@ -32,4 +32,9 @@ public class Chemin {
 	public HashSet<Destination> getChemin(){
 		return this.chemin;
 	}
+
+	/** @return Temps de trajet */
+	public double getTemps() {
+		return this.temps;
+	}
 }

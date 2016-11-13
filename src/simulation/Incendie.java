@@ -5,7 +5,7 @@ public class Incendie {
 	private Case position;
 	private int intensite;
 
-	/** Construceut d'Incendie
+	/** Constructeur d'Incendie
 	 *  @param case_terrain Case où se trouve l'incendie
 	 *  @param intensite Intensité de l'incendie
 	 **/
@@ -13,6 +13,13 @@ public class Incendie {
 		position = case_terrain;
 		this.intensite = intensite;
 	}
+
+
+	/** @return Case de l'incendie */
+	public Case getCase() {
+		return this.position;
+	}
+
 
 	/** @return Coordonnée de l'incendie */
 	public Coordonnee getCoordonnee(){

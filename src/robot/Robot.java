@@ -16,7 +16,7 @@ public abstract class Robot {
 	/* position courante du robot */
 	protected Case position;
 
-	/* vitesses du robot pour chaque élément (0 si inaccessible) */
+	/* vitesses du robot pour chaque élément en m/s (0 si inaccessible) */
 	protected EnumMap<NatureTerrain, Double> vitesse;
 
 	/* capacité du réservoir (0 si infini) */
@@ -160,5 +160,10 @@ public abstract class Robot {
 		res += "Distance de remplissage " + this.distanceRemplissage + "\n";
 		res += repeat(30, "-") + "\n";
 		return res;
+	}
+
+	/** convertit une vitesse de km/h à m/s */
+	public double convertVitesse(double vitesse) {
+		return vitesse * 1000 / 3600;
 	}
 }
