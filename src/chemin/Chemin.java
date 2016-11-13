@@ -25,10 +25,6 @@ public class Chemin {
 			this.chemin.add(new Destination(noeud,distance[noeud.getLigne()][noeud.getColonne()]));
 			this.temps += distance[noeud.getLigne()][noeud.getColonne()];
 			noeud = predecesseur[noeud.getLigne()][noeud.getColonne()];
-			System.out.println("OK");
-			if (noeud == null) {
-				System.out.println("noeud = null");
-			}
 		}
 	}
 
@@ -45,5 +41,9 @@ public class Chemin {
 	/** @return Temps de trajet */
 	public double getTemps() {
 		return this.temps;
+	}
+
+	public void setTemps(double val) {
+		this.temps = val;
 	}
 }

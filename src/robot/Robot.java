@@ -107,7 +107,7 @@ public abstract class Robot {
 	/* ######################### Evenements  ######################### */
 
 	public void planifierAction(Chemin chemin) {
-		System.out.println("MOTHERFUCKER");
+		System.out.println("ALL GOOD");
 		// planifierDeplacement();
 		// planifierDeversement();
 		// planifierRemplissage();

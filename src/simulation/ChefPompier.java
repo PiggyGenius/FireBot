@@ -17,10 +17,11 @@ public class ChefPompier {
 	 *  @param incendie Incendie destination
 	 **/
 	public void choisirRobot(Incendie incendie) {
-		Robot best_r = this.donnees.getRobot(0);
-		Chemin best_c = this.getChemin(incendie.getCase(), best_r);
+		Robot best_r = null;
+		Chemin best_c = new Chemin();
+		best_c.setTemps(Double.MAX_VALUE);
 
-		for (int i = 1; i < donnees.getNbRobots(); i++) {
+		for (int i = 0; i < donnees.getNbRobots(); i++) {
 			Robot r = this.donnees.getRobot(i);
 			Chemin c = this.getChemin(incendie.getCase(), r);
 			if (c != null && c.getTemps() < best_c.getTemps()) {
@@ -28,8 +29,12 @@ public class ChefPompier {
 				best_c = c;
 			}
 		}
-
-		best_r.planifierAction(best_c);
+		
+		if (best_r != null) {
+			best_r.planifierAction(best_c);
+		} else {
+			System.out.println("We can't go there, let it burn");
+		}
 	}
 
 
