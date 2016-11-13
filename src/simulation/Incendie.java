@@ -10,8 +10,12 @@ public class Incendie {
 	 *  @param intensite Intensité de l'incendie
 	 **/
 	public Incendie(Case case_terrain,int intensite){
-		position = case_terrain;
+		this.position = case_terrain;
 		this.intensite = intensite;
+	}
+
+	public Incendie(Incendie i) {
+		this(i.getCase(), i.getIntensite());
 	}
 
 

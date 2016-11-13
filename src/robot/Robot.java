@@ -50,6 +50,7 @@ public abstract class Robot {
 	public Robot(Case position) {
 		this.setPosition(position);
 		vitesse = new EnumMap<NatureTerrain, Double>(NatureTerrain.class);
+		this.dispo = true;
 	}
 
 	/* ######################### Getters / Setters ######################### */
@@ -99,7 +100,7 @@ public abstract class Robot {
 		return this.distanceRemplissage;
 	}
 
-	public boolean getDispo() {
+	public boolean isDispo() {
 		return this.dispo;
 	}
 
@@ -119,7 +120,7 @@ public abstract class Robot {
 	/* ######################### Evenements  ######################### */
 
 	public void planifierAction(Chemin chemin, Simulateur sim) {
-		System.out.println("ALL GOOD");
+		this.dispo = false;
 		planifierDeplacement(chemin, sim);
 		planifierDeversement(sim);
 		planifierRemplissage(sim);
@@ -131,7 +132,8 @@ public abstract class Robot {
 	private void planifierDeplacement(Chemin c, Simulateur sim) {
 		double tailleCase = (double)sim.getSimulation().getCarte().getTailleCases() / 10.0;
 		for (Destination dest : c.getChemin()) {
-			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase + sim.getDateSimulation(), this, dest.getPosition()));
+			sim.ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase 
+								+ sim.getDateSimulation(), this, dest.getPosition()));
 		}
 	}
 

@@ -22,10 +22,11 @@ public class TestCarteGUI {
 			DonneesSimulation simulation = LecteurDonnees.lire(args[0]);
 	        GUISimulator gui = new GUISimulator(600, 600, Color.BLACK);
 	        Simulateur simule_terrain = new Simulateur(gui,simulation);
-			simulation.setPlusCourtChemin();
-
 			ChefPompier chef = new ChefPompier(simule_terrain);
-			chef.choisirRobot(simulation.getIncendie(0));
+			simule_terrain.setChef(chef);
+
+			simulation.setPlusCourtChemin();
+			// chef.choisirRobot(simulation.getIncendie(0));
 
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");

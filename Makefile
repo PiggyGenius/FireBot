@@ -62,6 +62,9 @@ exeRobots: testRobots
 exeCarteGUI: testCarteGUI
 	java -classpath bin:bin/gui.jar TestCarteGUI cartes/spiralOfMadness-50x50.map
 
+exeCarteGUI2: testCarteGUI
+	java -classpath bin:bin/gui.jar TestCarteGUI cartes/carteSujet.map
+
 exeEvenements: testEvenements
 	java -classpath bin:bin/gui.jar TestEvenements cartes/carteSujet.map -enableassertions
 

@@ -21,6 +21,7 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation simulation;
 	private int x_step;
 	private int y_step;
+	private ChefPompier chef;
 	// TEMPORARY JUST TO TEST STUFF
 	private HashSet<Destination> chemin;
 	private long dateSimulation;
@@ -33,12 +34,14 @@ public class Simulateur implements Simulable {
 		this.x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
 		this.y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
 		gui.setSimulable(this);
+		this.chef = null;
 	}
 	
 	@Override
 	public void next(){
 		this.incrementeDate();
 		this.draw();
+		this.chef.choisirRobot();
 		//this.drawPath();
 	}
 
@@ -46,7 +49,15 @@ public class Simulateur implements Simulable {
 	public void restart(){
 		System.out.println("Clicked on restart"); // DEBUG
 		// TODO : reinitialiser proprement la date et la liste d'evenements
-		this.draw();
+		throw new IllegalArgumentException("Not implemented yet");
+	}
+
+	public void setChef(ChefPompier chef) {
+		this.chef = chef;
+	}
+
+	public ChefPompier getChef() {
+		return this.chef;
 	}
 
 	//TEMPORARY JUST TO TEST STUFF
