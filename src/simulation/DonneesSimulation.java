@@ -10,12 +10,16 @@ import enumerations.*;
 /** Stock les différentes données d'une simulation */
 public class DonneesSimulation {
 	private Carte carteTerrain;
-	private List<Incendie> listeIncendie = new ArrayList<Incendie>();
-	private List<Robot> listeRobot = new ArrayList<Robot>();
+	private List<Incendie> listeIncendie;
+	private List<Robot> listeRobot;
+	private List<Case> listeEau;
 	private PlusCourtChemin plusCourtChemin;
 
-	/** Le constructeur n'initialise aucun attribut */
+	/** Le constructeur initialise les listes */
 	public DonneesSimulation(){
+		this.listeIncendie = new ArrayList<Incendie>();
+		this.listeRobot = new ArrayList<Robot>();
+		this.listeEau = new ArrayList<Case>();
 	}
 
 	/** @return Plus court chemin entre source et dest
@@ -46,7 +50,10 @@ public class DonneesSimulation {
 	 *  @param terrain Nature du terrain de la case
 	 **/
 	public void setCase(Coordonnee c, NatureTerrain terrain){
-		this.carteTerrain.setCase(c,terrain);
+		Case noeud = new Case(c,terrain);
+		if(terrain == NatureTerrain.EAU)
+			this.listeEau.add(noeud);
+		this.carteTerrain.setCase(noeud);
 	}
 
 	/** Ajoute un incendie à la liste 

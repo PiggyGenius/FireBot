@@ -23,9 +23,7 @@ public class Simulateur implements Simulable {
 	private int y_step;
 	// TEMPORARY JUST TO TEST STUFF
 	private HashSet<Destination> chemin;
-
 	private long dateSimulation;
-
 	private PriorityQueue<Evenement> listeEvenements = new PriorityQueue<Evenement> ();
 
 	public Simulateur(GUISimulator gui,DonneesSimulation simulation){

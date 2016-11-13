@@ -66,7 +66,7 @@ exeEvenements: testEvenements
 	java -classpath bin:bin/gui.jar TestEvenements cartes/carteSujet.map -enableassertions
 
 doc:
-	javadoc -private -d doc/ -sourcepath src/ -classpath bin/ -subpackages chemin simulation io robot enumerations evenement
+	javadoc -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath bin/ -subpackages chemin simulation io robot enumerations evenement
 
 clean:
 	rm -rf bin/*.class doc/*

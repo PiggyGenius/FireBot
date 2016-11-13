@@ -61,6 +61,18 @@ public class Carte {
 		grilleCase[c.getLigne()][c.getColonne()] = new Case(c,terrain);
 	}
 
+	/** Ajoute une case dans la matrice 
+	 *  @param caseTerrain Case à ajoutée dans la matrice
+	 *  @throws IllegalArgumentException La case n'est pas située dans la carte
+	 **/
+	public void setCase(Case caseTerrain){
+		int line = caseTerrain.getLigne();
+		int colonne = caseTerrain.getColonne();
+		if(line<0 || line >= this.getNbLignes() || colonne<0 || colonne >= this.getNbColonnes())
+			throw new IllegalArgumentException("La case n'est pas située dans la carte");
+		grilleCase[line][colonne] = caseTerrain;
+	}
+
 	/** @return Coordonnée de la case voisine à src
 	 *  @param src Case source
 	 *  @param dir Direction dans laquelle chercher le voisin
