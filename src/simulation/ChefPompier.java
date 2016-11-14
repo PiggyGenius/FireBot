@@ -107,16 +107,12 @@ public class ChefPompier {
 				throw new IllegalArgumentException("Pas de point d'eau accessible.");
 			}
 		}
-		System.out.println("Planification d'un deplacement / temps = " + best_c.getTemps());
 		r.planifierDeplacement(best_c, null, this, false);
-		System.out.println("Planification terminée");
 	}
 
 
 	public void calculRemplissage(Robot r) {
-		System.out.println("Remplissage = " + this.sim.getDateSimulation());
 		this.sim.ajouteEvenement(new EvenementRemplissage(this.sim.getDateSimulation(), this, r));
-		System.out.println(r + "RemplissageFin = " + (this.sim.getDateSimulation() + r.getTempsRemplissage()));
 		this.sim.ajouteEvenement(new EvenementRemplissageFin(this.sim.getDateSimulation() + r.getTempsRemplissage(), this, r));
 	}
 

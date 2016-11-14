@@ -12,7 +12,7 @@ public class EvenementDeplacementFin extends Evenement {
 	private boolean extinction;
 
 	private Incendie incendie;
-	
+
 	public EvenementDeplacementFin(double date, ChefPompier chef, Robot r, Incendie incendie, boolean extinction) {
 		super(date, chef);
 		this.robot = r;
