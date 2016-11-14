@@ -13,8 +13,7 @@ public class EvenementRemplissageFin extends Evenement {
 	}
 
 	public void execute() {
-		// appeler methode du chef pompier qui va
-		// passer le statut de ce robot à libre
-		return;
+		System.out.println("Déversement terminé");
+		robot.liberer();
 	}
 }

@@ -41,7 +41,7 @@ public class Simulateur implements Simulable {
 	public void next(){
 		this.incrementeDate();
 		this.draw();
-		this.chef.choisirRobot();
+		this.chef.calculDeplacement();
 	}
 
 	@Override
@@ -58,6 +58,7 @@ public class Simulateur implements Simulable {
 	public ChefPompier getChef() {
 		return this.chef;
 	}
+
 
 	private void draw(){
 		this.gui.reset();

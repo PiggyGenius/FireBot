@@ -166,6 +166,10 @@ public class DonneesSimulation {
 		return this.listeIncendie;
 	}
 
+	public List<Case> getListeEau() {
+		return this.listeEau;
+	}
+
 	/** @return Nombre de robots dans la liste */
 	public int getNbRobots(){
 		return this.listeRobot.size();

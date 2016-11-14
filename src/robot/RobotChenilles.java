@@ -26,6 +26,7 @@ public class RobotChenilles extends Robot {
 		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 2000;
+		this.qteReservoir = 2000;
 		this.tempsRemplissage = 300;
 		this.litresUnitaire = 100;
 		this.tempsUnitaire = 8;
