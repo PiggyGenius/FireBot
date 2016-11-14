@@ -118,13 +118,11 @@ public class Carte {
 	 *  @throws IllegalArgumentException Le voisin n'existe pas
 	 **/
 	public Case getVoisin(Case src, Direction dir){
-		System.out.println("==> " + src + dir);
 		if(voisinExiste(src,dir)){
 			Coordonnee voisin = getCoordonnee(src,dir);
 			return grilleCase[voisin.getLigne()][voisin.getColonne()];
 		}
 		else {
-			System.out.println("Cette case n'a pas de voisin dans cette direction.");
 			throw new IllegalArgumentException();
 		}
 	}
