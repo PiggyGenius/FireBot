@@ -2,8 +2,12 @@ package simulation;
 
 /** Un incendie se trouve à une case et a une intensité */
 public class Incendie {
+
 	private Case position;
+
 	private int intensite;
+
+	private boolean enExtinction;
 
 	/** Constructeur d'Incendie
 	 *  @param case_terrain Case où se trouve l'incendie
@@ -12,6 +16,7 @@ public class Incendie {
 	public Incendie(Case case_terrain,int intensite){
 		this.position = case_terrain;
 		this.intensite = intensite;
+		this.enExtinction = false;
 	}
 
 	public Incendie(Incendie i) {
@@ -34,6 +39,14 @@ public class Incendie {
 	/** @return Intensite de l'incendie */
 	public int getIntensite() {
 		return this.intensite;
+	}
+
+	public boolean getEnExtinction() {
+		return this.enExtinction;
+	}
+
+	public void setEnExtinction(boolean val) {
+		this.enExtinction = val;
 	}
 
 
