@@ -100,8 +100,8 @@ On notera $N = n*m$, où n et m sont les dimensions de la carte, le nombre de no
 	\item getMin: Retourne le noeud non exploré le plus proche de la source. Coût: $\sum\limits_{i=0}^{N}{N-i} = \frac{N(N-1)}{2} = \theta(N^2)$.
 	\item setDistanceVoisins: Met à jour les distances du tableau avec les distances des voisins. Coût: $4N-4 = \theta(N)$.\\
 \end{itemize}
-Complexité générale de l'algorithme: $\theta(N^2)$.\\
-La Complexité assez élevée et l'on a donc décider d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple.\\
+Complexité générale de l'algorithme: $\theta(N^2)$.\\\\
+La Complexité assez élevée et l'on a donc décidé d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple mais qui reste respectable: la file de priorité.\\
 
 \subsubsection{Dijkstra avec une priority queue}
 Il est possible d'améliorer l'algorithme en utilisant une priority queue comme structure de données, le coût de deux méthodes change.
