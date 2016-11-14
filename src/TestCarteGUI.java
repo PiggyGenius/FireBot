@@ -26,7 +26,6 @@ public class TestCarteGUI {
 			simule_terrain.setChef(chef);
 
 			simulation.setPlusCourtChemin();
-			// chef.choisirRobot(simulation.getIncendie(0));
 
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");

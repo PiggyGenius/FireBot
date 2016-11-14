@@ -19,7 +19,6 @@ public class EvenementDeversement extends Evenement {
 	}
 
 	public void execute() {
-		System.out.println("Deversement"); // DEBUG
 		this.incendie.diminuerIntensite(this.volume);
 		this.robot.diminuerQteReservoir(this.volume);
 	}

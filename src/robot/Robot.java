@@ -78,6 +78,9 @@ public abstract class Robot {
 	}
 
 	public void diminuerQteReservoir(int volume) {
+		if (this.capaciteReservoir == 0) {
+			return;
+		}
 		if (this.qteReservoir < volume) {
 			throw new IllegalArgumentException("Quantité d'eau à déverser invalide.");
 		}
@@ -104,6 +107,14 @@ public abstract class Robot {
 		return this.dispo;
 	}
 
+	public void liberer() {
+		this.dispo = true;
+	}
+
+	public void occuper() {
+		this.dispo = false;
+	}
+
 	/** 
 	 * @param terrain
 	 * 	La nature du terrain à traverser
@@ -119,40 +130,34 @@ public abstract class Robot {
 
 	/* ######################### Evenements  ######################### */
 
-	// probablement plus utile
-	// public void planifierAction(Chemin chemin, ChefPompier chef) {
-	// 	planifierDeplacement(chemin, chef);
-	// 	planifierDeversement(chef);
-	// 	planifierRemplissage(chef);
-	// }
-
 
 	/** Planifie l'action de se deplacer
 	 * Ajoute la liste des eveneemnts elementaires necessaires au deplacement */
-	public void planifierDeplacement(Chemin c, ChefPompier chef) {
+	public void planifierDeplacement(Chemin c, Incendie incendie, ChefPompier chef, boolean extinction) {
 		this.dispo = false;
-		double tailleCase = (double)chef.getSimulateur().getSimulation().getCarte().getTailleCases() / 10.0;
+		double tailleCase = (double)chef.getSimulateur().getSimulation().
+			getCarte().getTailleCases() / 10.0;
+
+		// pour chaque case du chemin
 		for (Destination dest : c.getChemin()) {
-			chef.getSimulateur().ajouteEvenement(new EvenementDeplacement(dest.getTemps()*tailleCase + chef.getSimulateur().getDateSimulation(), chef, this, dest.getPosition()));
+			// ajouter evenement de deplacement
+			chef.getSimulateur().ajouteEvenement(new EvenementDeplacement(
+						dest.getTemps()*tailleCase + chef.getSimulateur().
+						getDateSimulation(), chef, this, dest.getPosition()));
 		}
-		// TODO : planifier DeplacementFin avec True
-	}
-
-
-	/** Planifie l'action de deverser de l'eau sur la case courante */
-	private void planifierDeversement(ChefPompier chef, int nb) {
-		// TODO : ajouter nb evenements de deversement 
-		// ajouter DeversementFin
-		return;
+		// ajouter à la fin un evenement de fin de deplacement
+		chef.getSimulateur().ajouteEvenement(new EvenementDeplacementFin(
+					c.getTemps()*tailleCase + chef.getSimulateur().
+					getDateSimulation(), chef, this, incendie, extinction));
 	}
 
 
 	/** Action de remplir le reservoir */
-	private void planifierRemplissage(ChefPompier chef) {
-		// TODO : ajouter evenement de remplissage
-		// ajouter evenement RemplissageFin
-		return;
-	}
+	// private void planifierRemplissage(ChefPompier chef) {
+	// 	// TODO : ajouter evenement de remplissage
+	// 	// ajouter evenement RemplissageFin
+	// 	return;
+	// }
 
 
 	/* ######################### Affichage des robots ######################### */

@@ -18,12 +18,12 @@ public class Chemin {
 	 **/
 	public Chemin(Case[][] predecesseur,double[][] distance,Case src, Case dst){
 		this.chemin = new HashSet<Destination>();
-		this.temps = 0.0;
+		this.temps = distance[dst.getLigne()][dst.getColonne()];
 		Case noeud = dst;
 		// Pourquoi ? Je ne sais pas
 		while(noeud.getLigne() != src.getLigne() || noeud.getColonne() != src.getColonne()){
 			this.chemin.add(new Destination(noeud,distance[noeud.getLigne()][noeud.getColonne()]));
-			this.temps += distance[noeud.getLigne()][noeud.getColonne()];
+			// this.temps += distance[noeud.getLigne()][noeud.getColonne()];
 			noeud = predecesseur[noeud.getLigne()][noeud.getColonne()];
 		}
 	}

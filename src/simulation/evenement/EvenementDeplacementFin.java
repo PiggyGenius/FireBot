@@ -9,21 +9,19 @@ public class EvenementDeplacementFin extends Evenement {
 
 	/* indique si c'est un deplacement pour une extinction (True)
 	 * ou pour un remplissage (False) */
-	boolean extinction;
+	private boolean extinction;
 
-	public EvenementFinDeplacement(double date, ChefPompier chef, Robot r, boolean extinction) {
+	private Incendie incendie;
+	
+	public EvenementDeplacementFin(double date, ChefPompier chef, Robot r, Incendie incendie, boolean extinction) {
 		super(date, chef);
 		this.robot = r;
 		this.extinction = extinction;
+		this.incendie = incendie;
 	}
 
 	public void execute() {
-		// TODO
-		// Appeler methode du chef pompier, qui
-		// calculera le nombre de deversements necessaires
-		// et appelera une méthode du Robot, qui
-		// planifiera les evenements de deversement + fin
-		// de deversement
-		return;
+		System.out.println("Deplacement terminé");
+		this.chef.finDeplacement(this.robot, this.incendie, extinction);
 	}
 }

@@ -26,6 +26,7 @@ public class RobotDrone extends Robot {
 		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 10000;
+		this.qteReservoir = 10000;
 		this.tempsRemplissage = 1800;
 		this.litresUnitaire = 10000;
 		this.tempsUnitaire = 30;

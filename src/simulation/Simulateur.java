@@ -41,7 +41,7 @@ public class Simulateur implements Simulable {
 	public void next(){
 		this.incrementeDate();
 		this.draw();
-		this.chef.choisirRobot();
+		this.chef.calculDeplacement();
 		//this.drawPath();
 	}
 
@@ -74,7 +74,6 @@ public class Simulateur implements Simulable {
 		while(dest_iterator.hasNext()){
 			Destination dest = dest_iterator.next();
 			Case noeud = dest.getPosition();
-			//System.out.println(dest.getTemps());
 			gui.addGraphicalElement(new Rectangle(this.y_step*noeud.getColonne(),this.x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
 			this.chemin.remove(noeud);
 		}

@@ -24,6 +24,7 @@ public class RobotRoues extends Robot {
 		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 5000;
+		this.qteReservoir = 5000;
 		this.tempsRemplissage = 600;
 		this.litresUnitaire = 100;
 		this.tempsUnitaire = 5;
