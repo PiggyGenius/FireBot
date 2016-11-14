@@ -1,6 +1,7 @@
 package simulation;
 
 import chemin.*;
+import enumerations.*;
 import simulation.*;
 import simulation.evenement.*;
 import robot.*;
@@ -111,8 +112,15 @@ public class ChefPompier {
 
 	private List<Case> getVoisins(Case c, int dist) {
 		List<Case> res = new ArrayList<Case>();
-		// TODO modifier pour retourner les voisins
-		res.add(c);
+		Carte carte = this.sim.getSimulation().getCarte();
+		for (Direction dir : Direction.values()) {
+			System.out.println("In loop : " + dir);
+			try {
+				res.add(carte.getVoisin(c, dir));
+			} catch (IllegalArgumentException e) {
+				// OSEF
+			}
+		}
 		return res;
 	}
 
