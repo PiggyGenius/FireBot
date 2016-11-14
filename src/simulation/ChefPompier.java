@@ -17,10 +17,11 @@ public class ChefPompier {
 
 	public ChefPompier(Simulateur sim) {
 		this.sim = sim;
-		this.listeIncendie = new ArrayList<Incendie>();
-		for (Incendie i : sim.getSimulation().getListeIncendie()) {
-			this.listeIncendie.add(new Incendie(i));
-		}
+		// this.listeIncendie = new ArrayList<Incendie>();
+		// for (Incendie i : sim.getSimulation().getListeIncendie()) {
+		// 	this.listeIncendie.add(new Incendie(i));
+		// }
+		this.listeIncendie = sim.getSimulation().getListeIncendie();
 	}
 
 	public Simulateur getSimulateur() {
@@ -37,24 +38,28 @@ public class ChefPompier {
 
 		for (Iterator<Incendie> it = this.listeIncendie.iterator(); it.hasNext();) {
 			Incendie incendie = it.next();
-			Robot best_r = null;
-			Chemin best_c = new Chemin();
-			best_c.setTemps(Double.MAX_VALUE);
+			if (incendie.getIntensite() <= 0) {
+				it.remove();
+			} else if (! incendie.getEnExtinction()) {
+				Robot best_r = null;
+				Chemin best_c = new Chemin();
+				best_c.setTemps(Double.MAX_VALUE);
 
-			for (int i = 0; i < this.sim.getSimulation().getNbRobots(); i++) {
-				Robot r = this.sim.getSimulation().getRobot(i);
-				if (r.isDispo()) {
-					Chemin c = this.getChemin(incendie.getCase(), r);
-					if (c != null && c.getTemps() < best_c.getTemps()) {
-						best_r = r;
-						best_c = c;
+				for (int i = 0; i < this.sim.getSimulation().getNbRobots(); i++) {
+					Robot r = this.sim.getSimulation().getRobot(i);
+					if (r.isDispo()) {
+						Chemin c = this.getChemin(incendie.getCase(), r);
+						if (c != null && c.getTemps() < best_c.getTemps()) {
+							best_r = r;
+							best_c = c;
+						}
 					}
 				}
-			}
 
-			if (best_r != null) {
-				best_r.planifierDeplacement(best_c, incendie, this, true);
-				it.remove();
+				if (best_r != null) {
+					incendie.setEnExtinction(true);
+					best_r.planifierDeplacement(best_c, incendie, this, true);
+				}
 			}
 		}
 	}
@@ -86,7 +91,7 @@ public class ChefPompier {
 					temps, this, r, r.getLitresUnitaire(), incendie));
 			temps += r.getTempsUnitaire();
 		}
-		this.sim.ajouteEvenement(new EvenementDeversementFin(temps, this, r));
+		this.sim.ajouteEvenement(new EvenementDeversementFin(temps, this, r, incendie));
 	}
 
 
@@ -107,16 +112,12 @@ public class ChefPompier {
 				throw new IllegalArgumentException("Pas de point d'eau accessible.");
 			}
 		}
-		System.out.println("Planification d'un deplacement / temps = " + best_c.getTemps());
 		r.planifierDeplacement(best_c, null, this, false);
-		System.out.println("Planification terminée");
 	}
 
 
 	public void calculRemplissage(Robot r) {
-		System.out.println("Remplissage = " + this.sim.getDateSimulation());
 		this.sim.ajouteEvenement(new EvenementRemplissage(this.sim.getDateSimulation(), this, r));
-		System.out.println(r + "RemplissageFin = " + (this.sim.getDateSimulation() + r.getTempsRemplissage()));
 		this.sim.ajouteEvenement(new EvenementRemplissageFin(this.sim.getDateSimulation() + r.getTempsRemplissage(), this, r));
 	}
 
