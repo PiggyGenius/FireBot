@@ -123,7 +123,6 @@ public class Carte {
 			return grilleCase[voisin.getLigne()][voisin.getColonne()];
 		}
 		else {
-			System.out.println("Cette case n'a pas de voisin dans cette direction.");
 			throw new IllegalArgumentException();
 		}
 	}

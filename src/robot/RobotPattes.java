@@ -24,6 +24,7 @@ public class RobotPattes extends Robot {
 		this.vitesse.put(NatureTerrain.HABITAT, new Double(v));
 
 		this.capaciteReservoir = 0;
+		this.qteReservoir = 0;
 		this.tempsRemplissage = 0;
 		this.litresUnitaire = 10;
 		this.tempsUnitaire = 1;
