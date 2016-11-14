@@ -7,7 +7,6 @@ public class Case {
 	private Coordonnee coord;
 	private NatureTerrain nature;
 
-
 	/** Constructeur de Case avec coordonnée
 	 * @param coord
 	 * 	coordonnees de la case
@@ -55,5 +54,4 @@ public class Case {
 	public String toString() {
 		return new String(this.coord.toString());
 	}
-
 }

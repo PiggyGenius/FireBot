@@ -16,15 +16,14 @@ public class Chemin {
 	 *  @param src Case source
 	 *  @param dst Case destination
 	 **/
-	public Chemin(Case[][] predecesseur,double[][] distance,Case src, Case dst){
+	public Chemin(Noeud src, Noeud dst){
 		this.chemin = new HashSet<Destination>();
 		this.temps = 0.0;
-		Case noeud = dst;
-		// Pourquoi ? Je ne sais pas
-		while(noeud.getLigne() != src.getLigne() || noeud.getColonne() != src.getColonne()){
-			this.chemin.add(new Destination(noeud,distance[noeud.getLigne()][noeud.getColonne()]));
-			this.temps += distance[noeud.getLigne()][noeud.getColonne()];
-			noeud = predecesseur[noeud.getLigne()][noeud.getColonne()];
+		Noeud noeud = dst;
+		this.temps += dst.getPoids();
+		while(noeud != src){
+			this.chemin.add(new Destination(noeud.getElement(),noeud.getPoids()));
+			noeud = noeud.getPredecesseur();
 		}
 	}
 
