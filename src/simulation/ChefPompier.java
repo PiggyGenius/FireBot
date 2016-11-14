@@ -27,15 +27,10 @@ public class ChefPompier {
 		return this.sim;
 	}
 
-<<<<<<< HEAD
-	/** Teste tous les robots disponibles */
-	public void calculDeplacement() {
-=======
 	/** Teste tous les robots disponibles
 	 *  @param incendie Incendie destination
 	 **/
 	public void calculDeplacementExtinction() {
->>>>>>> 63c89c9a0b46133d4e8db7221568ba319aa87ab4
 		if (listeIncendie.isEmpty()) {
 			return;
 		}
