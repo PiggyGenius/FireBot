@@ -115,6 +115,10 @@ public abstract class Robot {
 		this.dispo = false;
 	}
 
+	public void remplirReservoir() {
+		this.qteReservoir = this.capaciteReservoir;
+	}
+
 	/** 
 	 * @param terrain
 	 * 	La nature du terrain à traverser
@@ -151,13 +155,6 @@ public abstract class Robot {
 					getDateSimulation(), chef, this, incendie, extinction));
 	}
 
-
-	/** Action de remplir le reservoir */
-	// private void planifierRemplissage(ChefPompier chef) {
-	// 	// TODO : ajouter evenement de remplissage
-	// 	// ajouter evenement RemplissageFin
-	// 	return;
-	// }
 
 
 	/* ######################### Affichage des robots ######################### */

@@ -13,6 +13,7 @@ public class EvenementRemplissage extends Evenement {
 	}
 
 	public void execute() {
+		System.out.println("Remplissage");
 		this.robot.remplirReservoir();
 	}
 }

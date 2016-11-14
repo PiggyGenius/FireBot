@@ -27,8 +27,15 @@ public class ChefPompier {
 		return this.sim;
 	}
 
+<<<<<<< HEAD
 	/** Teste tous les robots disponibles */
 	public void calculDeplacement() {
+=======
+	/** Teste tous les robots disponibles
+	 *  @param incendie Incendie destination
+	 **/
+	public void calculDeplacementExtinction() {
+>>>>>>> 63c89c9a0b46133d4e8db7221568ba319aa87ab4
 		if (listeIncendie.isEmpty()) {
 			return;
 		}
@@ -88,7 +95,7 @@ public class ChefPompier {
 	}
 
 
-	public void calculRemplissage(Robot r) {
+	public void calculDeplacementRemplissage(Robot r) {
 		Chemin c;
 		Chemin best_c = new Chemin();
 		best_c.setTemps(Double.MAX_VALUE);
@@ -96,7 +103,7 @@ public class ChefPompier {
 		for (Iterator<Case> it = this.sim.getSimulation().getListeEau().iterator(); it.hasNext();) {
 			Case case_cour = it.next();
 			for (Case voisin : this.getVoisins(case_cour, r.getDistanceRemplissage())) {
-				c = this.getChemin(case_cour, r);
+				c = this.getChemin(voisin, r);
 				if (c != null && c.getTemps() < best_c.getTemps()) {
 					best_c = c;
 				}
@@ -105,22 +112,41 @@ public class ChefPompier {
 				throw new IllegalArgumentException("Pas de point d'eau accessible.");
 			}
 		}
+		System.out.println("Planification d'un deplacement / temps = " + best_c.getTemps());
 		r.planifierDeplacement(best_c, null, this, false);
+		System.out.println("Planification terminée");
 	}
+
+
+	public void calculRemplissage(Robot r) {
+		System.out.println("Remplissage = " + this.sim.getDateSimulation());
+		this.sim.ajouteEvenement(new EvenementRemplissage(this.sim.getDateSimulation(), this, r));
+		System.out.println(r + "RemplissageFin = " + (this.sim.getDateSimulation() + r.getTempsRemplissage()));
+		this.sim.ajouteEvenement(new EvenementRemplissageFin(this.sim.getDateSimulation() + r.getTempsRemplissage(), this, r));
+	}
+
+
+
+
 
 	private List<Case> getVoisins(Case c, int dist) {
 		List<Case> res = new ArrayList<Case>();
-		Carte carte = this.sim.getSimulation().getCarte();
-		for (Direction dir : Direction.values()) {
-			try {
-				res.add(carte.getVoisin(c, dir));
-			} catch (IllegalArgumentException e) {
-				// OSEF
+		if (dist == 0) {
+			res.add(c);
+		} else if (dist == 1) {
+			Carte carte = this.sim.getSimulation().getCarte();
+			for (Direction dir : Direction.values()) {
+				try {
+					res.add(carte.getVoisin(c, dir));
+				} catch (IllegalArgumentException e) {
+					// OSEF
+				}
 			}
+		} else {
+			throw new IllegalArgumentException("Trop loin pour se remplir.");
 		}
 		return res;
 	}
-
 
 
 	/**

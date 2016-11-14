@@ -14,6 +14,6 @@ public class EvenementDeversementFin extends Evenement {
 
 	public void execute() {
 		System.out.println("Déversement terminé");
-		this.chef.calculRemplissage(this.robot);
+		this.chef.calculDeplacementRemplissage(this.robot);
 	}
 }
