@@ -189,6 +189,9 @@ public class DonneesSimulation {
 		return this.listeRobot.get(index).getCoordonnee();
 	}
 
+	/** @return Type du robot dans la liste à l'indice donnée
+	 *  @param index Index du robot dans la liste
+	 **/
 	public TypeRobot getTypeRobot(int index){
 		Robot robot = this.listeRobot.get(index);
 		if(robot instanceof RobotChenilles){

@@ -31,6 +31,7 @@ public class Dijkstra extends PlusCourtChemin {
 	}
 
 	/** Initialise le poids et prédecesseur du tableau de noeud
+	 *  @param src Case source du chemin
 	 *  @param vitesse Mapping des vitesses associées aux terrains
 	 **/
 	private void setEnsembleNoeud(Case src,EnumMap<NatureTerrain,Double> vitesse){
@@ -49,7 +50,6 @@ public class Dijkstra extends PlusCourtChemin {
 	 *  @param src Case de départ
 	 *  @param dst Case de destination
 	 *  @param vitesse Mapping des vitesses associées aux terrains
-	 *  @throws NoSuchElementException La case destination n'est pas accessible
 	 *  @return chemin Liste de destination à suivre pour se rendre à l'objectif + temps
 	 **/
 	@Override
@@ -68,7 +68,7 @@ public class Dijkstra extends PlusCourtChemin {
 		while(this.ensembleNoeud.peek() != null){
 			Noeud min = this.ensembleNoeud.poll();
 			if(min.getPoids() == Double.MAX_VALUE)
-				throw new NoSuchElementException();
+				return null;
 			this.setDistanceVoisins(min,vitesse);
 		}
 		return new Chemin(this.tableau_noeud[src_i][src_j],this.tableau_noeud[dst_i][dst_j]);
@@ -76,6 +76,7 @@ public class Dijkstra extends PlusCourtChemin {
 
 	/** Met à jour la distance des voisins
 	 *  @param noeud Case de départ pour déterminer les voisins
+	 *  @param vitesse Mapping des vitesses associées aux terrains
 	 **/
 	private void setDistanceVoisins(Noeud noeud,EnumMap<NatureTerrain,Double> vitesse){
 		int nb_lignes = this.tableau_noeud.length;

@@ -11,10 +11,8 @@ public class Chemin {
 	private double temps;
 
 	/** Constructeur de chemin
-	 *  @param predecesseur tableau 2-D des predecesseurs obtenue par Dijkstra
-	 *  @param distance tableau 2-D des distances à la destination
-	 *  @param src Case source
-	 *  @param dst Case destination
+	 *  @param src Noeud source
+	 *  @param dst Noeud destination
 	 **/
 	public Chemin(Noeud src, Noeud dst){
 		this.chemin = new HashSet<Destination>();
@@ -26,6 +24,7 @@ public class Chemin {
 		}
 	}
 
+	/** Constructeur de chemin vide si la source et la destination sont la meme case */
 	public Chemin(){
 		this.chemin = new HashSet<Destination>();
 		this.temps = 0;

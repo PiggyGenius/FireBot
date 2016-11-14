@@ -11,7 +11,6 @@ public class Noeud implements Comparable<Noeud> {
 
 	/** Constructeur de noeud pour la liste de priorité 
 	 *  @param element Case à laquelle le noeud fait référence
-	 *  @param poids Temps du trajet depuis source vers la case
 	 **/
 	public Noeud(Case element){
 		this.element = element;
@@ -34,7 +33,7 @@ public class Noeud implements Comparable<Noeud> {
 		return this.element.getNatureTerrain();
 	}
 
-	/** @param element Predecesseur du noeud stocké */
+	/** @param predecesseur Predecesseur du noeud stocké */
 	public void setPredecesseur(Noeud predecesseur){
 		this.predecesseur = predecesseur;
 	}
