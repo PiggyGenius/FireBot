@@ -114,7 +114,6 @@ public class ChefPompier {
 		List<Case> res = new ArrayList<Case>();
 		Carte carte = this.sim.getSimulation().getCarte();
 		for (Direction dir : Direction.values()) {
-			System.out.println("In loop : " + dir);
 			try {
 				res.add(carte.getVoisin(c, dir));
 			} catch (IllegalArgumentException e) {

@@ -19,6 +19,7 @@ public class Chemin {
 	public Chemin(Noeud src, Noeud dst){
 		this.chemin = new HashSet<Destination>();
 		Noeud noeud = dst;
+		this.temps = dst.getPoids();
 		while(noeud != src){
 			this.chemin.add(new Destination(noeud.getElement(),noeud.getPoids()));
 			noeud = noeud.getPredecesseur();
