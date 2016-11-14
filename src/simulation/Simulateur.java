@@ -42,7 +42,6 @@ public class Simulateur implements Simulable {
 		this.incrementeDate();
 		this.draw();
 		this.chef.choisirRobot();
-		//this.drawPath();
 	}
 
 	@Override
@@ -58,26 +57,6 @@ public class Simulateur implements Simulable {
 
 	public ChefPompier getChef() {
 		return this.chef;
-	}
-
-	//TEMPORARY JUST TO TEST STUFF
-	public void setPath(HashSet<Destination> chemin){
-		this.chemin = chemin;
-	}
-
-	//TEMPORARY JUST TO TEST STUFF
-	public void drawPath(){
-		Color couleur_case = Color.decode("#3607ea");
-		if(this.chemin == null)
-			return;
-		Iterator<Destination> dest_iterator = this.chemin.iterator();
-		while(dest_iterator.hasNext()){
-			Destination dest = dest_iterator.next();
-			Case noeud = dest.getPosition();
-			//System.out.println(dest.getTemps());
-			gui.addGraphicalElement(new Rectangle(this.y_step*noeud.getColonne(),this.x_step*noeud.getLigne(),couleur_case,couleur_case,y_step));
-			this.chemin.remove(noeud);
-		}
 	}
 
 	private void draw(){

@@ -107,7 +107,7 @@ public class Carte {
 		Coordonnee voisin = getCoordonnee(src,dir);
 		int x = voisin.getLigne();
 		int y = voisin.getColonne();
-		if(x < 0 || x > getNbLignes() || y < 0 || y > getNbColonnes())
+		if(x < 0 || x >= getNbLignes() || y < 0 || y >= getNbColonnes())
 			return false;
 		return true;
 	}

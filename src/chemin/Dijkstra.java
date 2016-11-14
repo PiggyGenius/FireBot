@@ -1,5 +1,6 @@
 package chemin;
 
+import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class Dijkstra extends PlusCourtChemin {
 		}
 	}
 
-	/** Remplit le HashSet de Case avec les références de la carte 
+	/** Initialise le poids et prédecesseur du tableau de noeud
 	 *  @param vitesse Mapping des vitesses associées aux terrains
 	 **/
 	private void setEnsembleNoeud(Case src,EnumMap<NatureTerrain,Double> vitesse){
@@ -48,7 +49,8 @@ public class Dijkstra extends PlusCourtChemin {
 	 *  @param src Case de départ
 	 *  @param dst Case de destination
 	 *  @param vitesse Mapping des vitesses associées aux terrains
-	 *  @return chemin Liste de case à suivre pour se rendre à l'objectif + temps
+	 *  @throws NoSuchElementException La case destination n'est pas accessible
+	 *  @return chemin Liste de destination à suivre pour se rendre à l'objectif + temps
 	 **/
 	@Override
 	public Chemin getChemin(Case src,Case dst,EnumMap<NatureTerrain,Double> vitesse){
@@ -56,6 +58,7 @@ public class Dijkstra extends PlusCourtChemin {
 			return new Chemin();
 		if(vitesse.get(dst.getNatureTerrain()) == 0.0)
 			return null;
+			//throw new NoSuchElementException();
 		int src_i = src.getLigne(); int src_j = src.getColonne();
 		int dst_i = dst.getLigne(); int dst_j = dst.getColonne();
 
@@ -65,6 +68,8 @@ public class Dijkstra extends PlusCourtChemin {
 		this.ensembleNoeud.add(this.tableau_noeud[src_i][src_j]);
 		while(this.ensembleNoeud.peek() != null){
 			Noeud min = this.ensembleNoeud.poll();
+			if(min.getPoids() == Double.MAX_VALUE)
+				throw new NoSuchElementException();
 			this.setDistanceVoisins(min,vitesse);
 		}
 		return new Chemin(this.tableau_noeud[src_i][src_j],this.tableau_noeud[dst_i][dst_j]);
