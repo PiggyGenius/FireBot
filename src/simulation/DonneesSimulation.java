@@ -184,4 +184,19 @@ public class DonneesSimulation {
 	public Coordonnee getCoordonneeRobot(int index){
 		return this.listeRobot.get(index).getCoordonnee();
 	}
+
+	public TypeRobot getTypeRobot(int index){
+		Robot robot = this.listeRobot.get(index);
+		if(robot instanceof RobotChenilles){
+			return TypeRobot.CHENILLES;
+		}
+		else if(robot instanceof RobotDrone){
+			return TypeRobot.DRONE;
+		}
+		else if(robot instanceof RobotRoues){
+			return TypeRobot.ROUES;
+		}
+		else
+			return TypeRobot.PATTES;
+	}
 }

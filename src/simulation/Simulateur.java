@@ -88,14 +88,16 @@ public class Simulateur implements Simulable {
 		}
 
 		/* Et enfin les robots */
-		couleur_case = Color.decode("#c0c0c0");
+		String[] robot_couleur_string = {"#302b54","#7a67ee","#b27300","#9f79ee"};
+		EnumMap<TypeRobot, Color> couleur_robot = new EnumMap<TypeRobot, Color>(TypeRobot.class);
+		for(int i = 0; i < 4; i++)
+			couleur_robot.put(TypeRobot.values()[i],Color.decode(robot_couleur_string[i]));
 		for(int i = 0; i < this.simulation.getNbRobots(); i++){
 			c = this.simulation.getCoordonneeRobot(i);
-			gui.addGraphicalElement(new Rectangle(y_step*c.getColonne(),x_step*c.getLigne(),couleur_case,couleur_case,y_step));
-		}
-
+			couleur_case = couleur_robot.get(this.simulation.getTypeRobot(i));
+			gui.addGraphicalElement(new Rectangle(this.y_step*c.getColonne(),this.x_step*c.getLigne(),couleur_case,couleur_case,y_step));
+			}
 	}
-
 
 	public void ajouteEvenement(Evenement e) {
 		listeEvenements.add(e);

@@ -58,7 +58,6 @@ public class Dijkstra extends PlusCourtChemin {
 			return new Chemin();
 		if(vitesse.get(dst.getNatureTerrain()) == 0.0)
 			return null;
-			//throw new NoSuchElementException();
 		int src_i = src.getLigne(); int src_j = src.getColonne();
 		int dst_i = dst.getLigne(); int dst_j = dst.getColonne();
 
