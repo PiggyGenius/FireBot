@@ -3,6 +3,7 @@ package simulation;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.awt.Color;
 import robot.*;
 import chemin.*;
 import enumerations.*;
@@ -189,21 +190,21 @@ public class DonneesSimulation {
 		return this.listeRobot.get(index).getCoordonnee();
 	}
 
-	/** @return Type du robot dans la liste à l'indice donnée
+	/** @return Couleur du robot dans la liste à l'indice donnée
 	 *  @param index Index du robot dans la liste
 	 **/
-	public TypeRobot getTypeRobot(int index){
+	public Color getCouleurRobot(int index){
 		Robot robot = this.listeRobot.get(index);
 		if(robot instanceof RobotChenilles){
-			return TypeRobot.CHENILLES;
+			return Color.decode("#39316d");
 		}
 		else if(robot instanceof RobotDrone){
-			return TypeRobot.DRONE;
+			return Color.decode("#7a67ee");
 		}
 		else if(robot instanceof RobotRoues){
-			return TypeRobot.ROUES;
+			return Color.decode("#b27300");
 		}
 		else
-			return TypeRobot.PATTES;
+			return Color.decode("#fbd742");
 	}
 }
