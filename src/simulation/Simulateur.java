@@ -41,7 +41,7 @@ public class Simulateur implements Simulable {
 	public void next(){
 		this.incrementeDate();
 		this.draw();
-		this.chef.calculDeplacement();
+		this.chef.calculDeplacementExtinction();
 	}
 
 	@Override

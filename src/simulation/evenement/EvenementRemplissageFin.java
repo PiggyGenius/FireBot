@@ -13,7 +13,7 @@ public class EvenementRemplissageFin extends Evenement {
 	}
 
 	public void execute() {
-		System.out.println("Déversement terminé");
+		System.out.println("Remplissage terminé");
 		robot.liberer();
 	}
 }
