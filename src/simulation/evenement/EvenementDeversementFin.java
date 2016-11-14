@@ -16,8 +16,12 @@ public class EvenementDeversementFin extends Evenement {
 	}
 
 	public void execute() {
-		System.out.println("Déversement terminé");
+		// System.out.println("Déversement terminé");
 		this.incendie.setEnExtinction(false);
-		this.chef.calculDeplacementRemplissage(this.robot);
+		if (this.robot.getCapaciteReservoir() == 0) {
+			this.robot.liberer();
+		} else {
+			this.chef.calculDeplacementRemplissage(this.robot);
+		}
 	}
 }

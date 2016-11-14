@@ -21,7 +21,7 @@ public class EvenementDeplacementFin extends Evenement {
 	}
 
 	public void execute() {
-		System.out.println("Deplacement terminé");
+		// System.out.println("Deplacement terminé");
 		this.chef.finDeplacement(this.robot, this.incendie, extinction);
 	}
 }
