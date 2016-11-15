@@ -66,7 +66,7 @@
 % auteur(s)
 \author{
 	\begin{tabular}{p{15cm}}
-		\Large Maxime Deloche \& Ludovic Carré \& Cyril Carlin
+		\Large Maxime Deloche, Ludovic Carré \& Cyril Carlin
 	\end{tabular} \\
 	\hline
 }
@@ -119,6 +119,26 @@ On définit un chemin comme un hash set de Destination, à chaque objet est asso
 Puisqu'il s'agit d'un hash set, il n'y a pas de notion d'ordre dans un chemin ce qui peut sembler particulier mais puisque les événements sont ajoutés avec un temps d'exécution, l'ordre n'est pas nécessaire.\\\\
 \textbf{Algorithme de reconstruction de Dijkstra:} L'algorithme consiste simplement à reconstruire le chemin à partir du tableau de prédécesseurs créé lors des mises à jours de distance.\\
 Coût: $\theta(M)$ où $M$ est la longueur du chemin en nombre de case donc $\theta(N-1)$ en pire cas.
+
+
+
+
+\subsection{Simulation et evenements}
+
+\verb?evenement? est un sous-package de \verb?simulation?.
+
+\subsubsection{ChefPompier}
+
+Le ChefPompier est chargé de planifier la liste des évènements. Pour cela, il possède plusieurs méthodes, qui sont appelées lorsque les évènements sont exécutés. Un cycle d'intervention d'un robot sur un incendie se déroule comme suit : 
+\begin{enumerate}
+	\item A chaque pas de temps, la fonction \verb?calculDeplacementExtinction? parcourt la liste des incendies, et cherche pour chacun dans la liste des robots disponibles le plus rapide à intervenir. Elle envoit ensuite ce robot à cet emplacement, donc planifie une séquence d'\verb?EvenementDeplacement? élémentaires et un évènement \verb?EvenementDeplacementFin?.
+	\item Lorque ce \verb?EvenementDeplacementFin? est éxécuté, le \verb?ChefPompier? calcule le nombre de déversements maximum possible, et planifie des \verb?EvenementDeversement? et un \verb?EvenementDeversementFin?.
+	\item Lorsque cet évènement \verb?EvenementDeversementFin? est éxécuté, le \verb?ChefPompier? calcule le plus court chemin pour remplir le robot, et planifie à nouveau une série \verb?EvenementDeplacement? et un autre \verb?EvenementDeplacementFin?. Si le robot n'a pas besoin de remplissage, il repasse immédiatement à 'libre' et sera affecté à un nouvel incendie au prochain pas de temps.
+	\item Lorsque cet évènement \verb?EvenementDeplacementFin? est éxécuté, il planifie un \verb?EvenementRemplissage? et un \verb?EvenementRemplissageFin?.
+	\item Lorsque cet évènement \verb?EvenementRemplissageFin? est éxécuté, le robot est libéré et sera affecté à un nouvel incendie au prochain pas de temps.
+\end{enumerate}
+
+NB : Dans les \verb?EvenementDeplacementFin?, un attribut sert à indiquer si c'est un évènement pour un déversement ou un remplissage, et permet au \verb?ChefPompier? d'"aiguiller" la suite de la procédure.
 
 % -------------------------------------- SECTION 2 --------------------------------------
 
