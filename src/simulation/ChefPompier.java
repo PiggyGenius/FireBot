@@ -28,9 +28,7 @@ public class ChefPompier {
 		return this.sim;
 	}
 
-	/** Teste tous les robots disponibles
-	 *  @param incendie Incendie destination
-	 **/
+	/** Teste tous les robots disponibles */
 	public void calculDeplacementExtinction() {
 		if (listeIncendie.isEmpty()) {
 			return;

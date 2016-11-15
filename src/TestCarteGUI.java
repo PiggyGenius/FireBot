@@ -20,7 +20,7 @@ public class TestCarteGUI {
 		
         try {
 			DonneesSimulation simulation = LecteurDonnees.lire(args[0]);
-	        GUISimulator gui = new GUISimulator(600, 600, Color.BLACK);
+	        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 	        Simulateur simule_terrain = new Simulateur(gui,simulation);
 			ChefPompier chef = new ChefPompier(simule_terrain);
 			simule_terrain.setChef(chef);

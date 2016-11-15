@@ -102,7 +102,7 @@ public class Simulateur implements Simulable {
 
 	public void incrementeDate() {
 		this.dateSimulation ++;
-		System.out.println(this.dateSimulation); // DEBUG
+		//System.out.println(this.dateSimulation); // DEBUG
 		Evenement e;
 		// TODO : on recherche 2 fois de suite le meilleur, c'est dommage
 		while (! this.simulationTerminee() && listeEvenements.peek().getDate() <= this.dateSimulation) {
