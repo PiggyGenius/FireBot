@@ -60,7 +60,7 @@ public class Simulateur implements Simulable {
 			this.dateSimulation = 0;
 
 			this.simulation = LecteurDonnees.lire(this.simulation.getName());
-			this.gui = new GUISimulator(800, 600, Color.BLACK);
+			this.gui.reset();
 			this.simulation.setPlusCourtChemin();
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Ce fichier n'existe pas.");
