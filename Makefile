@@ -21,25 +21,13 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testInvader testLecture testCarte testRobots testCarteGUI testEvenements
+all: testInvader testCarteGUI
 
 testInvader:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
 
-testLecture:
-	javac -d bin -sourcepath src src/TestLecteurDonnees.java
-
-testCarte:
-	javac -d bin -sourcepath src src/TestCarte.java
-
-testRobots:
-	javac -d bin -sourcepath src src/TestRobots.java
-
 testCarteGUI:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarteGUI.java
-
-testEvenements:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEvenements.java
 
 # Ajouter une regle
 # Execution:
@@ -50,23 +38,14 @@ testEvenements:
 exeInvader: testInvader
 	java -classpath bin:bin/gui.jar TestInvader
 
-exeLecture: testLecture
-	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
-
-exeCarte: testCarte
-	java -classpath bin TestCarte
-
-exeRobots: testRobots
-	java -classpath bin TestRobots
-
 exeCarteGUI: testCarteGUI
+ifeq ("$(MAP)", "")
 	java -classpath bin:bin/gui.jar TestCarteGUI cartes/spiralOfMadness-50x50.map
+else
+	java -classpath bin:bin/gui.jar TestCarteGUI $(MAP)
+endif
+	
 
-exeCarteGUI2: testCarteGUI
-	java -classpath bin:bin/gui.jar TestCarteGUI cartes/carteSujet.map
-
-exeEvenements: testEvenements
-	java -classpath bin:bin/gui.jar TestEvenements cartes/carteSujet.map -enableassertions
 
 doc:
 	javadoc -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath gui.jar -subpackages chemin simulation io robot enumerations
@@ -77,6 +56,6 @@ rapport:
 	pdflatex -output-directory rapport/ rapport/rapport.tex && pdflatex -output-directory rapport/ rapport/rapport.tex
 
 clean:
-	rm -rf bin/*.class doc/* $(LATEX_TRASH)
+	rm -rf bin/*.class doc/* $(addprefix rapport/, $(LATEX_TRASH))
 
 .PHONY: doc clean rapport
