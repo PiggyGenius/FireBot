@@ -76,7 +76,10 @@ LATEX_TRASH=rapport.toc rapport.log rapport.aux
 rapport:
 	pdflatex -output-directory rapport/ rapport/rapport.tex && pdflatex -output-directory rapport/ rapport/rapport.tex
 
+stats:
+	./gitstats.sh
+
 clean:
 	rm -rf bin/*.class doc/* $(LATEX_TRASH)
 
-.PHONY: doc clean rapport
+.PHONY: doc clean rapport stats
