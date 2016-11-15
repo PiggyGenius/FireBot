@@ -44,8 +44,6 @@ ifeq ("$(MAP)", "")
 else
 	java -classpath bin:bin/gui.jar TestCarteGUI $(MAP)
 endif
-	
-
 
 doc:
 	javadoc -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath gui.jar -subpackages chemin simulation io robot enumerations
