@@ -31,8 +31,8 @@ public class Simulateur implements Simulable {
 		this.gui = gui;
 		this.simulation = simulation;
 		this.dateSimulation = 0;
-		this.x_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
-		this.y_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
+		this.y_step = (int) Math.floor(this.gui.getPanelHeight() / this.simulation.getNbLignes());
+		this.x_step = (int) Math.floor(this.gui.getPanelWidth() / this.simulation.getNbColonnes());
 		gui.setSimulable(this);
 		this.chef = null;
 	}
@@ -72,11 +72,11 @@ public class Simulateur implements Simulable {
 
 		/* On affiche le terrain de la carte */
 		int nbLignes = this.simulation.getNbLignes();
-		int nbColonnes = this.simulation.getNbColonnes();	
+		int nbColonnes = this.simulation.getNbColonnes();
 		for(int i = 0; i < nbLignes; i++){
 			for(int j = 0; j < nbColonnes; j++){
 				couleur_case = couleur_terrain.get(this.simulation.getNatureTerrain(i,j));
-				gui.addGraphicalElement(new Rectangle(y_step/2+this.y_step*j,y_step/2+this.x_step*i,couleur_case,couleur_case,y_step));
+				gui.addGraphicalElement(new Rectangle(this.x_step/2+this.x_step*j,this.y_step/2+this.y_step*i,couleur_case,couleur_case,this.x_step,this.y_step));
 			}
 		}
 
@@ -85,14 +85,14 @@ public class Simulateur implements Simulable {
 		Coordonnee c;
 		for(int i = 0; i < this.simulation.getNbIncendies(); i++){
 			c = this.simulation.getCoordonneeIncendie(i);
-			gui.addGraphicalElement(new Rectangle(y_step/2+y_step*c.getColonne(),y_step/2+x_step*c.getLigne(),couleur_case,couleur_case,y_step));
+			gui.addGraphicalElement(new Rectangle(this.x_step/2+this.x_step*c.getColonne(),this.y_step/2+this.y_step*c.getLigne(),couleur_case,couleur_case,this.x_step,this.y_step));
 		}
 
 		/* Et enfin les robots */
 		for(int i = 0; i < this.simulation.getNbRobots(); i++){
 			c = this.simulation.getCoordonneeRobot(i);
 			couleur_case = this.simulation.getCouleurRobot(i);
-			gui.addGraphicalElement(new Rectangle(y_step/2+this.y_step*c.getColonne(),y_step/2+this.x_step*c.getLigne(),couleur_case,couleur_case,y_step));
+			gui.addGraphicalElement(new Rectangle(this.x_step/2+this.x_step*c.getColonne(),this.y_step/2+this.y_step*c.getLigne(),couleur_case,couleur_case,this.x_step,this.y_step));
 			}
 	}
 
