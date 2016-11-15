@@ -1,6 +1,13 @@
 Ensimag 2A POO - TP 2016/17
 ============================
 
+Pour lancer le programme
+------------------------
+- Carte par défaut (spiralOfMadness):
+	make exeCarteGUI
+- Autre carte:
+	make exeCarteGUI MAP=path/to/the/map
+
 - src: contient les classes fournies par les enseignants
   -> LecteurDonnees.java         : lit tous les elements d'un fichier de description de donnees (cases, incendies et robots) et les affiche.
                                    A vous de MODIFIER cette classe (ou en ecrire une nouvelle) pour creer les objets correspondants à vos propres classes
