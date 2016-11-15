@@ -40,6 +40,7 @@ public class LecteurDonnees {
      **/
     public static DonneesSimulation lire(String fichierDonnees) throws FileNotFoundException, DataFormatException {
 		simulation = new DonneesSimulation();
+		simulation.setName(fichierDonnees);
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         lecteur.lireCarte();

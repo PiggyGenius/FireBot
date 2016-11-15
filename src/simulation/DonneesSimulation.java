@@ -11,6 +11,7 @@ import enumerations.*;
 /** Stock les différentes données d'une simulation */
 public class DonneesSimulation {
 	private Carte carteTerrain;
+	private String name;
 	private List<Incendie> listeIncendie;
 	private List<Robot> listeRobot;
 	private List<Case> listeEau;
@@ -190,6 +191,17 @@ public class DonneesSimulation {
 	 **/
 	public Coordonnee getCoordonneeRobot(int index){
 		return this.listeRobot.get(index).getCoordonnee();
+	}
+
+	/** @param name the name of the input file */
+	public void setName(String name) {
+		this.name = name;
+		System.out.println("Name = " + name);
+	}
+
+	/** @return the name of the input file */
+	public String getName() {
+		return this.name;
 	}
 
 	/** @return Couleur du robot dans la liste à l'indice donnée

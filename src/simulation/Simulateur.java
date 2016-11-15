@@ -6,6 +6,9 @@ import java.util.PriorityQueue;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.io.*;
+import java.util.zip.DataFormatException;
+import io.*;
 import gui.GUISimulator;
 import gui.Rectangle;
 import simulation.*;
@@ -51,9 +54,20 @@ public class Simulateur implements Simulable {
 	/** Methode de reinitialisation de la simulation */
 	@Override
 	public void restart(){
-		System.out.println("Clicked on restart"); // DEBUG
-		// TODO : reinitialiser proprement la date et la liste d'evenements
-		throw new IllegalArgumentException("Not implemented yet");
+		try {
+			System.out.println("Clicked on restart"); // DEBUG
+			this.listeEvenements.clear();
+			this.dateSimulation = 0;
+
+			this.simulation = LecteurDonnees.lire(this.simulation.getName());
+			this.gui = new GUISimulator(800, 600, Color.BLACK);
+			this.simulation.setPlusCourtChemin();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Ce fichier n'existe pas.");
+		} catch (DataFormatException e) {
+			throw new IllegalArgumentException("Fichier invalide.");
+		}
+		
 	}
 
 	/** @param chef le ChefPompier */
