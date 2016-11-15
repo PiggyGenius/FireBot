@@ -69,7 +69,7 @@ exeEvenements: testEvenements
 	java -classpath bin:bin/gui.jar TestEvenements cartes/carteSujet.map -enableassertions
 
 doc:
-	javado -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath gui.jar -subpackages chemin simulation io robot enumerations
+	javadoc -docencoding utf8 -encoding utf8 -charset utf8 -private -d doc/ -sourcepath src/ -classpath gui.jar -subpackages chemin simulation io robot enumerations
 
 LATEX_TRASH=rapport.toc rapport.log rapport.aux
 

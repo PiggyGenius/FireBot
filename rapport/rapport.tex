@@ -101,16 +101,17 @@ On notera $N = n*m$, où n et m sont les dimensions de la carte, le nombre de no
 	\item setDistanceVoisins: Met à jour les distances du tableau avec les distances des voisins. Coût: $4N-4 = \theta(N)$.\\
 \end{itemize}
 Complexité générale de l'algorithme: $\theta(N^2)$.\\\\
-La Complexité assez élevée et l'on a donc décidé d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple mais qui reste respectable: la file de priorité.\\
+La Complexité assez élevée et l'on a donc décidé d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple mais qui reste très respectable: la file de priorité.\\
 
 \subsubsection{Dijkstra avec une priority queue}
-Il est possible d'améliorer l'algorithme en utilisant une priority queue comme structure de données, le coût de deux méthodes change.
+Il est possible d'améliorer l'algorithme en utilisant une priority queue comme structure de données. Pour cela il faut rajouter une abstraction Noeud qui contient un poids et une case, la liste est constamment ordonnée tel que l'élément de poids minimale est le premier élément de la liste, ce qui améliore la complexité de l'algorithme car la priority queue est implémentée avec un tas binaire en Java.\\
+De plus, afin d'encore améliorer la rapidité de l'algorithme, nous traitons un ensemble de noeud ne contenant que la source au départ qui se remplit au fur et à mesure des détections de voisins ce qui permet de diminuer les coefficients des différentes étapes de l'algorithme. On note $N_i=i*4-i$ le nombre de noeud à l'iteration i de l'algoritme.
 \begin{itemize}
-	\item setEnsembleNoeud: L'ajout d'un élément est en $log_2(N)$ on a donc un coût en $\theta(Nlog_2(N))$.
-	\item getMin: On a ici une amélioration conséquente grâce à la recherche en $log_2(n)$ (pour conserver l'ordre) ce qui nous donne un coût en $\theta(Nlog_2(N))$.\\
+	\item stockCarte: La nouvelle version de l'algorithme créée un tableau de noeud constitué des cases de la carte lors de la création de l'objet. Coût: $\theta(N)$.
+	\item setEnsembleNoeud: Il faut initialiser tous les noeuds avec un poids à $+\inf$ et un prédecesseur à null. Coût: $\theta(N)$.
+	\item getMin: La fonction à disparue il s'agit simplement de l'extraction de la tête de la file de priorité. Trouver le min de la file est en $\theta(1)$ puisqu'il s'agit de la tête, cependant il faut déterminer la nouvelle tête de file après l'extraction. Dans un tas binaire, l'opération se fait par swapping jusqu'a obtenir le min en racine. Coût: $\theta(log_2(N)$.
 \end{itemize}
 Complexité générale de l'algorithme: $\theta(Nlog_2(N))$.\\
-TODO du coup faut que je me motive pour modifier notre algo.
 
 \subsubsection{Reconstruction du chemin avec le tableau de prédecesseur}
 
