@@ -76,7 +76,7 @@ public class Simulateur implements Simulable {
 		for(int i = 0; i < nbLignes; i++){
 			for(int j = 0; j < nbColonnes; j++){
 				couleur_case = couleur_terrain.get(this.simulation.getNatureTerrain(i,j));
-				gui.addGraphicalElement(new Rectangle(this.y_step*j,this.x_step*i,couleur_case,couleur_case,y_step));
+				gui.addGraphicalElement(new Rectangle(y_step/2+this.y_step*j,y_step/2+this.x_step*i,couleur_case,couleur_case,y_step));
 			}
 		}
 
@@ -85,14 +85,14 @@ public class Simulateur implements Simulable {
 		Coordonnee c;
 		for(int i = 0; i < this.simulation.getNbIncendies(); i++){
 			c = this.simulation.getCoordonneeIncendie(i);
-			gui.addGraphicalElement(new Rectangle(y_step*c.getColonne(),x_step*c.getLigne(),couleur_case,couleur_case,y_step));
+			gui.addGraphicalElement(new Rectangle(y_step/2+y_step*c.getColonne(),y_step/2+x_step*c.getLigne(),couleur_case,couleur_case,y_step));
 		}
 
 		/* Et enfin les robots */
 		for(int i = 0; i < this.simulation.getNbRobots(); i++){
 			c = this.simulation.getCoordonneeRobot(i);
 			couleur_case = this.simulation.getCouleurRobot(i);
-			gui.addGraphicalElement(new Rectangle(this.y_step*c.getColonne(),this.x_step*c.getLigne(),couleur_case,couleur_case,y_step));
+			gui.addGraphicalElement(new Rectangle(y_step/2+this.y_step*c.getColonne(),y_step/2+this.x_step*c.getLigne(),couleur_case,couleur_case,y_step));
 			}
 	}
 
