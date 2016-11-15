@@ -6,6 +6,9 @@ import java.lang.Double;
 
 public class RobotPattes extends Robot {
 
+	/** Constructeur de RobotPattes
+	 * @param position la position initiale
+	 * @param vitesse la vitesse de deplacement */
 	public RobotPattes(Case position, double vitesse) {
 
 		super(position);
@@ -32,6 +35,8 @@ public class RobotPattes extends Robot {
 	}
 
 
+	/** Constructeur de RobotPattes (en utilisant la vitesse par defaut)
+	 * @param position la position initiale */
 	public RobotPattes(Case position) {
 		this(position, 30.0);
 	}
