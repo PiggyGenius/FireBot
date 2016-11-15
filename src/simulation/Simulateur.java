@@ -27,6 +27,9 @@ public class Simulateur implements Simulable {
 	private long dateSimulation;
 	private PriorityQueue<Evenement> listeEvenements = new PriorityQueue<Evenement> ();
 
+	/** Constructeur du simulateur
+	 * @param gui l'objet GUISimulator
+	 * @param simulation les donnees de simulation */
 	public Simulateur(GUISimulator gui,DonneesSimulation simulation){
 		this.gui = gui;
 		this.simulation = simulation;
@@ -37,6 +40,7 @@ public class Simulateur implements Simulable {
 		this.chef = null;
 	}
 	
+	/** Methode d'increment du pas de temps et de gestion des evenements associes */
 	@Override
 	public void next(){
 		this.incrementeDate();
@@ -44,6 +48,7 @@ public class Simulateur implements Simulable {
 		this.chef.calculDeplacementExtinction();
 	}
 
+	/** Methode de reinitialisation de la simulation */
 	@Override
 	public void restart(){
 		System.out.println("Clicked on restart"); // DEBUG
@@ -51,15 +56,18 @@ public class Simulateur implements Simulable {
 		throw new IllegalArgumentException("Not implemented yet");
 	}
 
+	/** @param chef le ChefPompier */
 	public void setChef(ChefPompier chef) {
 		this.chef = chef;
 	}
 
+	/** @return le ChefPompier */
 	public ChefPompier getChef() {
 		return this.chef;
 	}
 
 
+	/** Mise a jour de l'affichage */
 	private void draw(){
 		this.gui.reset();
 		Color couleur_case;
@@ -96,10 +104,14 @@ public class Simulateur implements Simulable {
 			}
 	}
 
+
+	/** Ajout d'evenement
+	 * @param e evenement a ajouter */
 	public void ajouteEvenement(Evenement e) {
 		listeEvenements.add(e);
 	}
 
+	/** Incremente la date courante et traite les evenements correspondants */
 	public void incrementeDate() {
 		this.dateSimulation ++;
 		//System.out.println(this.dateSimulation); // DEBUG
@@ -111,15 +123,18 @@ public class Simulateur implements Simulable {
 		}
 	}
 
+	/** @return true si la simulation est terminee */
 	public boolean simulationTerminee() {
 		return listeEvenements.isEmpty();
 	}
 
 
+	/** @return date courante de la simulation */
 	public long getDateSimulation() {
 		return this.dateSimulation;
 	}
 
+	/** @return les donnees de simulation */
 	public DonneesSimulation getSimulation() {
 		return this.simulation;
 	}

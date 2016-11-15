@@ -17,8 +17,6 @@ public class Carte {
 		this.tailleCases = tailleCases;
 	}
 
-	public void evenement(long date){
-	}
 
 	/** @return Nombre de lignes de la carte */
 	public int getNbLignes(){

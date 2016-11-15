@@ -163,10 +163,12 @@ public class DonneesSimulation {
 		return this.listeIncendie.size();
 	}
 
+	/** @return la liste des incendies */
 	public List<Incendie> getListeIncendie() {
 		return this.listeIncendie;
 	}
 
+	/** @return la liste des cases contenant de l'eau */
 	public List<Case> getListeEau() {
 		return this.listeEau;
 	}

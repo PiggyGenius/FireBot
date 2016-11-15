@@ -60,6 +60,7 @@ public abstract class Robot {
 		return this.position;
 	}
 
+	/** @return Coordonnees courantes */
 	public Coordonnee getCoordonnee(){
 		return this.position.getCoordonnee();
 	}
@@ -69,14 +70,18 @@ public abstract class Robot {
 		this.position = position;
 	}
 
+	/** @return capacite du reservoir */
 	public int getCapaciteReservoir() {
 		return this.capaciteReservoir;
 	}
 
+	/** @return la quantite d'eau dans le reservoir */
 	public int getQteReservoir() {
 		return this.qteReservoir;
 	}
 
+	/** @param volume la quantite d'eau a retirer
+	 * @throws IllegalArgumentException si il reste moins que 'volume' d'eau dans le reservoir */
 	public void diminuerQteReservoir(int volume) {
 		if (this.capaciteReservoir == 0) {
 			return;
@@ -87,34 +92,42 @@ public abstract class Robot {
 		this.qteReservoir -= volume;
 	}
 
+	/** @return temps de remplissage */
 	public int getTempsRemplissage() {
 		return this.tempsRemplissage;
 	}
 
+	/** @return nombre de litres deverses par temps de deversement */
 	public int getLitresUnitaire() {
 		return this.litresUnitaire;
 	}
 
+	/** @return temps unitaire de deversement */
 	public int getTempsUnitaire() {
 		return this.tempsUnitaire;
 	}
 
+	/** @return distance a laquelle doit se trouver le robot d'un point d'eau pour se remplir */
 	public int getDistanceRemplissage() {
 		return this.distanceRemplissage;
 	}
 
+	/** @return la disponibilite du robot */
 	public boolean isDispo() {
 		return this.dispo;
 	}
 
+	/** libere le robot */
 	public void liberer() {
 		this.dispo = true;
 	}
 
+	/** occupe (reserve) le robot */
 	public void occuper() {
 		this.dispo = false;
 	}
 
+	/** remplit le reservoir du robot */
 	public void remplirReservoir() {
 		this.qteReservoir = this.capaciteReservoir;
 	}
@@ -127,6 +140,7 @@ public abstract class Robot {
 		return this.vitesse.get(terrain);
 	}
 
+	/** @return EnumMap des vitesses en fonction du terrain */
 	public EnumMap<NatureTerrain,Double> getVitesseMap(){
 		return this.vitesse;
 	}
@@ -136,7 +150,10 @@ public abstract class Robot {
 
 
 	/** Planifie l'action de se deplacer
-	 * Ajoute la liste des eveneemnts elementaires necessaires au deplacement */
+	 * @param c le chemin pour aller à la destination
+	 * @param incendie l'incendie (null si c'est pour un remplissage)
+	 * @param chef le chef pompier qui a donne l'ordre
+	 * @param extinction true si c'est pour une extinction de feu */
 	public void planifierDeplacement(Chemin c, Incendie incendie, ChefPompier chef, boolean extinction) {
 		this.dispo = false;
 		double tailleCase = (double)chef.getSimulateur().getSimulation().
@@ -159,10 +176,11 @@ public abstract class Robot {
 
 	/* ######################### Affichage des robots ######################### */
 
-	public static String repeat(int count, String with) {
+	private String repeat(int count, String with) {
 		return new String(new char[count]).replace("\0", with);
 	}
 
+	/** @return l'affichage des caracteristiques d'un robot */
 	@Override
 	public String toString() {
 		String res = new String();
@@ -185,7 +203,10 @@ public abstract class Robot {
 		return res;
 	}
 
-	/** convertit une vitesse de km/h à m/s */
+	/** convertit une vitesse de km/h à m/s 
+	 * @param vitesse la vitesse en km/h a convertir 
+	 * @return la vitesse convertie en m/s */
+
 	public double convertVitesse(double vitesse) {
 		return vitesse * 1000 / 3600;
 	}

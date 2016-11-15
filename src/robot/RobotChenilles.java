@@ -6,6 +6,9 @@ import java.lang.Double;
 
 public class RobotChenilles extends Robot {
 
+	/** Constructeur de RobotChenilles
+	 * @param position la position initiale
+	 * @param vitesse la vitesse de deplacement */
 	public RobotChenilles(Case position, double vitesse) {
 		
 		super(position);
@@ -34,6 +37,8 @@ public class RobotChenilles extends Robot {
 	}
 
 
+	/** Constructeur de RobotChenilles (en utilisant la vitesse par defaut)
+	 * @param position la position initiale */
 	public RobotChenilles(Case position) {
 		this(position, 60.0);
 	}

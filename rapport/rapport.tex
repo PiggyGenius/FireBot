@@ -66,7 +66,7 @@
 % auteur(s)
 \author{
 	\begin{tabular}{p{15cm}}
-		\Large Maxime Deloche \& Ludovic Carré \& Cyril Carlin
+		\Large Maxime Deloche, Ludovic Carré \& Cyril Carlin
 	\end{tabular} \\
 	\hline
 }
@@ -81,17 +81,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% -------------------------------------- SECTION 1 --------------------------------------
-
-\section{Description des packages intéressants}
-
-\subsection{Chemin}
+\section{Chemin}
 
 Le package chemin a pour rôle de définir les différentes classes nécessaires à la partie 3 du projet. On a choisi de créer une classe abstraite PlusCourtChemin qui permet une abstraction sur les stratégies de calculs de plus court chemin employées. Nous avons pour l'instant implémenté un seul algorithme, Dijkstra, mais il serait facile de rajouter une classe pour un autre algorithme comme A* sans avoir à modifier le reste du code.\\
 
 Nous avons hésité entre Dijkstra et A* et finalement choisi Dijkstra car A* ne semblait pas vraiment nécessaire au problème traité. Les cartes sont relativement petites ce qui implique un nombre de noeud assez restreint, 2500 pour la plus grande carte. De plus, il serait difficile de définir une bonne heuristique puisqu'il n'y a pas d'information sur la structure "normale" d'une carte.
 
-\subsubsection{Dijkstra avec un hash set}
+\subsection{Dijkstra avec un hash set}
 
 On notera $N = n*m$, où n et m sont les dimensions de la carte, le nombre de noeuds et les complexités sont calculées en pire cas (aucun noeud inaccessible dans le graphe).
 \begin{itemize}
@@ -101,9 +97,9 @@ On notera $N = n*m$, où n et m sont les dimensions de la carte, le nombre de no
 	\item setDistanceVoisins: Met à jour les distances du tableau avec les distances des voisins. Coût: $4N-4 = \theta(N)$.\\
 \end{itemize}
 Complexité générale de l'algorithme: $\theta(N^2)$.\\\\
-La Complexité assez élevée et l'on a donc décidé d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple mais qui reste très respectable: la file de priorité.\\
+La complexité assez élevée et l'on a donc décidé d'améliorer l'algorithme avec une pile de Fibonacci ce qui permet d'atteindre la complexitée optimale en $\theta(4N-4 + Nlog_2(N))$. Malheureusement, nous avons visés un peut trop haut avec une implémentation générique de la pile de Fibonacci ce qui a beaucoup compliqué le code et l'échéance approchant on a décidé de se reporter sur une solution plus simple mais qui reste très respectable: la file de priorité.\\
 
-\subsubsection{Dijkstra avec une priority queue}
+\subsection{Dijkstra avec une priority queue}
 Il est possible d'améliorer l'algorithme en utilisant une priority queue comme structure de données. Pour cela il faut rajouter une abstraction Noeud qui contient un poids et une case, la liste est constamment ordonnée tel que l'élément de poids minimale est le premier élément de la liste, ce qui améliore la complexité de l'algorithme car la priority queue est implémentée avec un tas binaire en Java.\\
 De plus, afin d'encore améliorer la rapidité de l'algorithme, nous traitons un ensemble de noeud ne contenant que la source au départ qui se remplit au fur et à mesure des détections de voisins ce qui permet de diminuer les coefficients des différentes étapes de l'algorithme. On note $N_i=i*4-i$ le nombre de noeud à l'iteration i de l'algoritme.
 \begin{itemize}
@@ -113,29 +109,31 @@ De plus, afin d'encore améliorer la rapidité de l'algorithme, nous traitons un
 \end{itemize}
 Complexité générale de l'algorithme: $\theta(Nlog_2(N))$.\\
 
-\subsubsection{Reconstruction du chemin avec le tableau de prédecesseur}
+\subsection{Reconstruction du chemin avec le tableau de prédecesseur}
 
 On définit un chemin comme un hash set de Destination, à chaque objet est associé une position et un temps de trajet pour s'y rendre en partant de la source, et un temps qui est la somme des temps des sous-trajets.\\
 Puisqu'il s'agit d'un hash set, il n'y a pas de notion d'ordre dans un chemin ce qui peut sembler particulier mais puisque les événements sont ajoutés avec un temps d'exécution, l'ordre n'est pas nécessaire.\\\\
 \textbf{Algorithme de reconstruction de Dijkstra:} L'algorithme consiste simplement à reconstruire le chemin à partir du tableau de prédécesseurs créé lors des mises à jours de distance.\\
 Coût: $\theta(M)$ où $M$ est la longueur du chemin en nombre de case donc $\theta(N-1)$ en pire cas.
 
-% -------------------------------------- SECTION 2 --------------------------------------
-
-\section{}
-
-\subsection{}
-
-\subsection{}
 
 
-% -------------------------------------- SECTION 3 --------------------------------------
 
-\section{}
+\section{Simulation et evenements}
 
-\subsection{}
+\verb?evenement? est un sous-package de \verb?simulation?.
 
-\subsection{}
+\subsection{ChefPompier}
 
+Le ChefPompier est chargé de planifier la liste des évènements. Pour cela, il possède plusieurs méthodes, qui sont appelées lorsque les évènements sont exécutés. Un cycle d'intervention d'un robot sur un incendie se déroule comme suit : 
+\begin{enumerate}
+	\item A chaque pas de temps, la fonction \verb?calculDeplacementExtinction? parcourt la liste des incendies, et cherche pour chacun dans la liste des robots disponibles le plus rapide à intervenir. Elle envoit ensuite ce robot à cet emplacement, donc planifie une séquence d'\verb?EvenementDeplacement? élémentaires et un évènement \verb?EvenementDeplacementFin?.
+	\item Lorque ce \verb?EvenementDeplacementFin? est éxécuté, le \verb?ChefPompier? calcule le nombre de déversements maximum possible, et planifie des \verb?EvenementDeversement? et un \verb?EvenementDeversementFin?.
+	\item Lorsque cet évènement \verb?EvenementDeversementFin? est éxécuté, le \verb?ChefPompier? calcule le plus court chemin pour remplir le robot, et planifie à nouveau une série \verb?EvenementDeplacement? et un autre \verb?EvenementDeplacementFin?. Si le robot n'a pas besoin de remplissage, il repasse immédiatement à 'libre' et sera affecté à un nouvel incendie au prochain pas de temps.
+	\item Lorsque cet évènement \verb?EvenementDeplacementFin? est éxécuté, il planifie un \verb?EvenementRemplissage? et un \verb?EvenementRemplissageFin?.
+	\item Lorsque cet évènement \verb?EvenementRemplissageFin? est éxécuté, le robot est libéré et sera affecté à un nouvel incendie au prochain pas de temps.
+\end{enumerate}
+
+NB : Dans les \verb?EvenementDeplacementFin?, un attribut sert à indiquer si c'est un évènement pour un déversement ou un remplissage, et permet au \verb?ChefPompier? d'"aiguiller" la suite de la procédure.
 
 \end{document}
