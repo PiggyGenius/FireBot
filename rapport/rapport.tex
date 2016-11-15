@@ -137,15 +137,19 @@ Le ChefPompier est chargé de planifier la liste des évènements. Pour cela, il
 NB : Dans les \verb?EvenementDeplacementFin?, un attribut sert à indiquer si c'est un évènement pour un déversement ou un remplissage, et permet au \verb?ChefPompier? d'"aiguiller" la suite de la procédure.
 
 
+\subsection{ChefPompierAvance}
 
+Cette section à été rajoutée en fin de projet et n'a malheureusement pas pu être liée au reste du projet, le code est tout de même dans l'archive mais il est impossible d'utiliser cette classe.\\
 
+La conception d’une méthode d’ordonnancement et d’affectation des tâches a été très longue. Compte-tenu de la pluralité de nos contraintes, le problème est un problème NP-difficile. On pourrait donc le rendre aussi optimisé qu’on le souhaite, à condition de concéder du temps. \\
+Après plusieurs recherches sur ce genre de problèmes, nous avons rencontré la méthode hongroise qui s’appuie essentiellement sur une approche matricielle. Grâce à des opérations élémentaires sur les lignes et les colonnes, on pouvait faire apparaître les affectations optimales. Ne pouvant, dans notre cas, pas appliquer tel quel la méthode hongroise, nous avons essayé de la réadapter. \\
 
-
-
-
-
-
-
-
+Nous avons donc décidé de remplir cette matrice avec un coût  qui nous semblait pertinent : le temps. Le temps que met le robot pour se déplacer depuis sa position initiale jusqu’à l’incendie, et le temps du premier déversage qui suit. De ce fait, les contraintes liées au type de robot étaient plus ou moins bien traduites puisqu’un drone, bien que plus rapide, possède une vitesse de déversement plus lente par rapport à sa capacité.\\
+A partir de ces valeurs, nous avons pu calculer la valeur minimale par ligne et la lui retrancher afin de faire apparaître un zéro ou plus. Ces zéros représentent donc des affectations réalisables mais pas forcément optimales.\\\\
+En effet, la présence d'un zéro à la case (i,j) de la matrice signifie que le robot i peut être assigné à l'incendie j. Cependant, rien ne nous garantit d'avoir un seul zéro par ligne et par colonne. Il a donc fallu faire un choix arbitraire qui consiste à affecter les premiers robots que l'on trouvait (dépend donc de l'ordre de lecture de la matrice).
+Dans le cas d'un robot qui n'aurait qu'un zéro, et dont ce dernier correspondrait à un incendie déjà affecté pendant ce tour de boucle, nous avons décidé d'ignorer ce robot jusqu'au prochain tour de boucle. D'un point de vue probabiliste, on peut noter la faible probabilité pour que tous les robots aient un zéro dans la même colonne.\\\\
+En effet, la condition de notre boucle while dans notre méthode de $traitement$ est de continuer tant qu'il y a des incendies non éteints. La présence des deux listes $listeIncendie$ et $listeIncendieDispo$ s'explique du fait que pour éviter de créer une matrice statique qui aurait des lignes et des colonnes inutiles au fur et à mesure que l'on avancerait dans le temps. De même pour l'existence de $listeRobotDispo$.\\\\
+Ainsi, $listeIncendieDispo$ nous permet de répartir le plus de robots sur le plus d'incendies différents possibles et de ne pas affecter deux robots à un même incendie si il y a encore un incendie non pris en charge (choix personnel d'optimisation). Quand cette liste est vide, cela signifie que tous les incendies sont au moins pris en charge (au plus éteints). Par conséquent, si il nous reste des robots disponibles, il nous suffit de rajouter tous les incendies non éteints à $listeIncendieDispo$ en mettant à false le booléen $enExtinction$, et ainsi éviter que des robots restent sans rien faire tant que des incendies ne sont pas effectués.\\\\
+Pour la liste $listeRobotDispo$, elle nous permet de ne pas créer des lignes inutiles dans notre matrices. Il suffit à côté de mettre à jour cette liste à chaque fin de tour de boucle en rajoutant les robots qui ont fini leur tâche et ne sont donc plus occupés.
 
 \end{document}
