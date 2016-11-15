@@ -61,6 +61,7 @@ public class Simulateur implements Simulable {
 
 			this.simulation = LecteurDonnees.lire(this.simulation.getName());
 			this.gui.reset();
+			this.chef = new ChefPompier(this);
 			this.simulation.setPlusCourtChemin();
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Ce fichier n'existe pas.");
